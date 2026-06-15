@@ -158,8 +158,8 @@ KPI-aware (from short-form research): **seamless cuts → likes (fluency)**, **o
 | skill | owns | version |
 |-------|------|---------|
 | **`reel-edit`** | video/EDL state: transcription, smart cut, modes/styles, presets, audio-first render, draft→final | 3.9 |
-| **`reel-block-edit`** | branch surface as a UI pattern: EDL strip, overlay lanes as first-class tracks, `realself.timeline.json` manifest (`source_blocks`, `cut_maps`, `overlay_tracks`, `branches`, `interlocks`, `renderer_adapters`), dashboard export | 1.6 |
-| **`stack-compare`** | the Shaper comparison artifact: build a B&W dashboard comparing two stacks, with a live EDL layer and research matrix; owns the public/private boundary (dashboard agent shapes/sanitizes/deploys, source agent owns the real EDL/project) | 1.5 |
+| **`reel-block-edit`** | portable block-editor contract `source blocks → branch surface → trim → overlay lanes → export`; EDL strip, overlay lanes as first-class tracks, `realself.timeline.json` manifest (`source_blocks`, `cut_maps`, `overlay_tracks`, `branches`, `interlocks`, `renderer_adapters`), dashboard export | 1.7 |
+| **`stack-compare`** | the Shaper comparison artifact: build a B&W dashboard comparing two stacks, with a live EDL layer and research matrix; owns the public/private boundary (dashboard agent shapes/sanitizes/deploys, source agent owns the real EDL/project) | 1.7 |
 
 Division of labor: `reel-edit` owns the video state; `stack-compare` owns the Shaper artifact. The agent and human argue at the level of **blocks, branches, and overlay lanes** — a shared, reproducible editing state.
 
@@ -195,3 +195,7 @@ This repo ships the **dashboard** (a single static `index.html`) and this stack 
 To **fork the dashboard** as your own stack-compare artifact, copy `index.html`, edit the header/thesis and the two pipeline columns, keep the Shaper design tokens. See the dashboard README.
 
 To **contribute your branch**, see [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## Portability — why the skills work anywhere
+
+The skills are portable because the public docs describe **contracts, not machine paths**: the EDL schema, manifest fields, overlay-lane contract, audio policy, QA gate, install requirements, and first-run sequence. Anyone can stand the stack up in their own Claude Code / Codex from these contracts. Absolute project examples stay private; **public examples are schematic EDL fragments or sanitized branch folders** — never real footage or local paths.
