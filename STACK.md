@@ -48,28 +48,34 @@ The Edit Decision List is the heart of the stack. Generic shape:
 
 ```json
 {
-  "schema": "reels.edl.v1",
+  "schema": "reel.edl.v2",
   "source": "source/take.mov",
   "strategy": {
-    "mode": "caption_only_soft",
-    "style": "answer_card_terminal_caption",
-    "audio_policy": "single_source_multi_take_remix_soft_boundaries"
+    "mode": "caption_only | visible_flow | proof_overlay | experimental",
+    "style": "answer_card_terminal_caption | low_rail | soft_card | ...",
+    "audio_policy": "single_source | single_source_multi_take_remix_experimental"
   },
   "cuts": [
-    { "label": "hook",    "sourceStart": 0.00, "sourceEnd": 3.70, "note": "cold open" },
-    { "label": "tension", "sourceStart": 4.10, "sourceEnd": 12.3, "note": "setup" },
-    { "label": "punch",   "sourceStart": 22.0, "sourceEnd": 23.5, "note": "one-liner", "insert": true }
+    {
+      "id": "c01",
+      "label": "hook",
+      "sourceStart": 0.0, "sourceEnd": 3.7,
+      "outStart": 0.0, "outEnd": 3.7,
+      "risk": "baseline | insert | remix | safe-zone-watch",
+      "note": "generic public-safe note"
+    }
   ],
   "overlay_tracks": [
-    { "type": "card",    "lane": "hook card",   "from": 0.25, "to": 5.35 },
-    { "type": "caption", "lane": "captions",    "from": 0.80, "to": 44.0 },
-    { "type": "rail",    "lane": "terminal",    "from": 21.0, "to": 30.0 }
+    { "id": "captions", "type": "caption",
+      "items": [ {"start": 0.8, "end": 2.8, "text": "caption", "safeZone": "lower-third", "visibleToViewer": true} ] },
+    { "id": "cards", "type": "card",  "items": [] },
+    { "id": "rail",  "type": "rail",  "items": [] },
+    { "id": "stamp", "type": "stamp", "items": [] }
   ],
   "render": {
-    "outputs": [
-      { "label": "draft", "res": "360p", "encoder": "videotoolbox" },
-      { "label": "final", "res": "1080x1920", "encoder": "libx264", "crf": 18 }
-    ]
+    "outputs": { "draft": "renders/draft_360p.mp4", "final": "renders/final_1080x1920.mp4" },
+    "video": { "width": 1080, "height": 1920, "fps": 24 },
+    "audio": { "codec": "aac", "channels": 2, "sampleRate": 48000, "targetLufs": -16 }
   }
 }
 ```
@@ -78,6 +84,35 @@ Notes:
 - `cuts[]` carry `sourceStart`/`sourceEnd` so the same map renders by MoviePy, ffmpeg, or (later) Remotion/OTIO.
 - `insert: true` marks a cross-take splice — only allowed in a branch explicitly tagged experimental, with a clean baseline preserved (`single_source_multi_take_remix` policy).
 - `overlay_tracks[]` are independent lanes; they do not move when the cut map changes.
+
+---
+
+## Contracts — overlay lanes, audio, QA
+
+**Overlay lane contract** (each lane has one job; lanes are independent of the cut map):
+
+| lane | rule |
+|------|------|
+| `caption` | sparse bottom copy, max one short phrase per beat |
+| `card` | one conceptual beat — never constant dashboard wallpaper |
+| `rail` | visible flow/state sequence, thin lower/side lane |
+| `stamp` | tiny recurring context label |
+| `proof` | only in `proof_overlay` / technical demo, never a default |
+
+**Visible-copy ban (public / viewer reels):** never put `branch`, `render`, `EDL`, `QA`, `segment`, source filename, local path, `proof`, or implementation notes *on screen*. On-screen text is viewer-facing only.
+
+**Audio policy:**
+- default: one continuous voice master.
+- multi-take speech splice only as an **explicit experimental branch** — same source/mic/place, clean baseline preserved, seam checked by listening.
+- avoid per-segment audio filters on iPhone MOV; build one master, then overlay/mux.
+- reject silent / tiny AAC: near −90 dB, mono mismatch, suspiciously low bitrate, clipping.
+
+**QA gate (before publish):**
+- `ffprobe`: resolution, fps, duration, audio codec/channels/sample-rate/bitrate.
+- loudness: ~−16 LUFS, sane peak limiter.
+- contact strip: hook, overlay/card/rail moments, seam, ending.
+- safe-zone: captions above IG controls; face/body/object not covered.
+- **viewer pass:** would a cold viewer understand the idea without reading internal labels?
 
 ---
 
@@ -101,9 +136,9 @@ KPI-aware (from short-form research): **seamless cuts → likes (fluency)**, **o
 
 | skill | owns | version |
 |-------|------|---------|
-| **`reel-edit`** | video/EDL state: transcription, smart cut, modes/styles, presets, audio-first render, draft→final | 3.8 |
-| **`reel-block-edit`** | branch surface as a UI pattern: EDL strip, overlay lanes as first-class tracks, `realself.timeline.json` manifest, dashboard export | 1.6 |
-| **`stack-compare`** | the Shaper comparison artifact: build a B&W dashboard comparing two stacks, with a live EDL layer and research matrix | 1.1 |
+| **`reel-edit`** | video/EDL state: transcription, smart cut, modes/styles, presets, audio-first render, draft→final | 3.9 |
+| **`reel-block-edit`** | branch surface as a UI pattern: EDL strip, overlay lanes as first-class tracks, `realself.timeline.json` manifest (`source_blocks`, `cut_maps`, `overlay_tracks`, `branches`, `interlocks`, `renderer_adapters`), dashboard export | 1.6 |
+| **`stack-compare`** | the Shaper comparison artifact: build a B&W dashboard comparing two stacks, with a live EDL layer and research matrix; owns the public/private boundary (dashboard agent shapes/sanitizes/deploys, source agent owns the real EDL/project) | 1.4 |
 
 Division of labor: `reel-edit` owns the video state; `stack-compare` owns the Shaper artifact. The agent and human argue at the level of **blocks, branches, and overlay lanes** — a shared, reproducible editing state.
 
