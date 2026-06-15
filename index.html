@@ -3,19 +3,19 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Mindset · Shaper — сравнение блоков: reel-редактор × стек Max Postnikov</title>
-<meta name="description" content="AI Mindset Shaper: сравнение монтажных стеков. Наш reel-блок-редактор (короткий формат) против YouTube cut-chain Max Postnikov (длинный формат) — послойно, плюс EXA-ресёрч (Remotion, OpenTimelineIO, Hyperframes, X-Cut, ElevenLabs Scribe).">
+<title>AI Mindset Reels Pipeline — открытый community-стек монтажа reels</title>
+<meta name="description" content="AI Mindset Reels Pipeline — открытый community-стек агентного монтажа reels: блок-редактор, EDL как SSOT, overlay lanes, draft→final, audio-first lip-sync. Сравнение со стеком Max Postnikov, живой рецепт-пример, ветки сообщества. Форкай и присылай свою ветку.">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="AI Mindset · Shaper">
-<meta property="og:title" content="AI Mindset Shaper — сравнение монтажных стеков">
-<meta property="og:description" content="reel-блок-редактор (короткий формат) × YouTube cut-chain Max Postnikov (длинный формат). 5 вкладок, послойное сравнение, EXA-ресёрч.">
+<meta property="og:site_name" content="AI Mindset Reels Pipeline">
+<meta property="og:title" content="AI Mindset Reels Pipeline — открытый community-стек монтажа reels">
+<meta property="og:description" content="Открытый стек агентного монтажа reels: блок-редактор, EDL-SSOT, overlay lanes, draft→final. Сравнение, живой рецепт, ветки сообщества. Форкай и контрибьють свою ветку.">
 <meta property="og:image" content="https://apowall.github.io/reel-stack-compare/assets/og-cover.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:url" content="https://apowall.github.io/reel-stack-compare/">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="AI Mindset Shaper — сравнение монтажных стеков">
-<meta name="twitter:description" content="reel-блок-редактор × YouTube cut-chain Max Postnikov. 5 вкладок, EXA-ресёрч.">
+<meta name="twitter:title" content="AI Mindset Reels Pipeline — открытый community-стек">
+<meta name="twitter:description" content="Открытый стек агентного монтажа reels. Сравнение, живой рецепт, ветки сообщества. Форкай и контрибьють.">
 <meta name="twitter:image" content="https://apowall.github.io/reel-stack-compare/assets/og-cover.png">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -48,6 +48,7 @@
     display:grid;grid-template-columns:auto 1fr auto;gap:24px;align-items:baseline;
     border-bottom:var(--frame) solid var(--ink);padding-bottom:16px;
   }
+  @media(max-width:760px){header.app{grid-template-columns:1fr;gap:10px;align-items:start}header.app .meta{justify-self:start;text-align:left}header.app .crumb{overflow-wrap:anywhere}}
   header.app .brand{font-weight:600;letter-spacing:.20em;font-size:21px}
   header.app .brand .bsub{font-size:10px;color:var(--muted);letter-spacing:.18em;font-weight:400}
   header.app .crumb{color:var(--muted);font-size:12.5px}
@@ -68,6 +69,7 @@
 
   /* tabs */
   nav.tabs{display:flex;gap:0;margin:20px 0 22px;border:1px solid var(--ink);width:fit-content}
+  @media(max-width:760px){nav.tabs{width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}nav.tabs button{white-space:nowrap;flex:0 0 auto}}
   nav.tabs button{font:inherit;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;
     background:var(--bg);color:var(--ink);border:0;border-right:1px solid var(--ink);
     padding:9px 20px;cursor:pointer}
@@ -81,7 +83,7 @@
   h2.sec{font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);
     font-weight:500;margin:30px 0 14px;border-bottom:1px solid var(--soft);padding-bottom:7px}
   h2.sec:first-child{margin-top:4px}
-  .lead{font-size:13px;color:var(--ink);margin:0 0 16px;max-width:880px}
+  .lead{font-size:13px;color:var(--ink);margin:0 0 16px;max-width:880px;overflow-wrap:anywhere}
   .lead .muted{color:var(--muted)}
 
   /* two-pipeline columns */
@@ -181,6 +183,16 @@
   .tcard.hero .kind,.tcard.hero a{color:rgba(255,255,255,.6)}
   .tcard.hero .verd{border-color:rgba(255,255,255,.25)}
 
+  /* live worked-example: schematic frame (no real footage) */
+  .frameSchema{aspect-ratio:9/16;width:100%;border:1px solid var(--ink);position:relative;display:block;
+    background:repeating-linear-gradient(0deg,var(--hair) 0 1px,transparent 1px 30px)}
+  .frameSchema .fz{position:absolute;left:10px;right:10px;text-align:center;font-size:10px;letter-spacing:.12em;
+    text-transform:uppercase;border:1px dashed var(--soft);padding:5px 0;color:var(--muted);background:var(--bg)}
+  .frameSchema .fz.hk{top:10px}
+  .frameSchema .fz.tm{top:45%}
+  .frameSchema .fz.ac{top:61%}
+  .frameSchema .fz.cp{bottom:10px}
+
   /* aim logo (theme-aware) */
   header.app .brand{display:flex;align-items:center;gap:11px}
   header.app .brand img{height:26px;width:26px;display:block}
@@ -199,6 +211,47 @@
   .branch p{margin:0;font-size:12px;line-height:1.5}
   .branch.exp p{color:rgba(255,255,255,.85)}
   .branch .risk{display:inline-block;margin-top:10px;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;border:1px solid currentColor;padding:2px 8px}
+
+  .livegrid{display:grid;grid-template-columns:minmax(280px,390px) 1fr;gap:18px;align-items:start}
+  @media(max-width:900px){.livegrid{grid-template-columns:1fr}}
+  .videoPanel{border:1px solid var(--ink);padding:14px;background:var(--bg)}
+  .finalVideo{display:block;width:100%;aspect-ratio:9/16;background:var(--ink);border:1px solid var(--ink);object-fit:cover}
+  .contact{margin-top:10px;border:1px solid var(--soft);padding:8px}
+  .contact img{display:block;width:100%;height:auto;border:1px solid var(--soft)}
+  .caption{font-size:10px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-top:7px}
+  .recipe{border:1px solid var(--ink);padding:15px 17px}
+  .recipe .eyebrow{font-size:9.5px;color:var(--muted);letter-spacing:.18em;text-transform:uppercase;margin-bottom:5px}
+  .recipe h3{margin:0 0 6px;font-size:17px;letter-spacing:.02em}
+  .recipe p{margin:0;font-size:12px;line-height:1.55}
+  .recipeMeta{display:grid;grid-template-columns:repeat(2,1fr);gap:0;border:1px solid var(--ink);margin:14px 0 0}
+  @media(max-width:700px){.recipeMeta{grid-template-columns:1fr}}
+  .recipeMeta div{padding:9px 11px;border-right:1px solid var(--soft);border-bottom:1px solid var(--soft);font-size:11px;min-width:0}
+  .recipeMeta div:nth-child(2n){border-right:0}
+  .recipeMeta div:nth-last-child(-n+2){border-bottom:0}
+  @media(max-width:700px){.recipeMeta div{border-right:0}.recipeMeta div:nth-last-child(2){border-bottom:1px solid var(--soft)}}
+  .recipeMeta b{display:block;font-size:9px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;font-weight:500;margin-bottom:2px}
+  .recipeMeta div,.recipeMeta a{overflow-wrap:anywhere;word-break:break-word}
+  .recipeMeta a{color:var(--ink);text-decoration:underline dotted}
+  .sourcegrid{display:grid;grid-template-columns:repeat(7,1fr);gap:0;border:1px solid var(--ink);margin:4px 0 8px}
+  @media(max-width:980px){.sourcegrid{grid-template-columns:repeat(2,1fr)}}
+  .sourcegrid .srcblock{padding:10px 9px;border-right:1px solid var(--soft);border-bottom:1px solid var(--soft);min-height:92px}
+  .sourcegrid .srcblock:last-child{border-right:0}
+  .srcblock .sid{font-size:9px;color:var(--muted);font-variant-numeric:tabular-nums}
+  .srcblock .st{font-size:11.2px;font-weight:600;margin:2px 0 3px}
+  .srcblock .sd{font-size:10.3px;color:var(--muted);line-height:1.35}
+  .laneviz{display:grid;grid-template-columns:104px 1fr;border:1px solid var(--ink);margin:4px 0 8px}
+  .laneviz .lname{border-bottom:1px solid var(--soft);border-right:1px solid var(--ink);padding:9px 11px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+  .laneviz .track{border-bottom:1px solid var(--soft);padding:8px 10px;min-height:38px}
+  .laneviz>div:nth-last-child(-n+2){border-bottom:0}
+  .bar{height:18px;border:1px solid var(--ink);background:var(--hi);position:relative}
+  .seg{position:absolute;top:0;bottom:0;border-right:1px solid var(--bg);background:var(--ink);color:var(--bg);font-size:8.5px;letter-spacing:.06em;display:flex;align-items:center;justify-content:center;overflow:hidden;white-space:nowrap}
+  .seg.alt{background:var(--bg);color:var(--ink);border:1px solid var(--ink);top:-1px;bottom:-1px}
+  .qaGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--ink);margin:4px 0 8px}
+  @media(max-width:840px){.qaGrid{grid-template-columns:repeat(2,1fr)}}
+  .qaGrid .q{padding:11px 13px;border-right:1px solid var(--soft)}
+  .qaGrid .q:last-child{border-right:0}
+  .qaGrid .m{font-size:14px;font-weight:700;letter-spacing:.02em}
+  .qaGrid .lb{font-size:9.5px;letter-spacing:.10em;text-transform:uppercase;color:var(--muted);line-height:1.35}
 
   .edlstrip{display:flex;flex-wrap:wrap;gap:0;border:1px solid var(--ink);margin:4px 0 8px}
   .edlstrip .cut{flex:1 1 0;min-width:84px;border-right:1px solid var(--soft);padding:10px 9px;display:flex;flex-direction:column;gap:3px}
@@ -224,6 +277,15 @@
   .ctxbar p{margin:0;font-size:12.5px;line-height:1.58}
   .ctxbar b{font-weight:600}
 
+  /* community bar */
+  .commbar{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--ink);margin:14px 0 0}
+  @media(max-width:760px){.commbar{grid-template-columns:1fr}}
+  .commbar .cb{padding:11px 14px;border-right:1px solid var(--soft);display:flex;flex-direction:column;gap:4px}
+  .commbar .cb:last-child{border-right:0}
+  .commbar .cbk{font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+  .commbar .cb a{font-size:12px;color:var(--ink);text-decoration:underline dotted}
+  .commbar .cb a:hover{background:var(--ink);color:var(--bg);text-decoration:none}
+
   /* kpi strip */
   .kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border:1px solid var(--ink);margin:4px 0 8px}
   @media(max-width:840px){.kpis{grid-template-columns:repeat(2,1fr)}}
@@ -248,18 +310,24 @@
 <div class="wrap">
 
   <header class="app">
-    <div class="brand"><img class="lt" src="assets/aim-logo-light.png" alt="ai mindset"><img class="dk" src="assets/aim-logo.png" alt="ai mindset">shaper <span class="bsub">· ai mindset</span></div>
-    <div class="crumb">fig.1 · <b>сравнение блоков</b> · наш reel-редактор × стек <b>max postnikov</b></div>
+    <div class="brand"><img class="lt" src="assets/aim-logo-light.png" alt="ai mindset"><img class="dk" src="assets/aim-logo.png" alt="ai mindset">reels pipeline <span class="bsub">· ai mindset</span></div>
+    <div class="crumb"><b>открытый community-стек</b> агентного монтажа reels · сравнение · живой рецепт · ветки сообщества</div>
     <div class="meta">
-      <b>v1</b> · 2026-06-15<br>
-      src · max postnikov · video-editing pipeline<br>
+      <b>v2</b> · 2026-06-15 · open<br>
+      <a href="https://github.com/aPoWall/reel-stack-compare" style="color:var(--muted);text-decoration:underline dotted">github · форкай и контрибьють</a><br>
       <button class="tbtn" onclick="document.documentElement.classList.toggle('dark')">◐ тема</button>
     </div>
   </header>
 
   <div class="thesis">
     <div class="tag">тезис</div>
-    <p><b>max postnikov</b> поделился своим стеком монтажа под длинный формат — это ответ-сравнение. обе системы строят рез по <b>word-таймкодам транскрипта</b> (общий примитив), но дальше расходятся: его пайплайн оптимизирован под <b>длинный youtube</b> (детерминированная цепочка скриптов, монтажный план = единый источник истины, draft→final), наш — под <b>короткий reels</b> (визуальный блок-редактор, библиотека режимов и стилей, audio-first lip-sync). каждая система сильнее ровно там, где другая слаба. ниже — что заимствуем, где наш ров, и куда растёт стек.</p>
+    <p><b>открытый стек агентного монтажа reels.</b> родился в <b>ai mindset {space}</b>: формат <b>stack compare</b> — сравни свой монтажный контур с чужим, забери лучшее. первой сравнили цепочку <b>max postnikov</b> (длинный youtube), потом — наш reels блок-редактор, живой рецепт-пример и ветки сообщества. идея не в «единственно верном» пайплайне, а в <b>стеке, который форкаешь под себя</b> и присылаешь свою ветку. ниже — сравнение, живой рецепт, что заимствуем, куда растёт, как сконтрибьютить и где скачать весь стек.</p>
+  </div>
+
+  <div class="commbar">
+    <div class="cb"><span class="cbk">скачать весь стек</span><a href="STACK.md">STACK.md — пайплайн + как работает + skill</a></div>
+    <div class="cb"><span class="cbk">сконтрибьютить ветку</span><a href="CONTRIBUTING.md">CONTRIBUTING — пришли свой EDL / пример / правку</a></div>
+    <div class="cb"><span class="cbk">репозиторий · open</span><a href="https://github.com/aPoWall/reel-stack-compare">github.com/aPoWall/reel-stack-compare</a></div>
   </div>
 
   <nav class="tabs" role="tablist">
@@ -376,68 +444,100 @@
 
   <!-- ============ TAB: LIVE · EDL LAYER ============ -->
   <section class="panel" id="live">
-    <h2 class="sec">живой пример — reel-edit pipeline v2 (рабочая сессия)</h2>
-    <p class="lead">это не гипотеза, а <b>работающий editing state</b> из реальной reel-edit сессии: pipeline v2 собирается из одной записи. переход от «сравнения инструментов» к <b>working reel OS</b>: агент и человек спорят на уровне блоков, веток и overlay lanes. <span class="muted">одна запись · один источник аудио.</span></p>
+    <h2 class="sec">живой пример — pinned answer-card style</h2>
+    <p class="lead">worked example стиля <b>answer_card_terminal_caption</b>: не mp4-галерея, а рецепт ветки. в одном месте — source blocks, монтажная карта, overlay lanes, QA/audio. <span class="muted">экранный текст ролика остаётся viewer-facing (hook, caption, terminal, answer card) — без служебных proof/render/EDL-лейблов в кадре. реальный контент скрыт, показана структура.</span></p>
 
-    <h2 class="sec">branch matrix — одна запись, две ветки</h2>
-    <div class="branchmx">
-      <div class="branch"><h4>v02 · clean caption</h4><div class="tagline">baseline-safe</div><p>чистая caption-only версия на сильной второй попытке. публикационный baseline — one-take философия не нарушена.</p><span class="risk">baseline-safe</span></div>
-      <div class="branch exp"><h4>v03 · cross-take · visible_flow</h4><div class="tagline">experimental remix</div><p>в сильную вторую попытку вклеен смысловой блок из первого дубля. explicit <b>single_source_multi_take_remix</b>: тот же микрофон и комната, но склейка дублей помечена как эксперимент, baseline сохранён.</p><span class="risk">experimental-remix</span></div>
+    <div class="livegrid">
+      <aside class="videoPanel">
+        <div class="frameSchema"><span class="fz hk">hook card</span><span class="fz tm">terminal</span><span class="fz ac">answer card</span><span class="fz cp">captions</span></div>
+        <div class="caption">final · 9:16 · 1080×1920 · ~44s · схема overlay-зон (реальный ролик не публикуется)</div>
+      </aside>
+
+      <div class="recipe">
+        <div class="eyebrow">branch recipe · pinned style</div>
+        <h3>answer card + terminal caption</h3>
+        <p>ответный reel из одной записи. структура держится на одном voice master, семи source-блоках и трёх overlay-слоях: hook card, captions, terminal/answer card. рецепт переносим на следующий рилз.</p>
+        <div class="recipeMeta">
+          <div><b>project</b>local reel-edit project</div>
+          <div><b>style id</b>answer_card_terminal_caption</div>
+          <div><b>edl</b>edit_decision_list.json · source ranges + lanes + audio policy</div>
+          <div><b>renderer</b>overlay renderer · ffmpeg + opencv/pillow</div>
+        </div>
+      </div>
     </div>
 
-    <h2 class="sec">branch surface — лесенка плотности оверлеев (v04–v08)</h2>
-    <p class="lead">одна soft cut-карта (мягкие границы фраз, single_source_multi_take_remix), пять веток по нарастанию плотности оверлеев. <span class="muted">это и есть «branch surface»: один рез — много смысловых слоёв, выбираешь под цель.</span></p>
-    <div class="lanes">
-      <div class="lname">v04 clean</div><div class="ldesc">без оверлеев, мягкие phrase-level резы, stereo master — baseline</div>
-      <div class="lname">v05 captions</div><div class="ldesc">только субтитры, та же soft-карта, без карточек/рейки/штампа</div>
-      <div class="lname">v06 micro</div><div class="ldesc">низкая плотность — крошечный stamp + редкие captions</div>
-      <div class="lname">v07 low-rail</div><div class="ldesc">тонкий visible-flow — низкоконтрастная rail + редкие captions, без крупных карточек</div>
-      <div class="lname">v08 soft card</div><div class="ldesc">самый явный слой, но компактная полупрозрачная карточка (мягче v03)</div>
+    <h2 class="sec">source blocks — one take, reordered by intent</h2>
+    <p class="lead">source — один iPhone MOV. EDL берёт семь фраз из одной записи и собирает арку: cold open → tension → turn → setting → one-liner → theme → sign-off. <span class="muted">(содержание блоков скрыто — показана только структура.)</span></p>
+    <div class="sourcegrid">
+      <div class="srcblock"><div class="sid">blk 01</div><div class="st">hook</div><div class="sd">cold open</div></div>
+      <div class="srcblock"><div class="sid">blk 02</div><div class="st">tension</div><div class="sd">setup</div></div>
+      <div class="srcblock"><div class="sid">blk 03</div><div class="st">turn</div><div class="sd">value shift</div></div>
+      <div class="srcblock"><div class="sid">blk 04</div><div class="st">setting</div><div class="sd">scene beat</div></div>
+      <div class="srcblock"><div class="sid">blk 05</div><div class="st">punch</div><div class="sd">one-liner</div></div>
+      <div class="srcblock"><div class="sid">blk 06</div><div class="st">theme</div><div class="sd">core idea</div></div>
+      <div class="srcblock"><div class="sid">blk 07</div><div class="st">closer</div><div class="sd">sign-off</div></div>
     </div>
 
-    <h2 class="sec">edl strip — 11 резов (монтажный план = SSOT)</h2>
-    <p class="lead">каждый рез = <span class="muted">sourceStart/sourceEnd + риторический label + note</span>. весь смысл лежит в <b>edit_decision_list.json</b>, не размазан по коду.</p>
+    <h2 class="sec">edl strip — семь резов, один SSOT</h2>
+    <p class="lead">монтажные решения лежат в <b>edit_decision_list.json</b>. renderer читает карту и собирает тот же final из source ranges, overlay lanes и audio policy.</p>
     <div class="edlstrip">
-      <div class="cut"><span class="ci">01</span><span class="cl">hook</span></div>
-      <div class="cut"><span class="ci">02</span><span class="cl">setup</span></div>
-      <div class="cut"><span class="ci">03</span><span class="cl">problem</span></div>
-      <div class="cut ins"><span class="ci">04</span><span class="cl">insert-a</span></div>
-      <div class="cut ins"><span class="ci">05</span><span class="cl">insert-b</span></div>
-      <div class="cut"><span class="ci">06</span><span class="cl">build</span></div>
-      <div class="cut"><span class="ci">07</span><span class="cl">build</span></div>
-      <div class="cut"><span class="ci">08</span><span class="cl">theme</span></div>
-      <div class="cut"><span class="ci">09</span><span class="cl">shift</span></div>
-      <div class="cut"><span class="ci">10</span><span class="cl">payoff</span></div>
-      <div class="cut"><span class="ci">11</span><span class="cl">close</span></div>
-    </div>
-    <p class="lead"><span class="muted">insert-a / insert-b (подсвечены) = вклейка из первого дубля — единственная часть, нарушающая one-take; поэтому вся ветка помечена experimental, а чистый v02 остаётся baseline.</span></p>
-
-    <h2 class="sec">overlay lanes — независимы от cut map</h2>
-    <p class="lead">ключевая мысль: <b>overlay lane независим от video cut map</b>, поэтому редактор показывает «рез» и «смысловой слой» отдельно. <span class="muted">render_v2_stack.py держит несколько активных overlay одновременно — alpha fade in/out, safe-zone coordinates.</span></p>
-    <div class="lanes">
-      <div class="lname">rail</div><div class="ldesc">timeline-рейка снизу — одна траектория процесса, без конкурирующих карточек</div>
-      <div class="lname">caption</div><div class="ldesc">viewer-facing субтитры, нижняя safe-zone, без внутренних лейблов на экране</div>
-      <div class="lname">card</div><div class="ldesc">одна концептуальная карточка на смысловой поворот</div>
-      <div class="lname">stamp</div><div class="ldesc">тихий мета-штамп в углу safe-zone</div>
+      <div class="cut"><span class="ci">01 · 3.7s</span><span class="cl">hook</span></div>
+      <div class="cut"><span class="ci">02 · 8.2s</span><span class="cl">tension</span></div>
+      <div class="cut"><span class="ci">03 · 8.0s</span><span class="cl">turn</span></div>
+      <div class="cut"><span class="ci">04 · 12.8s</span><span class="cl">setting</span></div>
+      <div class="cut ins"><span class="ci">05 · 1.5s</span><span class="cl">punch</span></div>
+      <div class="cut"><span class="ci">06 · 7.9s</span><span class="cl">theme</span></div>
+      <div class="cut"><span class="ci">07 · 1.6s</span><span class="cl">closer</span></div>
     </div>
 
-    <h2 class="sec">pipeline view — как агент оркестрирует</h2>
+    <h2 class="sec">overlay lanes — screen copy stays viewer-facing</h2>
+    <p class="lead">здесь, в dashboard, видна только раскладка дорожек. <span class="muted">реальный текст ролика скрыт — служебные слова всегда остаются снаружи кадра, copy говорит зрителю.</span></p>
+    <div class="laneviz">
+      <div class="lname">hook card</div><div class="track"><div class="bar"><span class="seg" style="left:.6%;width:11.6%">card</span></div></div>
+      <div class="lname">captions</div><div class="track"><div class="bar">
+        <span class="seg alt" style="left:.8%;width:9%">caption</span>
+        <span class="seg alt" style="left:11%;width:14%">caption</span>
+        <span class="seg alt" style="left:27.7%;width:17.5%">highlight</span>
+        <span class="seg alt" style="left:46%;width:27%">caption</span>
+        <span class="seg alt" style="left:78.5%;width:17.4%">caption</span>
+      </div></div>
+      <div class="lname">terminal</div><div class="track"><div class="bar"><span class="seg" style="left:48.8%;width:20.5%">term</span></div></div>
+      <div class="lname">answer card</div><div class="track"><div class="bar"><span class="seg" style="left:78.6%;width:14.8%">card</span></div></div>
+    </div>
+
+    <h2 class="sec">qa / audio / final route</h2>
+    <div class="qaGrid">
+      <div class="q"><span class="m">1080×1920</span><span class="lb">vertical · 24fps · 43.78s</span></div>
+      <div class="q"><span class="m">aac stereo</span><span class="lb">48kHz · single source voice master</span></div>
+      <div class="q"><span class="m">loudnorm</span><span class="lb">-16 LUFS · +3.5dB · limiter 0.95</span></div>
+      <div class="q"><span class="m">contact</span><span class="lb">1620×480 · frame-strip sanity check</span></div>
+    </div>
+
+    <h2 class="sec">branch flow — what the dashboard preserves</h2>
     <div class="pipeflow">
-      <span class="pf">transcript spine</span><span class="pa">→</span>
       <span class="pf">source blocks</span><span class="pa">→</span>
       <span class="pf">EDL json · SSOT</span><span class="pa">→</span>
       <span class="pf">overlay lanes</span><span class="pa">→</span>
-      <span class="pf draft">draft 360p</span><span class="pa">→</span>
-      <span class="pf">QA · contact sheet · safe-zone</span><span class="pa">→</span>
-      <span class="pf final">final 1080×1920</span>
+      <span class="pf">QA/audio</span><span class="pa">→</span>
+      <span class="pf final">final video</span>
+    </div>
+
+    <h2 class="sec">branch surface — лесенка плотности оверлеев</h2>
+    <p class="lead">тот же подход масштабируется на семейство веток поверх одной soft cut-карты — от чистой до карточки. <span class="muted">один рез, много смысловых слоёв, выбираешь под цель.</span></p>
+    <div class="lanes">
+      <div class="lname">v04 clean</div><div class="ldesc">без оверлеев, мягкие phrase-level резы, stereo master — baseline</div>
+      <div class="lname">v05 captions</div><div class="ldesc">только субтитры, та же soft-карта</div>
+      <div class="lname">v06 micro</div><div class="ldesc">крошечный stamp + редкие captions</div>
+      <div class="lname">v07 low-rail</div><div class="ldesc">низкоконтрастная rail + редкие captions</div>
+      <div class="lname">v08 soft card</div><div class="ldesc">компактная полупрозрачная карточка</div>
     </div>
 
     <h2 class="sec">что взяли у max + ключевой тезис</h2>
     <div class="cards">
-      <article class="block"><div class="num">↓</div><h3>заимствовано у max</h3><div class="ld">монтажный план как SSOT</div><p>все решения — в EDL, не в коде. draft→final из одного плана. дисциплина source-ranges (каждый рез воспроизводим). <span class="muted">не переносим: long-form youtube chain, тяжёлый asset-pipeline, youtube api — для reels важнее branch surface и быстрый preview.</span></p></article>
-      <article class="block inv"><div class="num">★</div><h3>ключевой тезис</h3><div class="ld">editor хранит не mp4, а карту</div><p>short-form редактор должен хранить <b>монтажную карту + overlay lanes + branch recipes</b>, а не только финальный mp4. тогда правка идёт на уровне блоков и веток — и агент с человеком спорят в одном editing state.</p></article>
+      <article class="block"><div class="num">↓</div><h3>заимствовано у max</h3><div class="ld">монтажный план как SSOT</div><p>все решения — в EDL, не в коде. один renderer может пересобрать тот же branch из source ranges, overlay lanes и audio policy. это переносит дисциплину long-chain в короткий формат.</p></article>
+      <article class="block inv"><div class="num">★</div><h3>ключевой тезис</h3><div class="ld">editor хранит рецепт, не только mp4</div><p>финальный ролик нужен для просмотра, но рабочая единица — branch recipe: source blocks + EDL strip + overlay lanes + QA/audio. так стиль можно закрепить и повторить на следующем reel.</p></article>
     </div>
-    <p class="lead" style="margin-top:14px"><span class="muted">tech ·</span> ffmpeg segments → concat → overlay-pass · overlay-рендерер (multi-overlay, alpha, safe-zone) · realself.timeline.json + edit_decision_list.json как SSOT · собрано в рабочей reel-edit сессии.</p>
+    <p class="lead" style="margin-top:14px"><span class="muted">tech ·</span> overlay renderer (ffmpeg + opencv/pillow) · edit_decision_list.json · realself.timeline.json. финальный mp4 не публикуется.</p>
   </section>
 
   <!-- ============ TAB 2: ADOPT ============ -->
@@ -559,8 +659,8 @@
   </section>
 
   <div class="ctxbar">
-    <div class="ct">{context}</div>
-    <p><b>ai mindset · shaper-инструмент.</b> не разовая картинка, а часть reels/harness-контура AI Mindset: формат <b>stack compare</b> как переиспользуемый артефакт (можно вынести в скилл) плюс живой мост к reel-edit OS — вкладка «живой пример» собрана из рабочей reel-edit сессии. сравнение инструментов → воспроизводимый editing state, который ведут агент и человек вместе.</p>
+    <div class="ct">community</div>
+    <p><b>это открытый стек, а не один «правильный» пайплайн.</b> ветки сейчас: <b>max postnikov</b> (длинный youtube), <b>наш reels</b> блок-редактор, <b>answer-card</b> рецепт-пример. твоя ветка — следующая: форкни репо, добавь свой EDL / пример / правку слоя и пришли PR. формат веток — в <a href="CONTRIBUTING.md">CONTRIBUTING</a>, весь стек — в <a href="STACK.md">STACK.md</a>. родилось в ai mindset {space}; агент и человек ведут стек вместе.</p>
   </div>
 
   <footer class="stamp">
