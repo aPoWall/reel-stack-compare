@@ -37,7 +37,7 @@
   html,body{margin:0;padding:0}
   body{
     background:var(--bg); color:var(--ink);
-    font-family:var(--mono); font-size:13px; line-height:1.55;
+    font-family:var(--mono); font-size:13.5px; line-height:1.58;
     letter-spacing:.02em; -webkit-font-smoothing:antialiased;
     text-transform:lowercase;
   }
@@ -106,7 +106,7 @@
   .pipe.ours .chip{border-color:rgba(255,255,255,.3)}
 
   /* layer comparison table */
-  table.cmp{width:100%;border-collapse:collapse;font-size:11.8px;margin-top:4px}
+  table.cmp{width:100%;border-collapse:collapse;font-size:12.3px;margin-top:4px}
   table.cmp th{text-align:left;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);
     font-weight:500;padding:8px 9px;border-bottom:1px solid var(--ink);vertical-align:bottom}
   table.cmp td{padding:9px 9px;border-bottom:1px solid var(--soft);vertical-align:top;line-height:1.45}
@@ -181,6 +181,49 @@
   .tcard.hero .kind,.tcard.hero a{color:rgba(255,255,255,.6)}
   .tcard.hero .verd{border-color:rgba(255,255,255,.25)}
 
+  /* aim logo (theme-aware) */
+  header.app .brand{display:flex;align-items:center;gap:11px}
+  header.app .brand img{height:26px;width:26px;display:block}
+  header.app .brand img.dk{display:none}
+  :root.dark header.app .brand img.lt{display:none}
+  :root.dark header.app .brand img.dk{display:block}
+
+  /* live · edl layer tab */
+  .branchmx{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:4px 0 8px}
+  @media(max-width:760px){.branchmx{grid-template-columns:1fr}}
+  .branch{border:1px solid var(--ink);padding:15px 17px}
+  .branch.exp{background:var(--ink);color:var(--bg)}
+  .branch h4{margin:0 0 4px;font-size:14px;font-weight:600}
+  .branch .tagline{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:9px}
+  .branch.exp .tagline{color:rgba(255,255,255,.6)}
+  .branch p{margin:0;font-size:12px;line-height:1.5}
+  .branch.exp p{color:rgba(255,255,255,.85)}
+  .branch .risk{display:inline-block;margin-top:10px;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;border:1px solid currentColor;padding:2px 8px}
+
+  .edlstrip{display:flex;flex-wrap:wrap;gap:0;border:1px solid var(--ink);margin:4px 0 8px}
+  .edlstrip .cut{flex:1 1 0;min-width:84px;border-right:1px solid var(--soft);padding:10px 9px;display:flex;flex-direction:column;gap:3px}
+  .edlstrip .cut:last-child{border-right:0}
+  .edlstrip .cut .ci{font-size:9px;color:var(--muted);font-variant-numeric:tabular-nums}
+  .edlstrip .cut .cl{font-size:11.8px;font-weight:600}
+  .edlstrip .cut.death{background:var(--hi)}
+
+  .lanes{display:grid;grid-template-columns:96px 1fr;border:1px solid var(--ink);margin:4px 0 8px}
+  .lanes .lname{border-bottom:1px solid var(--soft);border-right:1px solid var(--ink);padding:9px 11px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+  .lanes .ldesc{border-bottom:1px solid var(--soft);padding:9px 13px;font-size:12px}
+  .lanes>div:nth-last-child(-n+2){border-bottom:0}
+
+  .pipeflow{display:flex;flex-wrap:wrap;align-items:center;gap:7px;border:1px solid var(--ink);padding:15px;margin:4px 0 8px}
+  .pipeflow .pf{border:1px solid var(--ink);padding:7px 12px;font-size:11.5px;font-weight:500}
+  .pipeflow .pf.draft{border-style:dashed;color:var(--muted)}
+  .pipeflow .pf.final{background:var(--ink);color:var(--bg)}
+  .pipeflow .pa{color:var(--muted)}
+
+  /* aim {context} framing */
+  .ctxbar{border:1px solid var(--ink);padding:14px 17px;margin:20px 0 4px;display:grid;grid-template-columns:auto 1fr;gap:15px;align-items:center}
+  .ctxbar .ct{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);writing-mode:vertical-rl;transform:rotate(180deg);border-right:1px solid var(--soft);padding-right:11px;align-self:stretch}
+  .ctxbar p{margin:0;font-size:12.5px;line-height:1.58}
+  .ctxbar b{font-weight:600}
+
   /* kpi strip */
   .kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border:1px solid var(--ink);margin:4px 0 8px}
   @media(max-width:840px){.kpis{grid-template-columns:repeat(2,1fr)}}
@@ -205,7 +248,7 @@
 <div class="wrap">
 
   <header class="app">
-    <div class="brand">shaper <span class="bsub">· ai mindset</span></div>
+    <div class="brand"><img class="lt" src="assets/aim-logo.png" alt="ai mindset"><img class="dk" src="assets/aim-logo-light.png" alt="ai mindset">shaper <span class="bsub">· ai mindset</span></div>
     <div class="crumb">fig.1 · <b>сравнение блоков</b> · наш reel-редактор × стек <b>max postnikov</b></div>
     <div class="meta">
       <b>v1</b> · 2026-06-15<br>
@@ -222,6 +265,7 @@
   <nav class="tabs" role="tablist">
     <button role="tab" aria-selected="true" onclick="tab('compare',this)">сравнение</button>
     <button role="tab" aria-selected="false" onclick="tab('shortform',this)">короткий формат</button>
+    <button role="tab" aria-selected="false" onclick="tab('live',this)">живой пример</button>
     <button role="tab" aria-selected="false" onclick="tab('adopt',this)">заимствуем</button>
     <button role="tab" aria-selected="false" onclick="tab('evolve',this)">развитие</button>
     <button role="tab" aria-selected="false" onclick="tab('tech',this)">технологии</button>
@@ -328,6 +372,62 @@
     </div>
 
     <p class="lead" style="margin-top:18px"><span class="muted">итог короткого формата:</span> их стек даёт нам <b>дисциплину плана и draft-петлю</b>, но саму короткую механику — hook-бюджет, микро-ритм, sound-off, аудио-спайн, trial-A/B — несёт наш reels-слой. порт их пайплайна в short без этого слоя даёт «обрезанный youtube», а не рилз.</p>
+  </section>
+
+  <!-- ============ TAB: LIVE · EDL LAYER ============ -->
+  <section class="panel" id="live">
+    <h2 class="sec">живой пример — reel-edit pipeline v2 · codex-reel-v2 (по murmur)</h2>
+    <p class="lead">это не гипотеза, а <b>работающий editing state</b>. данные подтянуты <b>по murmur</b> от codex-сессии, которая прямо сейчас собирает pipeline v2 из одного дубля. переход от «сравнения инструментов» к <b>working reel OS</b>: агент и человек спорят на уровне блоков, веток и overlay lanes. <span class="muted">source · IMG_6064.MOV · проект 2026-06-15-reel-editor-v2-pipeline.</span></p>
+
+    <h2 class="sec">branch matrix — одна запись, две ветки</h2>
+    <div class="branchmx">
+      <div class="branch"><h4>v02 · clean caption</h4><div class="tagline">baseline-safe</div><p>чистая caption-only версия на сильной второй попытке. публикационный baseline — one-take философия не нарушена.</p><span class="risk">baseline-safe</span></div>
+      <div class="branch exp"><h4>v03 · death-overlay · visible_flow</h4><div class="tagline">experimental remix</div><p>в сильную вторую попытку вклеен блок из первой — про смерть и ценность жизни. explicit <b>single_source_multi_take_remix</b>: тот же микрофон и комната, но склейка дублей помечена как эксперимент, baseline сохранён.</p><span class="risk">experimental-remix</span></div>
+    </div>
+
+    <h2 class="sec">edl strip — 11 резов (монтажный план = SSOT)</h2>
+    <p class="lead">каждый рез = <span class="muted">sourceStart/sourceEnd + риторический label + note</span>. весь смысл лежит в <b>edit_decision_list_v03_death_overlay.json</b>, не размазан по коду.</p>
+    <div class="edlstrip">
+      <div class="cut"><span class="ci">01</span><span class="cl">hook</span></div>
+      <div class="cut"><span class="ci">02</span><span class="cl">limits</span></div>
+      <div class="cut"><span class="ci">03</span><span class="cl">refusal</span></div>
+      <div class="cut death"><span class="ci">04</span><span class="cl">death-a</span></div>
+      <div class="cut death"><span class="ci">05</span><span class="cl">death-b</span></div>
+      <div class="cut"><span class="ci">06</span><span class="cl">tea</span></div>
+      <div class="cut"><span class="ci">07</span><span class="cl">wall</span></div>
+      <div class="cut"><span class="ci">08</span><span class="cl">agents</span></div>
+      <div class="cut"><span class="ci">09</span><span class="cl">biology</span></div>
+      <div class="cut"><span class="ci">10</span><span class="cl">life</span></div>
+      <div class="cut"><span class="ci">11</span><span class="cl">closer</span></div>
+    </div>
+    <p class="lead"><span class="muted">death-a / death-b (подсвечены) = вклейка из первого дубля — единственная часть, нарушающая one-take; поэтому вся ветка помечена experimental, а чистый v02 остаётся baseline.</span></p>
+
+    <h2 class="sec">overlay lanes — независимы от cut map</h2>
+    <p class="lead">ключевая мысль: <b>overlay lane независим от video cut map</b>, поэтому редактор показывает «рез» и «смысловой слой» отдельно. <span class="muted">render_v2_stack.py держит несколько активных overlay одновременно — alpha fade in/out, safe-zone coordinates.</span></p>
+    <div class="lanes">
+      <div class="lname">rail</div><div class="ldesc">timeline-рейка снизу — одна траектория процесса, без конкурирующих карточек</div>
+      <div class="lname">caption</div><div class="ldesc">viewer-facing субтитры, нижняя safe-zone, без внутренних лейблов на экране</div>
+      <div class="lname">card</div><div class="ldesc">одна концептуальная карточка на смысловой поворот</div>
+      <div class="lname">stamp</div><div class="ldesc">тихий мета-штамп в углу safe-zone</div>
+    </div>
+
+    <h2 class="sec">pipeline view — как агент оркестрирует</h2>
+    <div class="pipeflow">
+      <span class="pf">transcript spine</span><span class="pa">→</span>
+      <span class="pf">source blocks</span><span class="pa">→</span>
+      <span class="pf">EDL json · SSOT</span><span class="pa">→</span>
+      <span class="pf">overlay lanes</span><span class="pa">→</span>
+      <span class="pf draft">draft 360p</span><span class="pa">→</span>
+      <span class="pf">QA · contact sheet · safe-zone</span><span class="pa">→</span>
+      <span class="pf final">final 1080×1920</span>
+    </div>
+
+    <h2 class="sec">что взяли у max + ключевой тезис</h2>
+    <div class="cards">
+      <article class="block"><div class="num">↓</div><h3>заимствовано у max</h3><div class="ld">монтажный план как SSOT</div><p>все решения — в EDL, не в коде. draft→final из одного плана. дисциплина source-ranges (каждый рез воспроизводим). <span class="muted">не переносим: long-form youtube chain, тяжёлый asset-pipeline, youtube api — для reels важнее branch surface и быстрый preview.</span></p></article>
+      <article class="block inv"><div class="num">★</div><h3>ключевой тезис</h3><div class="ld">editor хранит не mp4, а карту</div><p>short-form редактор должен хранить <b>монтажную карту + overlay lanes + branch recipes</b>, а не только финальный mp4. тогда правка идёт на уровне блоков и веток — и агент с человеком спорят в одном editing state.</p></article>
+    </div>
+    <p class="lead" style="margin-top:14px"><span class="muted">tech ·</span> ffmpeg segments → concat → overlay-pass · render_v2_stack.py (multi-overlay, alpha, safe-zone) · realself.timeline.json + edit_decision_list_v03_death_overlay.json · собрано сессией <b>codex-reel-v2</b>, передано по murmur (conversation reel-edit-v2-sync).</p>
   </section>
 
   <!-- ============ TAB 2: ADOPT ============ -->
@@ -448,12 +548,17 @@
     </div>
   </section>
 
+  <div class="ctxbar">
+    <div class="ct">{context}</div>
+    <p><b>ai mindset · shaper-инструмент.</b> не разовая картинка, а часть reels/harness-контура AI Mindset: формат <b>stack compare</b> как переиспользуемый артефакт (можно вынести в скилл) плюс живой мост к reel-edit OS — данные вкладки «живой пример» пришли по murmur от codex-сессии в реальном времени. сравнение инструментов → воспроизводимый editing state, который ведут агент и человек вместе.</p>
+  </div>
+
   <footer class="stamp">
-    <div class="seeds"><span class="seed">compare</span><span class="seed">adopt</span><span class="seed">evolve</span><span class="seed active">tech</span></div>
-    <div><b>fig.1</b> · schematic · reel-stack-compare · 2026-06-15 · exa-researched</div>
+    <div class="seeds"><span class="seed">compare</span><span class="seed">short</span><span class="seed active">live</span><span class="seed">adopt</span><span class="seed">evolve</span><span class="seed">tech</span></div>
+    <div><b>fig.1</b> · ai mindset shaper · reel-stack-compare · 2026-06-15</div>
   </footer>
   <div class="src-list">
-    источники ресёрча (exa mcp, 8 запросов): remotion.dev/docs · github/AcademySoftwareFoundation/OpenTimelineIO · github/heygen-com/hyperframes · github/MeiGen-AI/X-Cut · github/diffusionstudio/core · github/Vanilagy/mediabunny · gradium.ai stt-benchmark-2026 · github/Smolevich/stt-benchmarks · ffmpeg-cookbook videotoolbox · apatero rife-vs-film · vidstudio webcodecs-vs-ffmpeg-wasm · trybuildpilot remotion-vs-motion-canvas-vs-revideo
+    ресёрч · exa mcp (8 запросов) — полный список источников в <a href="https://github.com/aPoWall/reel-stack-compare">readme репозитория</a> · вкладка «живой пример» — по murmur от codex-reel-v2.
   </div>
 
 </div>
@@ -466,10 +571,10 @@
     btn.setAttribute('aria-selected','true');
     window.scrollTo({top:0,behavior:'smooth'});
   }
-  // keyboard 1-5
+  // keyboard 1-6
   document.addEventListener('keydown',e=>{
-    const order=['compare','shortform','adopt','evolve','tech'];
-    const map={'1':'compare','2':'shortform','3':'adopt','4':'evolve','5':'tech'};
+    const order=['compare','shortform','live','adopt','evolve','tech'];
+    const map={'1':'compare','2':'shortform','3':'live','4':'adopt','5':'evolve','6':'tech'};
     if(map[e.key]){
       const btns=[...document.querySelectorAll('nav.tabs button')];
       tab(map[e.key], btns[order.indexOf(map[e.key])]);
