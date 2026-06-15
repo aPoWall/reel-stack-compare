@@ -46,6 +46,23 @@ A/B audio alternation *by default* is the #1 cause of bad reels — but a consci
 
 ---
 
+## Modes — pick the editorial job before the visual style
+
+Choose the **mode** (what the edit is *for*) before the style (how it *looks*):
+
+| mode | when | default output |
+|------|------|----------------|
+| `dry_preserve` | source already works | clean trim, no overlay |
+| `caption_only` | social default, sound-off readability | sparse bottom captions |
+| `proof_overlay` | proof matters (terminal / receipt) | one lower/side proof overlay |
+| `visible_flow` | the process/sequence is the point | timeline rail / graph |
+| `social_short` | punch + CTA are enough | tighter cut, minimal captions |
+| `experimental` | explicit exploration | one wild branch per batch |
+
+Style (`terminal / cinematic / minimal / hybrid / tutorial / sermon`) is chosen *after* the mode. ~35% of viewers watch sound-off → captions are not optional.
+
+---
+
 ## EDL schema (generic example)
 
 The Edit Decision List is the heart of the stack. Generic shape:
@@ -155,6 +172,19 @@ Division of labor: `reel-edit` owns the video state; `stack-compare` owns the Sh
 - **Roadmap:** `realself.timeline.v1` → OTIO `.otio`; WebCodecs + Mediabunny live preview in the block editor; ProRes-4444 alpha overlay lane; cloud render via Remotion Lambda or Hyperframes (HTML-native, agent-first).
 
 Full technology survey (12 EXA queries: Remotion, OTIO, Hyperframes, X-Cut, CutAgent, libass vs HTML caption engines, multi-take selection, jump-cut engagement study, …) lives in the dashboard's **технологии** tab.
+
+---
+
+## How this stack is maintained — a two-agent loop
+
+This stack is kept by **two agents talking over Murmur** (agent-to-agent):
+
+- a **source agent** (Codex) owns the real EDL / project / renders — private, with real names and footage;
+- a **dashboard agent** (Claude Code) owns this public package — it only ever publishes **generic, sanitized mechanics**.
+
+The loop: the source agent cuts and assembles branches, then sends a **generic delta** (layers, EDL schema, contracts) over Murmur; the dashboard agent sanitizes it and folds it into the public stack. Personal content never crosses into the public repo (see [CONTRIBUTING](CONTRIBUTING.md): no real footage / names / on-screen text). The ownership boundary and the no-personal-data rule are encoded in the `stack-compare` skill.
+
+It's a pattern worth stealing: **let the agent that holds the private state hand only reproducible structure to the agent that publishes.**
 
 ---
 

@@ -277,14 +277,37 @@
   .ctxbar p{margin:0;font-size:12.5px;line-height:1.58}
   .ctxbar b{font-weight:600}
 
-  /* community bar */
-  .commbar{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--ink);margin:14px 0 0}
-  @media(max-width:760px){.commbar{grid-template-columns:1fr}}
-  .commbar .cb{padding:11px 14px;border-right:1px solid var(--soft);display:flex;flex-direction:column;gap:4px}
-  .commbar .cb:last-child{border-right:0}
-  .commbar .cbk{font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
-  .commbar .cb a{font-size:12px;color:var(--ink);text-decoration:underline dotted}
-  .commbar .cb a:hover{background:var(--ink);color:var(--bg);text-decoration:none}
+  /* kill browser-default blue links everywhere */
+  .wrap a{color:var(--ink)}
+
+  /* community CTAs — download stack (hero) / contribute / repo */
+  .ctas{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:12px;margin:16px 0 0}
+  @media(max-width:760px){.ctas{grid-template-columns:1fr}}
+  .cta{border:1.5px solid var(--ink);border-radius:10px;padding:15px 18px;display:flex;flex-direction:column;gap:2px;
+    text-decoration:none;color:var(--ink);background:var(--bg);cursor:pointer;position:relative;overflow:hidden;
+    transition:transform .16s ease, box-shadow .2s ease, background .16s ease, color .16s ease}
+  .cta .ctaTop{font-size:15px;font-weight:600;letter-spacing:.01em;display:flex;align-items:center;gap:10px}
+  .cta .ctaTop .g{display:inline-grid;place-items:center;width:26px;height:26px;border:1.5px solid currentColor;
+    border-radius:50%;font-size:13px;flex:0 0 auto}
+  .cta .ctaSub{font-size:11px;color:var(--muted);max-height:0;opacity:0;overflow:hidden;
+    transition:max-height .26s ease,opacity .22s ease,margin .26s ease}
+  .cta:hover{background:var(--ink);color:var(--bg);transform:translateY(-2px);box-shadow:0 7px 24px rgba(0,0,0,.15)}
+  .cta:hover .ctaSub{max-height:42px;opacity:1;margin-top:4px;color:rgba(255,255,255,.78)}
+  .cta.hero{border-width:2px;background:var(--ink);color:var(--bg)}
+  .cta.hero .ctaTop{font-size:19px}
+  .cta.hero .ctaSub{max-height:42px;opacity:1;margin-top:4px;color:rgba(255,255,255,.72)}
+  .cta.hero:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,0,0,.22)}
+  :root.dark .cta:hover{box-shadow:0 7px 24px rgba(0,0,0,.55)}
+
+  /* examples library */
+  .exlib{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:6px 0 0}
+  @media(max-width:840px){.exlib{grid-template-columns:1fr}}
+  .exo{border:1px solid var(--ink);padding:14px 15px;display:flex;flex-direction:column;gap:5px}
+  .exo.you{border-style:dashed}
+  .exo .et{font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+  .exo .eh{font-size:14px;font-weight:600}
+  .exo p{margin:0;font-size:11.5px;line-height:1.5}
+  .exo .en{font-size:10.5px;color:var(--muted);border-top:1px dashed var(--soft);padding-top:6px;margin-top:3px}
 
   /* kpi strip */
   .kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border:1px solid var(--ink);margin:4px 0 8px}
@@ -324,10 +347,19 @@
     <p><b>открытый стек агентного монтажа reels.</b> родился в <b>ai mindset {space}</b>: формат <b>stack compare</b> — сравни свой монтажный контур с чужим, забери лучшее. первой сравнили цепочку <b>max postnikov</b> (длинный youtube), потом — наш reels блок-редактор, живой рецепт-пример и ветки сообщества. идея не в «единственно верном» пайплайне, а в <b>стеке, который форкаешь под себя</b> и присылаешь свою ветку. ниже — сравнение, живой рецепт, что заимствуем, куда растёт, как сконтрибьютить и где скачать весь стек.</p>
   </div>
 
-  <div class="commbar">
-    <div class="cb"><span class="cbk">скачать весь стек</span><a href="STACK.md">STACK.md — пайплайн + как работает + skill</a></div>
-    <div class="cb"><span class="cbk">сконтрибьютить ветку</span><a href="CONTRIBUTING.md">CONTRIBUTING — пришли свой EDL / пример / правку</a></div>
-    <div class="cb"><span class="cbk">репозиторий · open</span><a href="https://github.com/aPoWall/reel-stack-compare">github.com/aPoWall/reel-stack-compare</a></div>
+  <div class="ctas">
+    <a class="cta hero" href="STACK.md" download="ai-mindset-reels-pipeline-STACK.md">
+      <span class="ctaTop"><span class="g">↓</span> скачать весь стек</span>
+      <span class="ctaSub">STACK.md · пайплайн по слоям + EDL-схема + контракты + skill</span>
+    </a>
+    <a class="cta" href="CONTRIBUTING.md">
+      <span class="ctaTop"><span class="g">+</span> сконтрибьютить ветку</span>
+      <span class="ctaSub">пришли свой EDL / пример / правку слоя</span>
+    </a>
+    <a class="cta" href="https://github.com/aPoWall/reel-stack-compare">
+      <span class="ctaTop"><span class="g">◆</span> open repo</span>
+      <span class="ctaSub">github · форкай и присылай PR</span>
+    </a>
   </div>
 
   <nav class="tabs" role="tablist">
@@ -465,6 +497,9 @@
         </div>
       </div>
     </div>
+
+    <h2 class="sec">как это собрано — коллаборация двух агентов</h2>
+    <p class="lead">этот рецепт собрали <b>два агента в связке</b>, не один. <b>Codex-сессия</b> держит приватный editing-state (реальный EDL / проект / рендеры), а <b>дашборд-агент</b> (Claude Code) публикует только generic-механику. они общаются <b>напрямую по murmur</b> (agent-to-agent): Codex режет и собирает ветки → отдаёт generic-дельту (слои, EDL-схема, контракты) → дашборд-агент санитизирует и кладёт в публичный стек. <span class="muted">так личный контент остаётся приватным, а в open-репо едет только воспроизводимая структура. границу владения и правило no-personal-data держат обе стороны (skill stack-compare + CONTRIBUTING).</span></p>
 
     <h2 class="sec">source blocks — one take, reordered by intent</h2>
     <p class="lead">source — один iPhone MOV. EDL берёт семь фраз из одной записи и собирает арку: cold open → tension → turn → setting → one-liner → theme → sign-off. <span class="muted">(содержание блоков скрыто — показана только структура.)</span></p>
@@ -657,6 +692,17 @@
 
     </div>
   </section>
+
+  <h2 class="sec" style="margin-top:30px">библиотека примеров — ветки стека</h2>
+  <p class="lead">каждая ветка = воспроизводимый рецепт. форкни любую, поменяй слой, пришли свою. <span class="muted">нюансы каждой — в <a href="STACK.md">STACK.md</a> и <a href="CONTRIBUTING.md">CONTRIBUTING</a>.</span></p>
+  <div class="exlib">
+    <div class="exo"><div class="et">long-form</div><div class="eh">max postnikov</div><p>детерминированная youtube cut-chain: монтажный план = SSOT, draft→final, Scribe, videotoolbox.</p><div class="en">нюанс: исток заимствований — план как единственный источник истины.</div></div>
+    <div class="exo"><div class="et">short-form · наш</div><div class="eh">reels block editor</div><p>визуальный блок-редактор, режим→стиль, audio-first lip-sync, Trial Reels A/B.</p><div class="en">нюанс: editor хранит рецепт (карта + lanes + branches), не mp4.</div></div>
+    <div class="exo"><div class="et">recipe</div><div class="eh">answer-card</div><p>ответный reel из одной записи: 7 source-блоков, 3 overlay-слоя (hook card / captions / terminal + answer card).</p><div class="en">нюанс: overlay lanes независимы от cut map; copy всегда viewer-facing.</div></div>
+    <div class="exo"><div class="et">density ladder</div><div class="eh">soft v04–v08</div><p>одна soft cut-карта, пять веток по плотности: clean → captions → micro → low-rail → soft card.</p><div class="en">нюанс: один рез — много смысловых слоёв, выбираешь под цель/KPI.</div></div>
+    <div class="exo"><div class="et">policy</div><div class="eh">audio · default + exception</div><p>default = один voice master; cross-take splice только как explicit experimental branch с сохранённым baseline.</p><div class="en">нюанс: осознанный remix — это ветка, а не нарушение.</div></div>
+    <div class="exo you"><div class="et">open slot</div><div class="eh">твоя ветка</div><p>форкни репо, добавь свой generic EDL / пример / правку слоя, пришли PR.</p><div class="en"><a href="CONTRIBUTING.md">CONTRIBUTING →</a></div></div>
+  </div>
 
   <div class="ctxbar">
     <div class="ct">community</div>
