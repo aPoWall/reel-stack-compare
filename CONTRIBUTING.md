@@ -1,107 +1,173 @@
-# Contributing to AI Mindset Reels Pipeline OS
+# Contributing to Reels Stack Configurator
 
-This is an **open community stack**. Add your branch, your example, or your improvement to a layer – and send it back so it lives next to everyone else's.
+This repo is a public configurator for montage stacks. Contribute **branch packs**, **EDL schemas**, **QA checks**, **render routes** or **sanitized worked recipes**.
 
-## What you can contribute
+## What To Contribute
 
-1. **A branch** – a new editing recipe (a different overlay-density branch, a new style, a different audio policy). Ship it as a generic EDL + a one-paragraph description.
-2. **A branch map** – show how your workflow moves through transcript, EDL, overlays, QA, and render. The dashboard is a forkable Shaper template; add your branch.
-3. **A layer improvement** – a better transcript step, a faster draft encoder, a new overlay lane type, an OTIO export, a browser-preview prototype.
-4. **An example** – a worked recipe (source blocks → EDL → overlay lanes → QA) showing your style.
-5. **A challenge branch** – a public creator-growth / collab-reel mechanic with aggregate metrics, a sanitized EDL, and a visual recipe.
-6. **A portable kit** – preflight checks, templates, QA scripts, or platform-specific production rules that can be reused without private media.
+1. **Branch pack** – a reusable source/goal/mode recipe with tools, artifacts and QA.
+2. **Generic EDL** – a public-safe `edit_decision_list.json`.
+3. **Layer improvement** – better ingest, transcript, EDL, overlay, render or QA step.
+4. **Render route** – ffmpeg, Remotion, browser/WebCodecs, MCP or cloud render adapter.
+5. **Challenge mechanic** – aggregate metrics + sanitized collab recipe.
+6. **Portable production kit** – dependency check, templates, platform-specific normalization and QA scripts.
 
-## The one hard rule: no personal data in public
+## Public Boundary
 
-This repo is **public**. Contributions must contain **mechanics only**, never personal content:
+This repo is public. Contributions store **mechanics only**.
 
-- ❌ no real footage (no `.mp4`/`.mov` of real people), no contact sheets / frame strips of faces
-- ❌ no real names, handles, or nicknames (yours or anyone's)
-- ❌ no real on-screen caption text, no personal monologue content in `cuts[].note` or overlay segments
-- ❌ no local file paths, project names, or source filenames that identify a recording
-- ❌ no private Instagram/Telegram screenshots, account-insight screenshots, or analytics exports unless fully anonymized and aggregated
-- ✅ generic rhetorical labels only: `hook / tension / turn / setting / punch / theme / closer`
-- ✅ generic overlay segment labels: `caption / highlight / card / term / rail / stamp`
-- ✅ public challenge metrics only: `followers_start/current/delta`, `content_count`, `prep_minutes`, `paid_ads_allowed`, `publish_window`, `trial_results`
-- ✅ structure, timings, schema, contracts – yes; the actual words said in the reel – no
+Do not include:
 
-If your branch was built from a real recording, **strip it to structure** before opening a PR (rename labels to generic, remove footage, replace caption text with `caption`/`highlight`). Keep the real version in your own private repo.
+- real footage;
+- contact sheets or frame strips with real faces;
+- real names, handles, nicknames or account names;
+- raw transcript text or real captions;
+- local paths, project names or source filenames that identify a recording;
+- private Instagram/Telegram screenshots;
+- provider keys, chat IDs, emails or internal CRM details.
 
-For challenge branches, keep the real creator agreement and partner context in a private CRM/card. The public repo only carries the **mechanic**: what is tracked, how the collab reel preserves handoffs, and what visual recipe can be reused.
+Use:
 
-## How to submit
+- `creator_a`, `creator_b`, `host_creator`, `guest_creator`;
+- `hook`, `tension`, `turn`, `proof`, `punch`, `closer`;
+- `caption`, `highlight`, `card`, `rail`, `stamp`, `proof`;
+- aggregate metrics only.
+
+If the branch came from a real recording, strip it to structure before opening a PR.
+
+## Branch Folder
 
 ```bash
-# 1. fork github.com/aPoWall/reels-pipeline-os
-# 2. add your branch as a generic EDL
-mkdir -p branches/<your-handle>
-cp your_edit.json branches/<your-handle>/edit_decision_list.json   # sanitized!
-# 3. add a row describing it
-#    branches/<your-handle>/README.md – one paragraph: what the branch does, when to use it
-# 4. (optional) add your branch map to the dashboard
-# 5. open a PR
+branches/<branch-pack>/
+  README.md
+  edit_decision_list.json
 ```
 
-### Branch EDL format
+`README.md` should answer:
 
-Use the generic schema from [STACK.md](STACK.md#edl-schema-generic-example). Minimum:
+- when to use this pack;
+- what source it expects;
+- what mode it defaults to;
+- what artifacts it creates;
+- what QA must pass;
+- what stays private.
+
+## EDL Minimum
+
+Use `reel.edl.v3` from [STACK.md](STACK.md#4-edl-schema). Minimum public-safe shape:
 
 ```json
 {
-  "schema": "reels.edl.v1",
-  "strategy": { "mode": "<your-mode>", "style": "<your-style>", "audio_policy": "single_source" },
-  "cuts": [ { "label": "hook", "sourceStart": 0.0, "sourceEnd": 3.7, "note": "cold open" } ],
-  "overlay_tracks": [ { "type": "caption", "lane": "captions", "from": 0.8, "to": 44.0 } ],
-  "render": { "outputs": [ { "label": "final", "res": "1080x1920", "encoder": "libx264", "crf": 18 } ] }
+  "schema": "reel.edl.v3",
+  "strategy": {
+    "pack": "portable-iphone-kit",
+    "mode": "caption_only",
+    "audio_policy": "single_source"
+  },
+  "source_blocks": [
+    {
+      "id": "b01",
+      "role": "hook",
+      "summary": "public-safe summary",
+      "sourceStart": 0.0,
+      "sourceEnd": 3.8
+    }
+  ],
+  "cuts": [
+    {
+      "id": "c01",
+      "block": "b01",
+      "sourceStart": 0.0,
+      "sourceEnd": 3.8,
+      "outStart": 0.0,
+      "outEnd": 3.8,
+      "risk": "baseline"
+    }
+  ],
+  "overlay_tracks": [
+    {
+      "id": "captions",
+      "type": "caption",
+      "items": [
+        {"start": 0.4, "end": 2.6, "text": "caption", "safeZone": "lower-third"}
+      ]
+    }
+  ],
+  "qa": {
+    "ffprobe": "required",
+    "contact_sheet": "required",
+    "listening_pass": "required",
+    "privacy_pass": "required"
+  }
 }
 ```
 
-### Challenge branch minimum
-
-If you contribute a public challenge branch, include:
+## Challenge Branch Minimum
 
 ```json
 {
   "challenge": {
     "goal": "first_to_10000_followers",
     "paid_ads_allowed": false,
-    "metrics": ["followers_start", "followers_current", "followers_delta", "content_count", "prep_minutes"]
+    "publish_window": "public date range",
+    "metrics": [
+      "followers_start",
+      "followers_current",
+      "followers_delta",
+      "content_count",
+      "prep_minutes",
+      "trial_results"
+    ]
   },
   "collabBeats": [
-    { "label": "handoff", "preserve_reason": "live exchange" }
+    {
+      "id": "beat_01",
+      "type": "handoff",
+      "speaker": "creator_a",
+      "preserve_reason": "sets the next turn"
+    }
   ]
 }
 ```
 
-Do not include real handles, private baseline screenshots, exact DM text, or raw captions. Use `creator_a` / `creator_b` and aggregate public counts.
+Keep real agreements, screenshots and private baselines in a private CRM or repo.
 
-### Portable kit minimum
-
-If you contribute a portable production kit, include:
+## Portable Kit Minimum
 
 ```json
 {
   "branch": "portable-kit-name",
+  "platform": "macOS | browser | linux | cloud",
   "pipeline": [
     {"label": "preflight", "contract": "check tools and folders"},
-    {"label": "normalize", "contract": "normalize media without changing private content"},
-    {"label": "qa", "contract": "state the checks before final export"}
+    {"label": "ingest", "contract": "normalize media safely"},
+    {"label": "timing", "contract": "word timing plus audio-energy check"},
+    {"label": "qa", "contract": "state checks before final export"}
   ],
   "privacy": "mechanics_only"
 }
 ```
 
-Acceptable: dependency checks, generic template names, media-normalization rules,
-EDL schema, QA gates. Not acceptable: real shoot names, source filenames, account
-handles, real captions, motif/image files copied from another creator, or private
-analytics.
+## Dashboard Style
 
-## Style
+Keep the static dashboard close to Shaper:
 
-The dashboard is **Shaper** aesthetic: pure B&W, JetBrains Mono, 1px frames, lowercase, inversion = active. No color, no Tailwind, no emoji in headings. Keep contributions in register.
+- monochrome base;
+- restrained accent colors only for data state;
+- JetBrains Mono / system monospace;
+- 1–2px frames;
+- radius 8px or less;
+- no decorative gradients;
+- no private data in UI text.
 
-## Review
+## Review Criteria
 
-PRs are reviewed for: (1) the no-personal-data rule, (2) a clear one-paragraph description, (3) a valid generic EDL. That's it – low friction, high signal.
+PR review checks:
 
-Born in **AI Mindset {space}**. Agent + human keep the stack together.
+- privacy boundary;
+- valid JSON;
+- clear source/goal/mode;
+- reproducible artifacts;
+- QA gate;
+- useful README.
+
+Low friction, high signal.

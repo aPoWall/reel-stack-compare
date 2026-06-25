@@ -1,24 +1,42 @@
 # creator-collab challenge
 
-Public-safe branch for a two-creator Instagram/Reels challenge.
+Public-safe branch pack for a two-creator Reels challenge.
 
-## What It Captures
+## Use When
 
-- a public commitment mechanic: first to `10000` followers;
-- a no-paid-targeting rule: `paid_ads_allowed: false`;
-- a lightweight stake: the loser publishes a short public post/reel marketing the winner's product;
-- tracking fields for follower delta, content cadence, and preparation time;
-- a collab-reel recipe that preserves live interruptions and handoffs.
+- a collab reel should keep the live exchange alive;
+- a public creator-growth challenge needs a reusable metric schema;
+- the private agreement, real handles and raw footage stay outside the open repo.
+
+## Pack Contract
+
+| layer | contract |
+|------|----------|
+| challenge | track public aggregate metrics and `paid_ads_allowed:false` |
+| turn map | mark each handoff, interruption and acknowledgement |
+| EDL | preserve live turns as story beats |
+| overlay | use direct viewer-facing captions and a thin challenge rail |
+| QA | check interruptions at 1x, privacy boundary and visual clarity |
+
+## Metrics
+
+- `followers_start`
+- `followers_current`
+- `followers_delta`
+- `content_count`
+- `prep_minutes`
+- `publish_window`
+- `trial_results`
+- `paid_ads_allowed`
 
 ## Visual Recipe
 
-- lead with a full-screen motif object or scene action;
-- use direct typography over the image, not oversized cards by default;
-- use white text with one yellow keyword;
-- optional small star accents are allowed;
-- keep faces, hands, objects, and the action clear;
-- never show production labels, local paths, source filenames, or private chat text.
+- open with a real motif object or scene action;
+- use direct typography over the image;
+- keep one yellow semantic keyword when useful;
+- keep faces, hands, objects and action clear;
+- keep production labels, local paths, source filenames and private chat text out of frame.
 
-## Contribution Rule
+## Public Boundary
 
-Keep the private partner agreement, account names, raw footage, and source captions outside this repo. This branch accepts only mechanics: generic EDL, metric schema, overlay lanes, and QA rules.
+Use `creator_a`, `creator_b`, `hook`, `turn`, `handoff`, `motif_insert` and aggregate public counts. Keep private partner agreement, account names, raw footage, source captions and baseline screenshots outside this repo.

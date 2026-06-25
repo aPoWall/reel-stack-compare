@@ -1,39 +1,42 @@
-# portable iphone kit
+# portable iPhone kit
 
-Public-safe branch for a transferable iPhone Reels workflow inspired by the public
-`Voronik1801/reel_pipline` repository.
+Public-safe branch pack for a transferable iPhone Reels workflow. It distills the useful mechanics from the public [`Voronik1801/reel_pipline`](https://github.com/Voronik1801/reel_pipline) repo into the broader Reels Stack Configurator.
 
-## What It Captures
+## Use When
 
-- macOS/iPhone color discipline: HDR/HLG footage is converted to SDR through Apple
-  `avconvert`, then exported with bt709 tags;
-- a first-run environment check before any edit starts;
-- copy-and-fill templates for a new shoot, so the pipeline can be handed to a
-  new creator without moving private footage;
-- stutter and dead-air review as explicit QA artifacts;
-- replaceable cover/finale/music slots, so account identity lives in config
-  and private media stays outside the public branch.
+- source is iPhone `.MOV`;
+- the creator needs a repeatable human/agent handoff;
+- speed matters more than a full block-editor UI;
+- color, subtitles, cover/finale and QA must be predictable.
 
-## What We Borrow
+## Pack Contract
 
-- **preflight before creativity**: check ffmpeg, ffprobe, whisper, avconvert,
-  fonts, and working folders first;
-- **template discipline**: new shoot = copy templates, fill sources, cut ranges,
-  cover config, and finale config;
-- **audio truth beats transcript truth**: word timings are useful, but long words,
-  RMS drops, and ZCR spikes must be reviewed by ear;
-- **iPhone color is a pipeline layer**: HDR conversion is not an aesthetic grade;
-- **handoff-friendly docs**: the README is written so a human can ask an agent to
-  run the whole chain.
+| layer | contract |
+|------|----------|
+| preflight | check `ffmpeg`, `ffprobe`, `whisper`, `avconvert`, Python packages, fonts and folders |
+| ingest | convert iPhone HLG/bt2020 to SDR bt709 through Apple `avconvert` |
+| timing | create word-level transcript and verify weak windows through audio energy |
+| plan | copy a template and fill source ranges, corrections and identity slots |
+| QA | run stutter/dead-air review, contact-sheet check, audio pass and privacy pass |
 
-## What Stays Different In Our Stack
+## What We Take
 
-The portable kit is a strong **single-account production skeleton**. AI Mindset
-Reels Pipeline OS keeps it as a branch, then adds EDL-as-SSOT, branch surfaces,
-overlay lanes, block editor previews, Trial Reels strategy, and skill memory.
+- `avconvert -p Preset1920x1080` as the canonical iPhone color front-end;
+- `pipeline_check.sh` before creative work;
+- copy-fill-run build/render templates;
+- RMS dead-air review for pauses hidden by background noise;
+- stutter review from long words, near-repeats and intra-piece pauses;
+- replaceable cover/finale/music/sticker slots;
+- final re-check by frames and transcript.
 
-## Contribution Rule
+## What This Pack Adds To The OS
 
-Do not copy creator footage, motif assets, real captions, Telegram/Instagram
-handles, private shoot names, local paths, or raw transcripts into this branch.
-Contribute the reusable mechanics only.
+- maps template plans into `source_blocks[]` and `cuts[]`;
+- treats captions as an overlay lane;
+- keeps account identity in private config;
+- adds public-safe branch packaging;
+- routes survivor findings back to skills.
+
+## Public Boundary
+
+Keep creator footage, real captions, account assets, handles, local paths, raw transcripts and private project names outside this branch. Contribute mechanics only.

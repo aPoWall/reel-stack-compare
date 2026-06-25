@@ -1,30 +1,36 @@
 {
-  "schema": "reels.edl.v2",
+  "schema": "reel.edl.v3",
   "branch": "portable-iphone-kit",
   "publicSafe": true,
-  "source": "public-repo-mechanics-only",
+  "source": {
+    "kind": "iphone_single",
+    "media": "private/raw/source_take_a.MOV",
+    "public_name": "source_take_a",
+    "ingest": "avconvert_sdr"
+  },
   "inspiredBy": "https://github.com/Voronik1801/reel_pipline",
   "strategy": {
-    "mode": "portable_single_creator_pipeline",
-    "style": "iphone_sdr_shadow_captions_replaceable_identity",
-    "audio_policy": "single_source_with_explicit_stutter_and_deadair_review",
+    "pack": "portable-iphone-kit",
+    "mode": "caption_only",
+    "style": "iphone_sdr_shadow_captions",
+    "audio_policy": "single_source",
     "privacy": "mechanics_only"
   },
   "pipeline": [
     {
       "id": "p00",
       "label": "preflight",
-      "contract": "check tools, fonts, folders, and platform assumptions before edit"
+      "contract": "check tools, fonts, folders and platform assumptions before edit"
     },
     {
       "id": "p01",
       "label": "iphone_sdr",
-      "contract": "convert HLG/HDR iPhone footage to SDR bt709 with native macOS tooling"
+      "contract": "convert HLG/bt2020 iPhone footage to SDR bt709 with Apple avconvert"
     },
     {
       "id": "p02",
       "label": "word_transcript",
-      "contract": "create word-level transcript, but mark unreliable windows for manual repair"
+      "contract": "create word-level transcript and flag unreliable windows"
     },
     {
       "id": "p03",
@@ -33,23 +39,75 @@
     },
     {
       "id": "p04",
-      "label": "stutter_review",
-      "contract": "detect long-word hidden false starts, near repeats, and intra-piece pauses"
+      "label": "stutter_deadair_review",
+      "contract": "detect long-word false starts, near repeats, intra-piece pauses and RMS drops"
     },
     {
       "id": "p05",
       "label": "render_body",
-      "contract": "scale/crop 1080x1920, add word-highlight captions as PNG overlay states"
+      "contract": "scale/crop 1080x1920 and render word-highlight captions as PNG overlay states"
     },
     {
       "id": "p06",
       "label": "identity_slots",
-      "contract": "cover, finale, music, and sticker/motif are replaceable config, not private defaults"
+      "contract": "cover, finale, music and sticker/motif live in replaceable private config"
     },
     {
       "id": "p07",
       "label": "qa",
-      "contract": "review frames, color tags, subtitles, final audio, and retranscribe if needed"
+      "contract": "review frames, color tags, subtitles, final audio and privacy boundary"
+    }
+  ],
+  "source_blocks": [
+    {
+      "id": "b01",
+      "role": "hook",
+      "summary": "first clear thought from the source take",
+      "sourceStart": 0.0,
+      "sourceEnd": 3.4
+    },
+    {
+      "id": "b02",
+      "role": "body",
+      "summary": "main reusable argument",
+      "sourceStart": 3.4,
+      "sourceEnd": 24.0
+    },
+    {
+      "id": "b03",
+      "role": "closer",
+      "summary": "identity or CTA slot",
+      "sourceStart": 24.0,
+      "sourceEnd": 31.0
+    }
+  ],
+  "cuts": [
+    {
+      "id": "c01",
+      "block": "b01",
+      "sourceStart": 0.0,
+      "sourceEnd": 3.4,
+      "outStart": 0.0,
+      "outEnd": 3.4,
+      "risk": "baseline"
+    },
+    {
+      "id": "c02",
+      "block": "b02",
+      "sourceStart": 3.4,
+      "sourceEnd": 24.0,
+      "outStart": 3.4,
+      "outEnd": 24.0,
+      "risk": "safe-zone-watch"
+    },
+    {
+      "id": "c03",
+      "block": "b03",
+      "sourceStart": 24.0,
+      "sourceEnd": 31.0,
+      "outStart": 24.0,
+      "outEnd": 31.0,
+      "risk": "baseline"
     }
   ],
   "overlay_tracks": [
@@ -80,7 +138,7 @@
       ]
     },
     {
-      "id": "finale",
+      "id": "identity_slot",
       "type": "stamp",
       "items": [
         {
@@ -93,14 +151,33 @@
       ]
     }
   ],
-  "qa": [
-    "environment_check_passed",
-    "iphone_hdr_to_sdr_checked",
-    "rotation_checked",
-    "word_timestamps_reviewed_by_audio_energy",
-    "stutters_reviewed",
-    "deadair_reviewed",
-    "bt709_tags_present",
-    "no_private_media_or_paths"
-  ]
+  "render": {
+    "route": "ffmpeg",
+    "outputs": {
+      "review": "renders/portable_iphone_review.mp4",
+      "final": "renders/portable_iphone_final_1080x1920.mp4"
+    },
+    "video": {
+      "width": 1080,
+      "height": 1920,
+      "fps": 24,
+      "colorspace": "bt709"
+    },
+    "audio": {
+      "codec": "aac",
+      "channels": 2,
+      "sampleRate": 48000,
+      "targetLufs": -16
+    }
+  },
+  "qa": {
+    "environment_check": "required",
+    "iphone_hdr_to_sdr": "required",
+    "rotation_check": "required",
+    "word_timing_audio_energy_review": "required",
+    "stutter_review": "required",
+    "deadair_review": "required",
+    "bt709_tags": "required",
+    "privacy_pass": "required"
+  }
 }

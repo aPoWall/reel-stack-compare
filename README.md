@@ -1,95 +1,71 @@
-# AI Mindset Reels Pipeline OS
+# Reels Stack Configurator
 
-> **Open community stack for agentic short-form (Reels) editing.**
+> **Forkable dashboard and stack spec for agentic Reels editing.**
 > Live: https://apowall.github.io/reels-pipeline-os/
 
-Portable editing OS you **fork, configure, and contribute back to**. It started as a small Shaper dashboard prototype; now it is a public package of Reels pipeline contracts, branches, and install recipes.
+This repo is a public **configuration surface** for short-form montage stacks. It helps you pick a stack before editing: source type, goal, mode, branch pack, EDL contract, render route, QA gate and public/private boundary.
+
+It is built from our real Codex/Claude Code reel sessions, the `reel-edit` skill, the `stack-compare` skill, and a fresh audit of the public `Voronik1801/reel_pipline` repo.
 
 ![cover](assets/og-cover.png)
 
-## Start here
+## Start Here
 
 | file | what |
 |------|------|
-| **[STACK.md](STACK.md)** | the whole stack – every layer, tools, contracts, EDL schema, the skills, how to run it. Download this. |
-| **[CONTRIBUTING.md](CONTRIBUTING.md)** | how to add your branch / example / improvement (+ the no-personal-data rule) |
-| **[index.html](index.html)** | the live dashboard (single static file) |
+| **[index.html](index.html)** | visual dashboard and live stack configurator |
+| **[STACK.md](STACK.md)** | full stack spec: packs, contracts, EDL schema, QA gates, source research |
+| **[CONTRIBUTING.md](CONTRIBUTING.md)** | how to contribute a branch without leaking private data |
+| **[branches/](branches/)** | public-safe branch recipes and sample EDLs |
 
-## The dashboard
+## What Changed
 
-| tab | shows |
-|-----|-------|
-| **как работает** | the stack in 30 seconds: transcript → source blocks → EDL → overlays → draft → QA → final |
-| **конфигуратор** | choose the branch pack for your use case and copy the install/checklist |
-| **подходы** | different reusable approaches: long-form discipline, portable iPhone kit, our Reels OS |
-| **короткий формат** | how long-form and portable kits change when they become short-form Reels |
-| **живой пример** | a sanitized worked recipe: source blocks → EDL strip → overlay lanes → QA → branch surface |
-| **заимствуем** | six borrows ranked by leverage + our moat |
-| **развитие** | target merged architecture + roadmap |
-| **технологии** | EXA-researched technology matrix (Remotion, OTIO, Hyperframes, X-Cut, Scribe, …) |
+The old page was a comparison artifact. The current version is a **stack configurator**:
 
-Keyboard: `1`–`8` switch tabs · `d` toggle dark/light.
+1. choose `source`: iPhone one-take, multi-take, collab, screen/system, reference echo, public package;
+2. choose `goal`: publish fast, reusable recipe, reviewable, public branch, challenge, skill update;
+3. choose `mode`: dry preserve, caption only, proof overlay, visible flow, social short, experimental;
+4. copy the generated JSON config and branch pack checklist.
 
-## The idea in one line
+## Branch Packs
 
-A short-form editor should store the **recipe** first: source blocks + EDL + overlay lanes + QA/audio. The final mp4 becomes an output of a pinned, reproducible, forkable editing state.
+| pack | use when | key artifacts |
+|------|----------|---------------|
+| `portable-iphone-kit` | one creator has iPhone `.MOV` footage | `source_map.md`, `raw_sdr/*.mov`, transcript JSON, EDL, QA |
+| `edl-block-editor` | the montage must become reusable state | `edit_decision_list.json`, `realself.timeline.json`, overlay manifest |
+| `inside-insanity` | Alex personal Instagram reels | EDL, survivor notes, contact sheet, Saved Messages preview |
+| `collab-spine` | live exchange between creators | turn map, `collabBeats[]`, preserved handoff notes |
+| `creator-collab-challenge` | public growth challenge | sanitized metrics, challenge EDL, Trial results |
+| `public-dashboard` | open-source package | `STACK.md`, `CONTRIBUTING.md`, branch README, static dashboard |
 
-## Branches so far
+## Dasha/Voronik Audit
 
-- **long-form discipline** – cut plan as SSOT, draft→final, transcript precision
-- **our reels** – visual block editor, mode/style library, audio-first lip-sync
-- **answer-card** – a sanitized worked recipe-example (overlay density ladder: clean → captions → micro → low-rail → soft-card)
-- **creator-collab-challenge** – public follower-growth challenge recipe: metrics schema + collab reel mechanics + privacy boundary
-- **portable-iphone-kit** – public-safe branch inspired by `Voronik1801/reel_pipline`: macOS/iPhone color discipline, templates, preflight, stutter/dead-air QA
-- **your branch** – next. See [CONTRIBUTING.md](CONTRIBUTING.md).
+The public [`Voronik1801/reel_pipline`](https://github.com/Voronik1801/reel_pipline) repo is strongest as a **portable iPhone production kit**:
 
-## Configurator
+- Apple `avconvert` for iPhone HLG/bt2020 → SDR bt709 color;
+- `pipeline_check.sh` preflight before creative work;
+- copy-fill-run templates for build and render;
+- RMS dead-air detector;
+- stutter detector from long words, pauses and near-repeats;
+- replaceable subtitle, cover, finale, music and sticker slots.
 
-Pick a pack before you edit:
+We use those mechanics as the `portable-iphone-kit` pack. The broader OS adds EDL-as-SSOT, branch surface, overlay lanes, block-editor direction, Trial loop, skill memory and public/private packaging.
 
-| use case | start with | add |
-|----------|------------|-----|
-| one personal talking-head reel | `reel-edit` + `portable-iphone-kit` | `inside-insanity` for Alex-style voice/visual DNA |
-| reusable block/timeline workflow | `reel-edit` + `reel-block-edit` | EDL export + overlay density ladder |
-| public package / dashboard | `stack-compare` | sanitized branches only, no personal data |
-| collab/challenge reel | `creator-collab-challenge` | aggregate public metrics, interruption-preserving EDL |
+## Public Boundary
 
-## Creator-collab challenge branch
+Public files store **mechanics only**:
 
-The current public branch is a **sanitized challenge mechanic**. It describes how two creators can run a public Reels/Instagram challenge with:
+- no raw footage;
+- no private transcript text;
+- no real handles, names, local filenames or local paths;
+- no provider keys;
+- public metrics are aggregated.
 
-- follower baseline/current/delta;
-- content count and publish cadence;
-- preparation time in minutes;
-- `paid_ads_allowed: false`;
-- a loser/winner public-post stake;
-- a reusable collab-reel EDL pattern that preserves live interruptions and handoffs.
-
-Real names, handles, private screenshots, raw footage, local paths, and secrets stay outside this repo. Code here is a **pipeline skeleton and public recipe** only; provider keys live in local environment variables.
-
-## Portable iPhone kit branch
-
-This branch distills what is useful from the public `Voronik1801/reel_pipline` repo:
-
-- `pipeline_check` before creative work;
-- Apple `avconvert` for iPhone HDR→SDR color;
-- copy-and-fill shoot templates;
-- stutter/dead-air detectors;
-- cover/finale/music as replaceable identity slots.
-
-It is packaged as transferable mechanics, with private creator style kept outside the public repo.
-
-## Fork the dashboard as your own pipeline
-
-One `index.html`, no build step. Copy it, edit the header/thesis and the two pipeline columns, keep the Shaper design tokens (`:root` block – pure B&W, JetBrains Mono, 1px frames). Regenerate the social cover from `assets/og-cover.src.html`.
-
-## Publish your own
+## Publish Your Fork
 
 ```bash
 gh repo create <you>/<name> --public --source=. --push
 gh api -X POST repos/<you>/<name>/pages -f 'source[branch]=main' -f 'source[path]=/'
 ```
 
----
-
-Built with Claude Code + Codex via EXA MCP. Aesthetic: AI Mindset Shaper. **No personal data in public artifacts – mechanics only.**
+Built with Codex + Claude Code + EXA MCP research. Design language: AI Mindset Shaper.

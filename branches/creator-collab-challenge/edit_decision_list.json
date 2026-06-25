@@ -1,9 +1,15 @@
 {
-  "schema": "reels.edl.v2",
+  "schema": "reel.edl.v3",
   "branch": "creator-collab-challenge",
   "publicSafe": true,
+  "source": {
+    "kind": "collab",
+    "media": "private/source/collab_take.mov",
+    "public_name": "collab_source_a"
+  },
   "strategy": {
-    "mode": "collab_challenge",
+    "pack": "creator-collab-challenge",
+    "mode": "visible_flow",
     "style": "minimal_yellow_text_motif",
     "audio_policy": "single_source_with_marked_collab_insert",
     "privacy": "mechanics_only"
@@ -12,88 +18,137 @@
     "goal": "first_to_10000_followers",
     "paid_ads_allowed": false,
     "stake": "loser_publishes_short_public_post_or_reel_marketing_winner_product",
+    "publish_window": "public date range",
     "metrics": [
       "followers_start",
       "followers_current",
       "followers_delta",
       "content_count",
       "prep_minutes",
-      "publish_window",
       "trial_results"
     ]
   },
+  "source_blocks": [
+    {
+      "id": "b01",
+      "role": "motif_hook",
+      "summary": "full-screen scene action introduces the collab",
+      "sourceStart": 0.0,
+      "sourceEnd": 2.2
+    },
+    {
+      "id": "b02",
+      "role": "guest_setup",
+      "summary": "creator_a sets the premise",
+      "sourceStart": 2.2,
+      "sourceEnd": 8.0
+    },
+    {
+      "id": "b03",
+      "role": "host_reply",
+      "summary": "creator_b replies and turns the premise",
+      "sourceStart": 8.0,
+      "sourceEnd": 15.0
+    },
+    {
+      "id": "b04",
+      "role": "interruption_handoff",
+      "summary": "overlap proves the exchange is live",
+      "sourceStart": 15.0,
+      "sourceEnd": 19.0
+    },
+    {
+      "id": "b05",
+      "role": "challenge_commit",
+      "summary": "public challenge is stated for the viewer",
+      "sourceStart": 19.0,
+      "sourceEnd": 25.0
+    },
+    {
+      "id": "b06",
+      "role": "closer",
+      "summary": "next episode or public commitment",
+      "sourceStart": 25.0,
+      "sourceEnd": 31.0
+    }
+  ],
   "cuts": [
     {
       "id": "c01",
-      "label": "motif_hook",
+      "block": "b01",
       "sourceStart": 0.0,
       "sourceEnd": 2.2,
       "outStart": 0.0,
       "outEnd": 2.2,
-      "risk": "baseline",
-      "note": "full-screen motif object or scene action"
+      "risk": "baseline"
     },
     {
       "id": "c02",
-      "label": "guest_setup",
+      "block": "b02",
       "sourceStart": 2.2,
       "sourceEnd": 8.0,
       "outStart": 2.2,
       "outEnd": 8.0,
-      "risk": "baseline",
-      "note": "first creator sets the premise"
+      "risk": "baseline"
     },
     {
       "id": "c03",
-      "label": "host_reply",
+      "block": "b03",
       "sourceStart": 8.0,
       "sourceEnd": 15.0,
       "outStart": 8.0,
       "outEnd": 15.0,
-      "risk": "insert",
-      "note": "second creator replies without flattening the live handoff"
+      "risk": "insert"
     },
     {
       "id": "c04",
-      "label": "interruption_handoff",
+      "block": "b04",
       "sourceStart": 15.0,
       "sourceEnd": 19.0,
       "outStart": 15.0,
       "outEnd": 19.0,
-      "risk": "safe-zone-watch",
-      "preserve_reason": "the overlap proves the collab is alive"
+      "risk": "safe-zone-watch"
     },
     {
       "id": "c05",
-      "label": "challenge_commit",
+      "block": "b05",
       "sourceStart": 19.0,
       "sourceEnd": 25.0,
       "outStart": 19.0,
       "outEnd": 25.0,
-      "risk": "baseline",
-      "note": "state the public challenge in viewer-facing language"
+      "risk": "baseline"
     },
     {
       "id": "c06",
-      "label": "closer",
+      "block": "b06",
       "sourceStart": 25.0,
       "sourceEnd": 31.0,
       "outStart": 25.0,
       "outEnd": 31.0,
-      "risk": "baseline",
-      "note": "leave room for the public commit / next episode"
+      "risk": "baseline"
     }
   ],
   "collabBeats": [
     {
-      "label": "handoff",
-      "range": "c03-c04",
-      "preserve_reason": "speaker overlap and reaction are part of the story"
+      "id": "beat_01",
+      "type": "handoff",
+      "speaker": "creator_a",
+      "range": "c02-c03",
+      "preserve_reason": "sets the next turn"
     },
     {
-      "label": "scene_insert",
+      "id": "beat_02",
+      "type": "interruption",
+      "speaker": "creator_b",
+      "range": "c04",
+      "preserve_reason": "speaker overlap is part of the story"
+    },
+    {
+      "id": "beat_03",
+      "type": "motif_insert",
+      "speaker": "scene",
       "range": "c01",
-      "preserve_reason": "motif object gives the reel a memorable start"
+      "preserve_reason": "scene action gives the reel a memorable start"
     }
   ],
   "overlay_tracks": [
@@ -135,28 +190,35 @@
           "style": "thin_bw"
         }
       ]
-    },
-    {
-      "id": "stars",
-      "type": "stamp",
-      "items": [
-        {
-          "start": 0.2,
-          "end": 31.0,
-          "text": "accent",
-          "safeZone": "corners",
-          "style": "tiny_yellow_star"
-        }
-      ]
     }
   ],
-  "qa": [
-    "no_real_names_or_handles",
-    "no_private_screenshots",
-    "no_raw_transcript_text",
-    "no_local_paths_or_source_filenames",
-    "no_provider_keys",
-    "interruptions_checked_at_1x",
-    "faces_and_motif_clear"
-  ]
+  "render": {
+    "route": "ffmpeg_or_remotion",
+    "outputs": {
+      "review": "renders/collab_challenge_review.mp4",
+      "final": "renders/collab_challenge_final_1080x1920.mp4"
+    },
+    "video": {
+      "width": 1080,
+      "height": 1920,
+      "fps": 24,
+      "colorspace": "bt709"
+    },
+    "audio": {
+      "codec": "aac",
+      "channels": 2,
+      "sampleRate": 48000,
+      "targetLufs": -16
+    }
+  },
+  "qa": {
+    "no_real_names_or_handles": "required",
+    "no_private_screenshots": "required",
+    "no_raw_transcript_text": "required",
+    "no_local_paths_or_source_filenames": "required",
+    "no_provider_keys": "required",
+    "interruptions_checked_at_1x": "required",
+    "faces_and_motif_clear": "required",
+    "challenge_metrics_aggregated": "required"
+  }
 }
