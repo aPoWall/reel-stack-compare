@@ -35,7 +35,7 @@ Public-safe branch pack for a transferable iPhone Reels workflow. It distills th
 - treats captions as an overlay lane;
 - keeps account identity in private config;
 - adds public-safe branch packaging;
-- routes survivor findings back to skills.
+- writes reusable learning notes for future branches.
 
 ## Public Boundary
 

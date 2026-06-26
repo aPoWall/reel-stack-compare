@@ -1,4 +1,4 @@
-# Reels Stack Configurator – stack spec
+# Reels Pipeline OS - stack spec
 
 > Public stack specification for agentic short-form editing: source audit → ingest → transcript → source blocks → EDL → overlay lanes → render → QA → publish loop.
 
@@ -19,15 +19,6 @@ source audit -> ingest/color -> transcript/timing -> source blocks -> EDL state 
 ```
 
 The MP4 is an output. The durable artifact is the recipe: source blocks, cut map, overlay tracks, QA decisions and branch status.
-
-For Alex's personal account, one layer sits before the editing contract:
-
-```text
-visual references -> personal visual board -> editing contract -> render state
-```
-
-See [PERSONAL-LAYER.md](PERSONAL-LAYER.md) for the public-safe analysis of that
-upstream visual-board layer.
 
 ## 2. Decision Order
 
@@ -51,7 +42,7 @@ upstream visual-board layer.
 | `manual_review` | block/timeline state + contact sheet |
 | `public_branch` | sanitized README + sample EDL |
 | `challenge` | metrics schema + collab EDL |
-| `skill_update` | survivor notes written back into skill memory |
+| `article_demo` | schematic EDL, library list and public citation paragraph |
 
 ### 2.3 Mode
 
@@ -72,12 +63,12 @@ Pick the editorial mode before the visual style:
 
 | author/source | strongest contribution | adopted layer |
 |---------------|------------------------|---------------|
-| Alex / AI Mindset `reel-edit 3.17` | mode-first, audio-first, EDL, overlay lanes, branch matrix, survivor memory | center stack |
 | Dasha / `Voronik1801/reel_pipline` | portable macOS/iPhone kit, `PIPELINE.md`, `pipeline_check.sh`, `avconvert`, templates, stutter/dead-air review | `portable-iphone-kit` |
 | MeiGen-AI / X-Cut | chat-driven video agent, selected skills, real-time Remotion timeline, reusable style recipes | agent/editor surface |
 | Ishan Parihar / OpenScript | MCP tools, multi-track EDL v2, Rust timeline validation, verification layer | state and QA |
 | HeyGen / HyperFrames | HTML/CSS/media to deterministic MP4, agent skills, CLI validation/render loop | render adapter |
 | ReelStack / OpenReels / OpenCut | API-first pipelines, live pipeline UI, effects/templates, editor API, headless/MCP direction | future builder and dashboard |
+| Reels Pipeline OS | EDL as SSOT, overlay lanes, branch packs, library stack, configurator and contribution boundary | public packaging |
 
 ### 3.1 `portable-iphone-kit`
 
@@ -122,21 +113,20 @@ Use when the edit should be reusable and inspectable.
 - `cuts[]` as single source of truth;
 - independent `overlay_tracks[]`;
 - branch surface: `clean`, `captions`, `micro`, `low_rail`, `soft_card`, `challenge`;
-- preview state for `reel-block-edit` / Palmier-style UI;
+- preview state for a timeline board UI;
 - render adapters for ffmpeg, Remotion or browser.
 
-### 3.3 `inside-insanity`
+### 3.3 `caption-lane`
 
-Use for Alex personal Instagram reels.
+Use when subtitles and short viewer-facing text are the main social layer.
 
 **Rules:**
 
-- one audio spine by default;
-- real physical footage first;
-- terminal/protocol layer as controlled friction;
-- lowercase captions and sparse overlays;
-- Saved Messages preview before any public post;
-- survivor patterns are written back into `inside-insanity` and `reel-edit`.
+- transcript must include word timings;
+- captions stay sparse and safe-zone aware;
+- export a portable subtitle file when useful: ASS, SRT or WebVTT;
+- burn-in captions can be rendered as PNG overlays or ffmpeg/libass;
+- review the first 3 seconds, face/object overlap and final mobile readability.
 
 ### 3.4 `collab-spine`
 
@@ -362,10 +352,10 @@ Practical conclusion: keep the state model small and portable, then route render
 ## 9. Agent Builder Prompt
 
 ```text
-Build a public-safe reel-edit pipeline branch for AI Mindset.
+Build a public-safe Reels pipeline branch.
 
 Selected source: <iphone_single | multi_take | collab | screen_system | reference>
-Selected goal: <publish_fast | recipe | reviewable | public_branch | skill_update>
+Selected goal: <publish_fast | recipe | reviewable | public_branch | article_demo>
 Selected mode: <dry_preserve | caption_only | proof_overlay | visible_flow | experimental>
 
 Use this stack:
@@ -386,7 +376,7 @@ Required process:
 6. Write edit_decision_list.json with cuts[], overlay_tracks[] and render.outputs.
 7. Render review MP4 and final 1080x1920 MP4.
 8. Run QA: ffprobe, audio listen, first 3 seconds, safe zones, contact sheet, privacy pass.
-9. If a survivor pattern appears, write skill_patch_notes.md for reel-edit memory.
+9. Write a short learning note: what branch worked, what failed and what should be reused next time.
 
 Public boundary:
 - Keep raw footage, transcript text, real names, handles, local paths, private screenshots and keys outside public artifacts.
@@ -397,5 +387,5 @@ Return:
 - commands or scripts to run;
 - JSON EDL skeleton;
 - QA checklist;
-- next skill update note.
+- next learning note.
 ```

@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Mindset Reels Pipeline OS - public atlas + builder</title>
-<meta name="description" content="Public atlas for AI Mindset reel-edit: how the stack works, personal visual board, author approaches, technology map, EDL as source of truth, overlay lanes, branch packs, QA and a prompt builder.">
+<title>Reels Pipeline OS - public editing atlas + configurator</title>
+<meta name="description" content="Public Reels Pipeline OS: how to edit short-form videos with source audit, transcript, EDL as source of truth, overlay lanes, libraries, branch packs, QA and a configurator.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="AI Mindset Reels Pipeline OS">
-<meta property="og:title" content="AI Mindset Reels Pipeline OS">
-<meta property="og:description" content="Public atlas of reel-edit: personal visual board, author approaches, technology map, timeline state, branch packs and prompt builder.">
+<meta property="og:title" content="Reels Pipeline OS">
+<meta property="og:description" content="Public atlas for Reels editing: pipeline map, library stack, coauthors, timeline state, branch packs and configurator.">
 <meta property="og:image" content="https://apowall.github.io/reels-pipeline-os/assets/og-cover.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -409,9 +409,9 @@
 
   <header class="app">
     <div class="brand"><img class="lt" src="assets/aim-logo-light.png" alt="ai mindset"><img class="dk" src="assets/aim-logo.png" alt="ai mindset">reels pipeline os <span class="bsub">· ai mindset</span></div>
-    <div class="crumb"><b>public atlas</b> как работает reel-edit · personal style board · подходы авторов · stack builder</div>
+    <div class="crumb"><b>public atlas</b> как монтировать reels · libraries · coauthors · configurator</div>
     <div class="meta">
-      <b>v3.3</b> · 2026-06-26 · public<br>
+      <b>v3.4</b> · 2026-06-26 · public<br>
       <a href="https://github.com/aPoWall/reels-pipeline-os">github · repo</a> · <a href="https://apowall.github.io/reels-pipeline-os/">pages</a><br>
       <button class="tbtn" onclick="document.documentElement.classList.toggle('dark')">◐ тема</button>
     </div>
@@ -419,22 +419,21 @@
 
   <div class="thesis">
     <div class="tag">тезис</div>
-    <p><b>reels pipeline os</b> показывает публичную механику короткого монтажа: запись проходит source audit, transcript, source blocks, EDL, overlay lanes, render route и QA. в центре стоит <b>мой reel-edit 3.17</b>, перед ним лежит <b>personal visual board</b>, вокруг него разложены подходы авторов, открытые технологии и builder, который собирает branch pack и готовый prompt для агента.</p>
+    <p><b>reels pipeline os</b> показывает публичную механику короткого монтажа: запись проходит source audit, transcript, source blocks, EDL, overlay lanes, render route и QA. страница собирает понятный workflow, список библиотек, вклад соавторов и configurator, который выдаёт branch pack, JSON config и prompt для агента.</p>
   </div>
 
   <div class="ctas">
-    <a class="cta hero" href="#skill" onclick="openTab('skill')"><span class="ctaTop"><span class="glyph">◎</span>мой reel-edit стек</span><span class="ctaSub">mode-first · audio-first · EDL · overlay lanes · branch matrix · QA</span></a>
-    <a class="cta" href="#tech" onclick="openTab('tech')"><span class="ctaTop"><span class="glyph">⌁</span>карта технологий</span><span class="ctaSub">ffmpeg · whisper · avconvert · OTIO · Remotion · HyperFrames · WebCodecs</span></a>
+    <a class="cta hero" href="#pipeline" onclick="openTab('pipeline')"><span class="ctaTop"><span class="glyph">◎</span>как монтировать рилс</span><span class="ctaSub">source audit · transcript · EDL · overlay lanes · render · QA</span></a>
+    <a class="cta" href="#tech" onclick="openTab('tech')"><span class="ctaTop"><span class="glyph">⌁</span>libraries stack</span><span class="ctaSub">ffmpeg · whisper · avconvert · OTIO · Remotion · HyperFrames · WebCodecs</span></a>
     <a class="cta" href="STACK.md" download="ai-mindset-reels-pipeline-STACK.md"><span class="ctaTop"><span class="glyph">↓</span>скачать STACK.md</span><span class="ctaSub">слои, контракты, EDL-схема, public/private boundary</span></a>
   </div>
 
   <nav class="tabs" role="tablist">
     <button role="tab" aria-selected="true" onclick="tab('map',this)">карта</button>
-    <button role="tab" aria-selected="false" onclick="tab('skill',this)">мой стек</button>
-    <button role="tab" aria-selected="false" onclick="tab('style',this)">визуал</button>
-    <button role="tab" aria-selected="false" onclick="tab('approaches',this)">авторы</button>
-    <button role="tab" aria-selected="false" onclick="tab('tech',this)">технологии</button>
-    <button role="tab" aria-selected="false" onclick="tab('config',this)">собрать</button>
+    <button role="tab" aria-selected="false" onclick="tab('pipeline',this)">pipeline</button>
+    <button role="tab" aria-selected="false" onclick="tab('tech',this)">библиотеки</button>
+    <button role="tab" aria-selected="false" onclick="tab('config',this)">конфигуратор</button>
+    <button role="tab" aria-selected="false" onclick="tab('approaches',this)">соавторы</button>
     <button role="tab" aria-selected="false" onclick="tab('branches',this)">ветки</button>
     <button role="tab" aria-selected="false" onclick="tab('sources',this)">sources</button>
   </nav>
@@ -443,7 +442,7 @@
     <h2 class="sec">общая карта – что происходит с рилсом</h2>
     <div class="mapHero">
       <div class="mapPanel">
-        <div class="mapTitle"><b>монтажные подходы складываются в один editing state</b><span>approaches → contracts → reel-edit</span></div>
+        <div class="mapTitle"><b>монтажный процесс складывается в один editing state</b><span>sources → contracts → reels pipeline</span></div>
         <div class="approachGrid">
           <div class="approach">
             <div class="ey">discipline</div>
@@ -479,19 +478,19 @@
             <div class="take"><b>берем:</b> track model, adapters, browser editor direction.</div>
           </div>
           <div class="approach main">
-            <div class="ey">ours</div>
-            <h3>reel-edit os</h3>
+            <div class="ey">public contract</div>
+            <h3>reels pipeline os</h3>
             <ul>
               <li>mode-first before style</li>
               <li>one audio spine</li>
               <li>EDL + overlay lanes</li>
-              <li>survivor patterns</li>
+              <li>public branch packs</li>
             </ul>
             <div class="take"><b>ядро:</b> raw reel → reusable recipe → branch pack.</div>
           </div>
         </div>
 
-        <div class="funnel" aria-label="reel-edit pipeline">
+        <div class="funnel" aria-label="reels pipeline">
           <div class="step"><div class="n">01</div><b>source audit</b><span>ffprobe · audio · frames</span></div>
           <div class="step"><div class="n">02</div><b>transcript</b><span>word-times · pauses</span></div>
           <div class="step"><div class="n">03</div><b>source blocks</b><span>hook · tension · turn</span></div>
@@ -504,15 +503,15 @@
 
       <aside class="sidePanel">
         <div>
-          <h3>current reel-edit skill</h3>
-          <div class="bigNumber">3.17</div>
-          <p>главная настройка сейчас: сначала выбрать монтажную работу, потом визуальный стиль. skill хранит cut map, overlay tracks и QA для повторной сборки результата.</p>
+          <h3>public pipeline contract</h3>
+          <div class="bigNumber">7</div>
+          <p>семь опор процесса: audit, transcript, blocks, EDL, overlays, render and QA. Страница описывает механику так, чтобы её можно было форкнуть и применить к своему монтажу.</p>
         </div>
         <div class="modeList">
           <div class="modeRow"><b>default matrix</b><span>dry_preserve · caption_only · one context branch · short social cut</span></div>
           <div class="modeRow"><b>audio policy</b><span>один voice master; cross-take remix только как explicit experimental branch</span></div>
           <div class="modeRow"><b>public layer</b><span>только mechanics: no raw footage, names, transcripts, paths, handles</span></div>
-          <div class="modeRow"><b>survivors</b><span>color-return, kitchen os, dual persona, collab interruption, cover set</span></div>
+          <div class="modeRow"><b>fork layer</b><span>generic EDL, overlay lane types, QA gates, branch recipes</span></div>
         </div>
       </aside>
     </div>
@@ -520,8 +519,8 @@
     <h2 class="sec">как пользоваться этой страницей</h2>
     <div class="useGrid">
       <div class="useStep"><div class="u">01</div><b>смотри карту</b><p>понять путь записи от сырого файла до review/final без внутренних деталей.</p></div>
-      <div class="useStep"><div class="u">02</div><b>читай мой стек</b><p>увидеть текущий contract reel-edit: mode, audio, EDL, overlays, QA.</p></div>
-      <div class="useStep"><div class="u">03</div><b>сравни источники</b><p>взять полезные слои из публичных репо и подходов авторов.</p></div>
+      <div class="useStep"><div class="u">02</div><b>читай pipeline</b><p>увидеть монтажный contract: mode, audio, EDL, overlays, QA.</p></div>
+      <div class="useStep"><div class="u">03</div><b>смотри соавторов</b><p>понять, какие публичные инструменты и подходы повлияли на stack.</p></div>
       <div class="useStep hot"><div class="u">04</div><b>собери pack</b><p>выбрать source/goal/mode и скопировать prompt для агента.</p></div>
     </div>
 
@@ -536,9 +535,9 @@
     </div>
   </section>
 
-  <section class="panel" id="skill">
-    <h2 class="sec">мой reel-edit – как он настроен сейчас</h2>
-    <p class="lead"><b>reel-edit 3.17</b> владеет render-grade spine: source audit, transcript, word-safe cuts, EDL, audio master, overlays, review MP4, text-free base и QA. Palmier/block editor получает state, а public dashboard получает sanitized mechanics.</p>
+  <section class="panel" id="pipeline">
+    <h2 class="sec">pipeline – как монтировать reels</h2>
+    <p class="lead"><b>reels pipeline os</b> держит render-grade spine: source audit, transcript, word-safe cuts, EDL, audio master, overlays, review MP4, text-free base и QA. Любая реализация может заменить renderer, но сохраняет один переносимый editing state.</p>
 
     <div class="stackLayers">
       <div class="layerName">input</div><div class="layerBody">raw `.mov/.mp4`, optional screen proof, creative brief, reference mechanics, publish goal.</div>
@@ -550,14 +549,14 @@
     </div>
 
     <div class="cards">
-      <article class="block inv"><div class="num">1</div><h3>mode first</h3><div class="ld">сначала работа, потом стиль</div><p>режим выбирается до визуала: `dry_preserve`, `caption_only`, `proof_overlay`, `visible_flow`, `social_short`, `experimental`.</p><div class="src">fix from 2026-06-05</div></article>
+      <article class="block inv"><div class="num">1</div><h3>mode first</h3><div class="ld">сначала монтажная задача</div><p>режим выбирается до визуала: `dry_preserve`, `caption_only`, `proof_overlay`, `visible_flow`, `social_short`, `experimental`.</p><div class="src">public rule</div></article>
       <article class="block"><div class="num">2</div><h3>audio first</h3><div class="ld">один аудио-источник</div><p>речь держит структуру. visual swaps возможны в паузах, звук не прыгает между камерами. lipsync_render мапит подготовленный audio master.</p><div class="src">critical policy</div></article>
       <article class="block"><div class="num">3</div><h3>EDL layer</h3><div class="ld">editing state как SSOT</div><p>`cuts[]` хранит source ranges и labels. `overlay_tracks[]` живёт отдельно. draft и final рендерятся из одного state.</p><div class="src">shaper v2 · 2026-06-15</div></article>
     </div>
 
     <h2 class="sec">рабочая последовательность</h2>
     <ol class="road">
-      <li><span class="tagline">step 0</span><b>creative brief / mode selection</b><p>skill выводит inferred brief, если контекста достаточно: цель, нарративная арка, cut policy, overlay density, branch matrix.</p></li>
+      <li><span class="tagline">step 0</span><b>creative brief / mode selection</b><p>определить цель, нарративную арку, cut policy, overlay density and branch matrix.</p></li>
       <li><span class="tagline">step 1</span><b>deep source analysis</b><p>ffprobe, ориентация, камера, аудио-каналы, frame scan, source map, аудио-источник и visual-only blocks.</p></li>
       <li><span class="tagline">step 2</span><b>transcript + word-level timeline</b><p>слова, паузы, punch words, concept map. cut points ставятся в паузах, не внутри слов.</p></li>
       <li><span class="tagline">step 3</span><b>clean baseline</b><p>silence trim, filler/repeat cleanup, handles 100-260ms, closer tail. baseline сохраняется перед стилем.</p></li>
@@ -575,71 +574,25 @@
         <tr><td class="l">proof_overlay</td><td>нужен screen / terminal / site proof</td><td>один нижний proof block</td><td>не превратить в production label</td></tr>
         <tr><td class="l">visible_flow</td><td>процесс важнее одной фразы</td><td>timeline rail / graph</td><td>не перегрузить интерфейсом</td></tr>
         <tr><td class="l">social_short</td><td>нужен punch</td><td>short cut, minimal captions</td><td>не съесть смысл ради темпа</td></tr>
-        <tr><td class="l">experimental</td><td>поиск survivor style</td><td>одна wild ветка в batch</td><td>baseline остаётся рядом</td></tr>
+        <tr><td class="l">experimental</td><td>поиск выразительного стиля</td><td>одна wild ветка в batch</td><td>baseline остаётся рядом</td></tr>
       </tbody>
     </table>
 
-    <h2 class="sec">survivor presets из последних сессий</h2>
+    <h2 class="sec">типовые branch recipes</h2>
     <div class="lanes">
-      <div class="lname">shaper color return</div><div class="ldesc">gray/gong intro → color return → restrained captions → bodily payoff. хорош для morning / inside-insanity.</div>
-      <div class="lname">kitchen operating system</div><div class="ldesc">еда, лампа, устройство или бытовой объект становятся local OS. объект держит proof, captions редкие.</div>
-      <div class="lname">dual persona</div><div class="ldesc">coach / critic / meta lanes, no-overlap rules, persona pill в safe-zone, short cuts усиливают voice switch.</div>
+      <div class="lname">color return</div><div class="ldesc">монохромный или тихий старт → возвращение цвета → restrained captions → clear payoff.</div>
+      <div class="lname">object proof</div><div class="ldesc">один физический объект или экранный фрагмент держит доказательство, captions редкие и viewer-facing.</div>
+      <div class="lname">dual voice</div><div class="ldesc">coach / critic / meta lanes, no-overlap rules, persona pill в safe-zone, short cuts усиливают voice switch.</div>
       <div class="lname">collab interruption</div><div class="ldesc">interruptions and handoffs как сюжетные beat-ы. turn_map и collabBeats[] обязательны.</div>
       <div class="lname">cover set</div><div class="ldesc">10 cover options: identity references + motif object + clean no-text bases + Pillow caption layer.</div>
     </div>
   </section>
 
-  <section class="panel" id="style">
-    <h2 class="sec">личный visual board - слой перед pipeline</h2>
-    <p class="lead">главный вывод из публичного atlas: <b>личный reel-stack начинается с visual board</b>. pipeline режет, хранит EDL и рендерит, но для @_inside_insanity сначала выбираются референсы, тон, эстетика, caption grammar и мотив дня.</p>
-
-    <div class="stackLayers">
-      <div class="layerName">reference intake</div><div class="layerBody">фото дня, screenshots, raw videos, внешние refs, телесный объект, mood phrase. Это вход для вкуса, еще не монтажный config.</div>
-      <div class="layerName">style bible</div><div class="layerBody">личная aesthetic DNA: свет, texture, palette, typography, materiality, recurring clusters and reference artists.</div>
-      <div class="layerName">inside-insanity board</div><div class="layerBody">account-level decisions: Lisbon raw-iPhone x Fuji, shaper/noir, color-return, kitchen OS, mono plashka, lowercase caption grammar.</div>
-      <div class="layerName">reel-edit pipeline</div><div class="layerBody">mode, audio spine, source audit, transcript, EDL, overlay lanes, render outputs and QA.</div>
-      <div class="layerName">public package</div><div class="layerBody">sanitized mechanics only: no raw media, private transcript text, handles, local paths or private source names.</div>
-    </div>
-
-    <h2 class="sec">как это ложится на один рилс</h2>
-    <div class="techGrid">
-      <article class="techCard core"><h3>visual premise</h3><b>что сегодня увиделось</b><p>один объект, состояние или reference: лампа, кухня, balcony, terminal-face, цвет возвращается, system fatigue.</p></article>
-      <article class="techCard"><h3>tone</h3><b>как это звучит</b><p>lowercase, dry, personal, sometimes profane in raw audio, screen copy softened and viewer-facing.</p></article>
-      <article class="techCard"><h3>aesthetic</h3><b>как это выглядит</b><p>raw iPhone/Fuji, moody dark account, mono plashka, thin frame, gold semantic chips, natural image alive.</p></article>
-      <article class="techCard"><h3>pipeline</h3><b>как это собирается</b><p>source audit, transcript, word-safe cuts, branch matrix, EDL, overlay lanes, text-free base, review MP4.</p></article>
-      <article class="techCard"><h3>feedback</h3><b>как стиль учится</b><p>Trial Reels, contact sheet, survivor/failure pair, skill patch note, updated visual board.</p></article>
-      <article class="techCard"><h3>public artifact</h3><b>как это отдать наружу</b><p>объяснить mechanics and stack without private media, real names, transcripts or local project state.</p></article>
-    </div>
-
-    <h2 class="sec">что это меняет в skills</h2>
-    <table class="cmp">
-      <thead><tr><th>skill</th><th>роль</th><th>обновление</th></tr></thead>
-      <tbody>
-        <tr><td class="l">style-bible</td><td>хранит внешний и личный вкус</td><td>пополнять refs, clusters, palette, light and texture language.</td></tr>
-        <tr><td class="l">visual-pipeline</td><td>превращает refs в Design DNA</td><td>давать brief/code для визуального борда, covers and page artifacts.</td></tr>
-        <tr><td class="l">inside-insanity</td><td>решает account voice and look</td><td>добавить visual board contract перед reel-edit route.</td></tr>
-        <tr><td class="l">reel-edit</td><td>исполняет render-grade spine</td><td>принимать `visualPipeline` metadata in EDL and keep style decisions data-driven.</td></tr>
-        <tr><td class="l">stack-compare</td><td>упаковывает публичную механику</td><td>показывать only sanitized stack, sources, builder prompt and branch recipes.</td></tr>
-      </tbody>
-    </table>
-  </section>
-
   <section class="panel" id="approaches">
-    <h2 class="sec">авторы и подходы – что входит в публичный атлас</h2>
-    <p class="lead">это карта вкладов: какой слой полезен, почему он сильный и куда он ложится в <b>мой reel-edit</b>.</p>
+    <h2 class="sec">соавторы и источники – кто усилил pipeline</h2>
+    <p class="lead">это отдельная credit map: какие публичные проекты, авторы и библиотеки дали полезные решения для открытого Reels Pipeline OS.</p>
 
     <div class="authorGrid">
-      <article class="authorCard you">
-        <div class="authorTop"><h3>alex / ai mindset reel-edit</h3><span>center stack</span></div>
-        <p>главный stack contract: mode-first, audio-first, source blocks, EDL as SSOT, overlay lanes, branch matrix, survivor presets and public/private boundary.</p>
-        <ul>
-          <li>сохраняет монтаж как recipe, cut map и final mp4</li>
-          <li>держит baseline рядом с экспериментами</li>
-          <li>пишет удачные паттерны обратно в skill memory</li>
-        </ul>
-        <div class="link">source: local reel-edit 3.17 skill, public-safe summary</div>
-      </article>
-
       <article class="authorCard">
         <div class="authorTop"><h3>dasha / voronik1801</h3><span>portable kit</span></div>
         <p>публичное repo `reel_pipline` сильнее всего как переносимый macOS/iPhone production kit: PIPELINE.md, preflight, avconvert, templates and detectors.</p>
@@ -649,6 +602,17 @@
           <li>`find_stutters.py` and `find_deadair.py` for review hints</li>
         </ul>
         <div class="link"><a href="https://github.com/Voronik1801/reel_pipline">github.com/Voronik1801/reel_pipline</a> · checked HEAD 2b255a8</div>
+      </article>
+
+      <article class="authorCard you">
+        <div class="authorTop"><h3>reels pipeline os</h3><span>public maintainer</span></div>
+        <p>этот репозиторий собирает публичную схему: EDL as SSOT, overlay lanes, branch packs, library stack, configurator and contribution boundary.</p>
+        <ul>
+          <li>держит страницу и `STACK.md` как открытый артефакт</li>
+          <li>публикует generic EDL, branch recipes and QA policy</li>
+          <li>сохраняет source links and public attribution</li>
+        </ul>
+        <div class="link">source: this repo · public packaging layer</div>
       </article>
 
       <article class="authorCard">
@@ -696,49 +660,54 @@
       </article>
     </div>
 
-    <h2 class="sec">что забираем в мой стек</h2>
+    <h2 class="sec">что входит в публичный pipeline</h2>
     <table class="cmp">
       <thead><tr><th>слой</th><th>источник</th><th>что берем</th><th>как применяем</th></tr></thead>
       <tbody>
         <tr><td class="l">portable ingest</td><td>Dasha / Voronik1801</td><td>preflight, avconvert, folders, copy-fill templates</td><td class="move">portable iPhone branch pack</td></tr>
         <tr><td class="l">timeline state</td><td>OTIO, Remotion, X-Cut, OpenScript</td><td>tracks/items, cuts, markers, validation, render adapters</td><td class="move">EDL + overlay_tracks + render.outputs</td></tr>
-        <tr><td class="l">agent surface</td><td>HyperFrames, X-Cut, OpenCut</td><td>chat intent, skills, browser preview, headless render</td><td class="move">future Palmier/block editor bridge</td></tr>
+        <tr><td class="l">agent surface</td><td>HyperFrames, X-Cut, OpenCut</td><td>chat intent, skills, browser preview, headless render</td><td class="move">future timeline board bridge</td></tr>
         <tr><td class="l">production loop</td><td>ReelStack, OpenReels</td><td>API/CLI stages, provider registry, cost/quality checks, live pipeline UI</td><td class="move">render queue, Trial Reels, batch variants</td></tr>
-        <tr><td class="l">my practice</td><td>reel-edit + inside-insanity</td><td>mode-first, audio-first, survivor presets, public boundary</td><td class="move">default skill behavior</td></tr>
+        <tr><td class="l">public package</td><td>STACK.md + CONTRIBUTING</td><td>generic examples, privacy rules, branch README format</td><td class="move">forkable docs and contribution path</td></tr>
       </tbody>
     </table>
   </section>
 
   <section class="panel" id="tech">
-    <h2 class="sec">карта технологий – из чего собрать pipeline</h2>
-    <p class="lead">технологии делятся на три уровня: <b>production core</b> для надежного mp4, <b>state/adapters</b> для переносимого монтажа, <b>editor surface</b> для будущего визуального dashboard.</p>
+    <h2 class="sec">libraries stack – из чего собрать pipeline</h2>
+    <p class="lead">стек делится на четыре слоя: <b>core cli</b> для проверки и рендера, <b>python libraries</b> для субтитров и кадров, <b>timeline adapters</b> для переносимого state, <b>editor surface</b> для визуального контроля.</p>
 
     <div class="techGrid">
-      <article class="techCard core"><h3>production core</h3><b>ffmpeg / ffprobe</b><p>source audit, crop, scale, concat, audio extraction, AAC, color tags, final diagnostics.</p></article>
-      <article class="techCard core"><h3>iphone color</h3><b>Apple avconvert</b><p>macOS-native path for iPhone HDR/HLG to SDR bt709 before creative grading and render.</p></article>
-      <article class="techCard core"><h3>speech layer</h3><b>Whisper / Scribe</b><p>word timings, pause map, subtitle base, retrancribe QA after final render.</p></article>
+      <article class="techCard core"><h3>core cli</h3><b>ffmpeg / ffprobe</b><p>source audit, crop, scale, concat, audio extraction, AAC, bt709 tags, final diagnostics.</p></article>
+      <article class="techCard core"><h3>iphone ingest</h3><b>Apple avconvert</b><p>macOS-native path for iPhone HDR/HLG to SDR bt709 before creative grading and render.</p></article>
+      <article class="techCard core"><h3>speech timing</h3><b>Whisper / Scribe</b><p>word timings, pause map, subtitle base, retranscribe QA after final render.</p></article>
 
-      <article class="techCard"><h3>caption render</h3><b>Pillow / numpy / ASS</b><p>PNG overlay captions, word highlight, contact sheets, fallback when ffmpeg drawtext/libass is not available.</p></article>
+      <article class="techCard"><h3>python image</h3><b>Pillow / numpy</b><p>PNG captions, word highlight frames, contact sheets, masks, thumbnails and QA stills.</p></article>
+      <article class="techCard"><h3>subtitle lanes</h3><b>ASS / SRT / WebVTT</b><p>portable caption layer for social default, review text and optional burn-in renders.</p></article>
       <article class="techCard"><h3>state model</h3><b>EDL JSON + OpenTimelineIO</b><p>small public-safe EDL now, OTIO adapter later for richer NLE interchange and metadata.</p></article>
-      <article class="techCard"><h3>programmatic render</h3><b>Remotion</b><p>React compositions from typed tracks/items, Player preview, inputProps and deterministic render path.</p></article>
 
-      <article class="techCard"><h3>agent video html</h3><b>HyperFrames</b><p>plain HTML/CSS/media with timing data, seekable animations, CLI validation and FFmpeg output.</p></article>
-      <article class="techCard"><h3>browser preview</h3><b>WebCodecs / OpenCut direction</b><p>local decode/encode and editor/headless split for future visual reel dashboard.</p></article>
-      <article class="techCard"><h3>agent control</h3><b>MCP / CLI / skills</b><p>structured tools for preflight, transcribe, build EDL, render, verify and update skill memory.</p></article>
+      <article class="techCard"><h3>react render</h3><b>Remotion</b><p>React compositions from typed tracks/items, Player preview, inputProps and deterministic render path.</p></article>
+      <article class="techCard"><h3>html render</h3><b>HyperFrames</b><p>plain HTML/CSS/media with timing data, seekable animations, CLI validation and FFmpeg output.</p></article>
+      <article class="techCard"><h3>browser preview</h3><b>WebCodecs / OpenCut</b><p>local decode/encode and editor/headless split for future visual reel dashboard.</p></article>
+
+      <article class="techCard"><h3>automation</h3><b>MCP / CLI tools</b><p>structured preflight, transcript, EDL build, render, verify and publish handoff.</p></article>
+      <article class="techCard"><h3>quality gates</h3><b>volumedetect / silencedetect</b><p>audio health, dead-air hints, first-frame checks, seam listening and final ffprobe report.</p></article>
+      <article class="techCard"><h3>package docs</h3><b>Markdown + JSON Schema</b><p>STACK.md, CONTRIBUTING, branch README, EDL skeletons and reusable config contracts.</p></article>
     </div>
 
     <h2 class="sec">минимальный технологический стек</h2>
     <div class="stackLayers">
       <div class="layerName">must have</div><div class="layerBody">Python 3.10+, ffmpeg/ffprobe, Whisper or Scribe, Pillow, numpy, JSON EDL, sequential render queue, QA checklist.</div>
       <div class="layerName">macOS pack</div><div class="layerBody">Apple `avconvert` for iPhone HDR/HLG footage, then ffmpeg renders from SDR sources with bt709 tags.</div>
-      <div class="layerName">visual editor</div><div class="layerBody">reel-block-edit or Palmier-style board, tracks/items state, safe-zone overlays, contact sheets and review MP4.</div>
+      <div class="layerName">caption pack</div><div class="layerBody">ASS/SRT/WebVTT for portable subtitles; Pillow/numpy for PNG overlays, contact sheets and review frames.</div>
+      <div class="layerName">visual editor</div><div class="layerBody">browser board, tracks/items state, safe-zone overlays, contact sheets and review MP4.</div>
       <div class="layerName">adapter future</div><div class="layerBody">OpenTimelineIO export, Remotion or HyperFrames render adapters, WebCodecs preview, MCP tools for agent control.</div>
     </div>
   </section>
 
   <section class="panel" id="config">
-    <h2 class="sec">собрать branch pack</h2>
-    <p class="lead">выбери исходник, работу и монтажный режим. builder выдаст pack, список артефактов, JSON config и prompt, который можно сразу дать агенту для сборки reel-edit pipeline.</p>
+    <h2 class="sec">конфигуратор branch pack</h2>
+    <p class="lead">выбери исходник, цель и монтажный режим. configurator выдаст pack, список артефактов, JSON config и prompt, который можно сразу дать агенту для сборки Reels pipeline.</p>
     <div class="configShell">
       <div class="configLeft">
         <div class="selectorGrid">
@@ -759,7 +728,7 @@
               <button data-value="recipe"><span class="label">recipe</span><span class="hint">повторить позже</span></button>
               <button data-value="reviewable"><span class="label">reviewable</span><span class="hint">человек правит</span></button>
               <button data-value="public_branch"><span class="label">public branch</span><span class="hint">отдать наружу</span></button>
-              <button data-value="skill_update"><span class="label">skill update</span><span class="hint">закрепить практику</span></button>
+              <button data-value="article_demo"><span class="label">article demo</span><span class="hint">пример для статьи</span></button>
             </div>
           </div>
           <div class="selector">
@@ -799,12 +768,13 @@
     <h2 class="sec">branch packs</h2>
     <div class="exlib">
       <div class="exo"><div class="et">portable</div><div class="eh">iphone core</div><p>preflight, avconvert, transcript, caption lane, QA. быстрый production pack.</p></div>
-      <div class="exo"><div class="et">personal</div><div class="eh">inside-insanity</div><p>raw day, gray→color return, object protocol, lowercase captions, Trial candidates.</p></div>
-      <div class="exo"><div class="et">state</div><div class="eh">edl-block</div><p>source blocks, branch surface, overlay lanes, text-free base, Palmier handoff.</p></div>
+      <div class="exo"><div class="et">captions</div><div class="eh">caption lane</div><p>word timings, sparse subtitles, safe zones, ASS/SRT/WebVTT or PNG burn-in.</p></div>
+      <div class="exo"><div class="et">state</div><div class="eh">edl-block</div><p>source blocks, branch surface, overlay lanes, text-free base, timeline handoff.</p></div>
       <div class="exo"><div class="et">collab</div><div class="eh">interruption spine</div><p>turn_map, collabBeats, handoffs, generic public challenge schema.</p></div>
       <div class="exo"><div class="et">proof</div><div class="eh">system receipt</div><p>terminal/site proof in one safe zone, no production labels, viewer-facing copy.</p></div>
       <div class="exo"><div class="et">trend</div><div class="eh">gyro / echo</div><p>reference mechanics, not assets. one clean branch plus one trend experiment.</p></div>
       <div class="exo"><div class="et">covers</div><div class="eh">cover set ×10</div><p>clean no-text bases, crisp caption layer, contact sheet, A/B candidates.</p></div>
+      <div class="exo"><div class="et">article</div><div class="eh">article demo</div><p>schematic EDL, library list, source credits and one paragraph for publication.</p></div>
       <div class="exo you"><div class="et">open slot</div><div class="eh">your branch</div><p>fork repo, add generic EDL, explain the layer, keep private media outside.</p></div>
     </div>
 
@@ -819,7 +789,7 @@
 
   <section class="panel" id="sources">
     <h2 class="sec">sources / research anchors</h2>
-    <p class="lead">страница цитирует публичные sources как anchors для решений. внутренние сессии сведены к public-safe mechanics.</p>
+    <p class="lead">страница цитирует публичные sources как anchors для решений. все примеры сведены к generic mechanics: timings, labels, EDL shape, overlay lane types and QA rules.</p>
     <div class="sourceGrid">
       <div class="sourceCard"><b>Dasha / Voronik1801 reel_pipline</b><p><a href="https://github.com/Voronik1801/reel_pipline">github.com/Voronik1801/reel_pipline</a> · portable iPhone kit: PIPELINE.md, avconvert, pipeline_check, templates, stutter/dead-air review. checked 2026-06-26, HEAD 2b255a8.</p></div>
       <div class="sourceCard"><b>OpenTimelineIO</b><p><a href="https://github.com/AcademySoftwareFoundation/OpenTimelineIO">github.com/AcademySoftwareFoundation/OpenTimelineIO</a> · editorial timeline interchange, clips, timing and external media references.</p></div>
@@ -830,12 +800,13 @@
       <div class="sourceCard"><b>ReelStack</b><p><a href="https://github.com/jurczykpawel/reelstack">github.com/jurczykpawel/reelstack</a> · API/CLI production pipeline, effects, templates, provider registry and self-hosting model.</p></div>
       <div class="sourceCard"><b>OpenReels / OpenCut</b><p><a href="https://github.com/tsensei/OpenReels">OpenReels</a> · topic-to-short pipeline with live UI. <a href="https://github.com/OpenCut-app/OpenCut">OpenCut</a> · editor API, plugins, MCP/headless direction.</p></div>
       <div class="sourceCard"><b>Whisper / FFmpeg / WebCodecs</b><p><a href="https://github.com/openai/whisper">Whisper</a> · word timings. <a href="https://ffmpeg.org/ffmpeg.html">FFmpeg</a> · render and diagnostics. <a href="https://www.w3.org/TR/webcodecs/">WebCodecs</a> · browser media primitives.</p></div>
+      <div class="sourceCard"><b>Article reference</b><p><a href="ARTICLE.md">ARTICLE.md</a> · short public description, citation notes and one-paragraph explanation for articles.</p></div>
     </div>
   </section>
 
   <footer class="stamp">
-    <div><b>fig.1</b> · reels-pipeline-os · visual atlas · 2026-06-26</div>
-    <div>shortcuts: <span class="kbd">1</span> map · <span class="kbd">2</span> skill · <span class="kbd">3</span> visual · <span class="kbd">4</span> authors · <span class="kbd">5</span> tech · <span class="kbd">6</span> builder · <span class="kbd">d</span> theme</div>
+    <div><b>fig.1</b> · reels-pipeline-os · public atlas · 2026-06-26</div>
+    <div>shortcuts: <span class="kbd">1</span> map · <span class="kbd">2</span> pipeline · <span class="kbd">3</span> libraries · <span class="kbd">4</span> config · <span class="kbd">5</span> coauthors · <span class="kbd">d</span> theme</div>
   </footer>
 </div>
 
@@ -854,7 +825,7 @@
       recipe: "reusable recipe",
       reviewable: "reviewable edit",
       public_branch: "public branch",
-      skill_update: "skill update"
+      article_demo: "article demo"
     },
     mode: {
       dry_preserve: "dry preserve",
@@ -875,7 +846,7 @@
     edl: {
       title: "EDL Block Editor Pack",
       score: 91,
-      text: "Когда важна ручная правка и повторяемость: source blocks, branch surface, overlay lanes и text-free base для Palmier/timeline review.",
+      text: "Когда важна ручная правка и повторяемость: source blocks, branch surface, overlay lanes и text-free base для timeline review.",
       layers: ["source blocks", "cut map", "overlay_tracks[]", "branch density ladder", "text-free base render"],
       artifacts: ["realself.timeline.json", "edit_decision_list.json", "overlayEvents.json", "renders/review.mp4", "renders/base.mp4"]
     },
@@ -896,21 +867,21 @@
     public: {
       title: "Public Dashboard Branch",
       score: 82,
-      text: "Когда надо отдать наружу механику: STACK.md, CONTRIBUTING, generic EDL, sanitized branch examples and no personal data.",
+      text: "Когда надо отдать наружу механику: STACK.md, CONTRIBUTING, generic EDL, sanitized branch examples and no private data.",
       layers: ["sanitized recipe", "branch README", "public EDL", "metrics schema", "source links"],
       artifacts: ["STACK.md", "CONTRIBUTING.md", "branches/*/README.md", "branches/*/edit_decision_list.json"]
     },
-    skill: {
-      title: "Skill Feedback Pack",
-      score: 89,
-      text: "Для закрепления практики обратно в skill: survivor pattern, failed branch notes, render QA and next default.",
-      layers: ["practice ledger", "winner/failure pair", "mode/style rule", "skill update target", "sync mirrors"],
-      artifacts: ["practice_ledger.md", "SPECS.md", "QA.md", "skill_patch_notes.md"]
+    article: {
+      title: "Article Demo Pack",
+      score: 84,
+      text: "Для статьи, доклада или публичного разбора: schematic EDL, pipeline screenshot, library list, source credits and privacy-safe example.",
+      layers: ["schematic source", "generic EDL", "library stack", "coauthor credits", "article paragraph"],
+      artifacts: ["ARTICLE.md", "edit_decision_list.example.json", "assets/og-cover.png", "STACK.md", "QA.md"]
     }
   };
   function choosePack(){
     if(state.goal === "public_branch") return packs.public;
-    if(state.goal === "skill_update") return packs.skill;
+    if(state.goal === "article_demo") return packs.article;
     if(state.source === "collab") return packs.collab;
     if(state.goal === "reviewable" || state.goal === "recipe" || state.mode === "visible_flow") return packs.edl;
     if(state.source === "system" || state.mode === "proof_overlay") return packs.proof;
@@ -924,11 +895,10 @@
     document.getElementById("recLayers").innerHTML = pack.layers.map(x=>`<li>${x}</li>`).join("");
     document.getElementById("recArtifacts").innerHTML = pack.artifacts.map(x=>`<li>${x}</li>`).join("");
     const json = {
-      schema: "reels.stack.config.v3",
+      schema: "reels.stack.config.v4",
       selected: state,
       recommended_pack: pack.title,
-      reel_edit_defaults: {
-        skill_version: "3.17",
+      pipeline_defaults: {
         mode_first: true,
         audio_policy: "one_audio_spine",
         baseline_required: true,
@@ -938,7 +908,7 @@
       artifacts: pack.artifacts
     };
     document.getElementById("configJson").textContent = JSON.stringify(json, null, 2);
-    const prompt = `Build a public-safe reel-edit pipeline branch for AI Mindset.
+    const prompt = `Build a public-safe Reels pipeline branch.
 
 Selected source: ${labels.source[state.source]}
 Selected goal: ${labels.goal[state.goal]}
@@ -966,7 +936,7 @@ Required process:
 6. Write edit_decision_list.json with cuts[], overlay_tracks[] and render.outputs.
 7. Render review MP4 and final 1080x1920 MP4.
 8. Run QA: ffprobe, audio listen, first 3 seconds, safe zones, contact sheet, privacy pass.
-9. If a survivor pattern appears, write skill_patch_notes.md for reel-edit memory.
+9. Write a short learning note: what branch worked, what failed and what should be reused next time.
 
 Public boundary:
 - Keep raw footage, transcript text, real names, handles, local paths, private screenshots and keys outside public artifacts.
@@ -977,7 +947,7 @@ Return:
 - commands or scripts to run,
 - JSON EDL skeleton,
 - QA checklist,
-- next skill update note.`;
+- next learning note.`;
     document.getElementById("configPrompt").textContent = prompt;
   }
   document.querySelectorAll(".seg button").forEach(btn=>{
@@ -1004,18 +974,22 @@ Return:
     window.scrollTo({top:0,behavior:"smooth"});
   }
   function openTab(id){
-    const order = ["map","skill","style","approaches","tech","config","branches","sources"];
+    if(id === "skill" || id === "style") id = "pipeline";
+    if(id === "authors") id = "approaches";
+    const order = ["map","pipeline","tech","config","approaches","branches","sources"];
     const btn = document.querySelectorAll("nav.tabs button")[order.indexOf(id)];
     if(btn) tab(id, btn);
   }
   document.addEventListener("keydown",e=>{
-    const map = {"1":"map","2":"skill","3":"style","4":"approaches","5":"tech","6":"config","7":"branches","8":"sources"};
+    const map = {"1":"map","2":"pipeline","3":"tech","4":"config","5":"approaches","6":"branches","7":"sources"};
     if(map[e.key]) openTab(map[e.key]);
     if(e.key === "d") document.documentElement.classList.toggle("dark");
   });
   renderConfig();
   if(location.hash){
-    const id = location.hash.replace("#","");
+    let id = location.hash.replace("#","");
+    if(id === "skill" || id === "style") id = "pipeline";
+    if(id === "authors") id = "approaches";
     if(document.getElementById(id)) openTab(id);
   }
 </script>
