@@ -3,7 +3,7 @@
 > **Visual atlas and stack spec for agentic Reels editing.**
 > Live: https://apowall.github.io/reels-pipeline-os/
 
-This repo is a public **visual atlas** for short-form montage stacks. It explains the shared editing state first: source audit, transcript, source blocks, EDL, overlay lanes, render route, QA and public/private boundary. The configurator is the second layer: it turns that map into a concrete branch pack.
+This repo is a public **visual atlas + branch builder** for short-form montage stacks. It explains the shared editing state first: source audit, transcript, source blocks, EDL, overlay lanes, render route, QA and public/private boundary. The builder is the practical layer: it turns that map into a branch pack, JSON config and agent prompt.
 
 It is built from our real Codex/Claude Code reel sessions, the `reel-edit` skill, the `stack-compare` skill, and a fresh audit of the public `Voronik1801/reel_pipline` repo.
 
@@ -13,20 +13,21 @@ It is built from our real Codex/Claude Code reel sessions, the `reel-edit` skill
 
 | file | what |
 |------|------|
-| **[index.html](index.html)** | visual atlas, `reel-edit` map and live stack configurator |
-| **[STACK.md](STACK.md)** | full stack spec: packs, contracts, EDL schema, QA gates, source research |
+| **[index.html](index.html)** | public atlas, author map, technology map and live stack builder |
+| **[STACK.md](STACK.md)** | stack spec: packs, contracts, EDL schema, QA gates, source research, agent prompt |
 | **[CONTRIBUTING.md](CONTRIBUTING.md)** | how to contribute a branch without leaking private data |
 | **[branches/](branches/)** | public-safe branch recipes and sample EDLs |
 
 ## What Changed
 
-The current version leads with the **montage map**:
+The current version leads with the **public montage atlas**:
 
 1. see how different editing approaches become one `editing state`;
 2. inspect how Alex's `reel-edit 3.17` skill is configured now;
-3. compare useful layers from portable kits, long-form planning and timeline tools;
-4. choose `source`, `goal` and `mode` in the configurator;
-5. copy the generated JSON config and branch pack checklist.
+3. review the author/source map: Dasha/Voronik, X-Cut, OpenScript, HyperFrames, ReelStack, OpenReels, OpenCut;
+4. inspect the technology map: ffmpeg, ffprobe, avconvert, Whisper/Scribe, Pillow, OTIO, Remotion, HyperFrames, WebCodecs, MCP;
+5. choose `source`, `goal` and `mode` in the builder;
+6. copy the generated JSON config and agent prompt.
 
 ## Branch Packs
 
@@ -51,6 +52,30 @@ The public [`Voronik1801/reel_pipline`](https://github.com/Voronik1801/reel_pipl
 - replaceable subtitle, cover, finale, music and sticker slots.
 
 We use those mechanics as the `portable-iphone-kit` pack. The broader OS adds EDL-as-SSOT, branch surface, overlay lanes, block-editor direction, Trial loop, skill memory and public/private packaging.
+
+## Technology Map
+
+| layer | recommended tools |
+|-------|-------------------|
+| production core | `ffmpeg`, `ffprobe`, Python 3.10+, sequential render queue |
+| iPhone ingest | Apple `avconvert` for HDR/HLG → SDR bt709 on macOS |
+| transcript | Whisper or Scribe with word timings and pause map |
+| overlays | Pillow, numpy, ASS/PNG subtitle lanes, contact sheets |
+| state | JSON EDL now, OpenTimelineIO adapter later |
+| render adapters | ffmpeg now, Remotion or HyperFrames for programmatic visual branches |
+| browser/editor surface | reel-block-edit/Palmier board, WebCodecs/OpenCut direction |
+| agent control | CLI, MCP tools, skills and public-safe branch packs |
+
+## Builder Prompt
+
+The live page generates a prompt from `source + goal + mode`. The prompt asks an agent to:
+
+- read `STACK.md`, `README.md` and the selected branch README;
+- run preflight;
+- build `source_map.md`, transcript JSON, pause map, EDL and overlay tracks;
+- render review/final MP4;
+- run ffprobe, audio, first-3s, safe-zone and privacy QA;
+- write `skill_patch_notes.md` when a survivor pattern should update `reel-edit`.
 
 ## Public Boundary
 

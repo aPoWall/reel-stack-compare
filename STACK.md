@@ -4,7 +4,7 @@
 
 - **Live dashboard:** https://apowall.github.io/reels-pipeline-os/
 - **Repo:** https://github.com/aPoWall/reels-pipeline-os
-- **Last rebuilt:** 2026-06-25
+- **Last rebuilt:** 2026-06-26
 
 This document is the downloadable operating spec behind the dashboard. It is intentionally public-safe: examples are generic, branch names are generic, and raw media/transcripts stay outside the repo.
 
@@ -58,6 +58,17 @@ Pick the editorial mode before the visual style:
 | `experimental` | deliberate exploration | one wild branch with clean baseline preserved |
 
 ## 3. Pack Catalog
+
+## 3.0 Author / Source Map
+
+| author/source | strongest contribution | adopted layer |
+|---------------|------------------------|---------------|
+| Alex / AI Mindset `reel-edit 3.17` | mode-first, audio-first, EDL, overlay lanes, branch matrix, survivor memory | center stack |
+| Dasha / `Voronik1801/reel_pipline` | portable macOS/iPhone kit, `PIPELINE.md`, `pipeline_check.sh`, `avconvert`, templates, stutter/dead-air review | `portable-iphone-kit` |
+| MeiGen-AI / X-Cut | chat-driven video agent, selected skills, real-time Remotion timeline, reusable style recipes | agent/editor surface |
+| Ishan Parihar / OpenScript | MCP tools, multi-track EDL v2, Rust timeline validation, verification layer | state and QA |
+| HeyGen / HyperFrames | HTML/CSS/media to deterministic MP4, agent skills, CLI validation/render loop | render adapter |
+| ReelStack / OpenReels / OpenCut | API-first pipelines, live pipeline UI, effects/templates, editor API, headless/MCP direction | future builder and dashboard |
 
 ### 3.1 `portable-iphone-kit`
 
@@ -246,7 +257,7 @@ Generic public-safe shape:
     }
   ],
   "render": {
-    "route": "ffmpeg | remotion | browser | mcp-video",
+    "route": "ffmpeg | remotion | hyperframes | browser",
     "outputs": {
       "review": "renders/review.mp4",
       "final": "renders/final_1080x1920.mp4"
@@ -326,27 +337,56 @@ EXA MCP research and primary docs point to a converging pattern:
 
 | source | useful role |
 |--------|-------------|
-| [OpenTimelineIO](https://opentimelineio.readthedocs.io/en/stable/) | editorial interchange: clips, timing, tracks, markers, metadata, external media refs |
-| [Remotion timeline docs](https://www.remotion.dev/docs/building-a-timeline) | typed tracks/items and Player sync |
-| [Remotion render docs](https://www.remotion.dev/docs/timeline/render) | render the same JSON-serializable timeline state through `inputProps` |
-| [OpenReel Video](https://github.com/Augani/openreel-video) | browser-local WebCodecs/WebGPU editor direction |
-| [Omniclip](https://github.com/omni-media/omniclip) | local browser editing, WebCodecs, no cloud upload |
-| [X-Cut](https://github.com/MeiGen-AI/X-Cut) | chat-driven video agent with multi-track timeline |
-| [mcp-video](https://github.com/KyaniteLabs/mcp-video) | MCP surface for ffmpeg edits and Remotion creation |
-| [ReelForge](https://github.com/pedro199288/reelforge) | short-form automation: silence, captions, take selection, effects |
-| [Premotion](https://github.com/arach/premotion) | review notes → agent plan → source rewrite → render |
+| [Dasha / Voronik1801 reel_pipline](https://github.com/Voronik1801/reel_pipline) | portable iPhone production kit: `PIPELINE.md`, `avconvert`, `pipeline_check.sh`, templates, stutter/dead-air review |
+| [OpenTimelineIO](https://github.com/AcademySoftwareFoundation/OpenTimelineIO) | editorial interchange: cut information, timing, external media refs and adapter direction |
+| [Remotion timeline docs](https://www.remotion.dev/docs/building-a-timeline) | typed tracks/items, Player sync and JSON `inputProps` as render state |
+| [HyperFrames](https://github.com/heygen-com/hyperframes) | HTML/CSS/media to deterministic MP4, agent skills, CLI validation and render loop |
+| [X-Cut](https://github.com/MeiGen-AI/X-Cut) | chat-driven video agent, multi-track timeline, reusable style skills and Remotion render |
+| [OpenScript](https://github.com/birchrust/openscript) | MCP tools, EDL v2, multi-track timeline, verification layer and agent-directed render |
+| [ReelStack](https://github.com/jurczykpawel/reelstack) | API/CLI production pipeline, templates, effects, provider registry and self-hosting |
+| [OpenReels](https://github.com/tsensei/OpenReels) | topic-to-short pipeline, live pipeline visualization, provider mix and critique/rerun loop |
+| [OpenCut](https://github.com/OpenCut-app/OpenCut) | open editor API, plugin-first architecture, headless and MCP direction |
+| [Whisper](https://github.com/openai/whisper), [FFmpeg](https://ffmpeg.org/ffmpeg.html), [WebCodecs](https://www.w3.org/TR/webcodecs/) | speech timing, render/diagnostics and future browser media primitives |
 
 Practical conclusion: keep the state model small and portable, then route rendering by use case.
 
-## 9. Minimal Agent Prompt
+## 9. Agent Builder Prompt
 
 ```text
-Read STACK.md and the selected branch README.
-Choose source, goal and mode.
-Run preflight.
-Build a public-safe EDL.
-Render a review MP4.
-Run QA.
-Keep private media, transcript text, names, handles, local paths and keys out of public artifacts.
-Write the survivor back into the relevant skill.
+Build a public-safe reel-edit pipeline branch for AI Mindset.
+
+Selected source: <iphone_single | multi_take | collab | screen_system | reference>
+Selected goal: <publish_fast | recipe | reviewable | public_branch | skill_update>
+Selected mode: <dry_preserve | caption_only | proof_overlay | visible_flow | experimental>
+
+Use this stack:
+- Python 3.10+ orchestration, JSON files as contracts, sequential render queue.
+- ffmpeg and ffprobe for source audit, crop, scale, concat, audio extraction, AAC, bt709 tags and diagnostics.
+- On macOS/iPhone footage, use Apple avconvert for HDR/HLG to SDR bt709 before creative render.
+- Whisper or Scribe for transcript, word timings and pause map.
+- Pillow and numpy for PNG caption overlays, contact sheets and review frames.
+- EDL JSON as the source of truth: source_blocks[], cuts[], overlay_tracks[], render.outputs and qa.
+- Optional adapters: OpenTimelineIO export, Remotion tracks/items render, HyperFrames HTML render, WebCodecs/browser preview.
+
+Required process:
+1. Read STACK.md, README.md and the selected branch README if it exists.
+2. Run preflight: ffmpeg, ffprobe, Python packages, avconvert when relevant.
+3. Create source_map.md with public-safe labels and source properties.
+4. Build transcript JSON and pause map. Do not cut inside words.
+5. Create clean baseline first, then branch variants.
+6. Write edit_decision_list.json with cuts[], overlay_tracks[] and render.outputs.
+7. Render review MP4 and final 1080x1920 MP4.
+8. Run QA: ffprobe, audio listen, first 3 seconds, safe zones, contact sheet, privacy pass.
+9. If a survivor pattern appears, write skill_patch_notes.md for reel-edit memory.
+
+Public boundary:
+- Keep raw footage, transcript text, real names, handles, local paths, private screenshots and keys outside public artifacts.
+- Public files may include generic timing, labels, EDL shape, overlay lane types, QA decisions and source links.
+
+Return:
+- branch pack summary;
+- commands or scripts to run;
+- JSON EDL skeleton;
+- QA checklist;
+- next skill update note.
 ```
