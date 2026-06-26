@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Reels Pipeline OS - public editing atlas + configurator</title>
-<meta name="description" content="Public Reels Pipeline OS: how to edit short-form videos with source audit, transcript, EDL as source of truth, overlay lanes, libraries, branch packs, QA and a configurator.">
+<meta name="description" content="Public Reels Pipeline OS: editing protocols, soft communication layer, community borrow map, libraries and configurator for short-form videos.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="AI Mindset Reels Pipeline OS">
 <meta property="og:title" content="Reels Pipeline OS">
-<meta property="og:description" content="Public atlas for Reels editing: pipeline map, library stack, coauthors, timeline state, branch packs and configurator.">
+<meta property="og:description" content="Public atlas for Reels editing: protocol stack, soft communication layer, community borrow map, libraries, timeline state, branch packs and configurator.">
 <meta property="og:image" content="https://apowall.github.io/reels-pipeline-os/assets/og-cover.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -205,6 +205,7 @@
   .take b{font-weight:700}
 
   .funnel{margin-top:18px;border:1px solid var(--ink);display:grid;grid-template-columns:repeat(7,1fr)}
+  .funnel.protocolFunnel{grid-template-columns:repeat(8,1fr)}
   .step{min-height:78px;border-right:1px solid var(--soft);padding:11px 9px;position:relative;background:var(--paper)}
   .step:last-child{border-right:0}
   .step:after{content:"";position:absolute;right:-6px;top:calc(50% - 6px);width:10px;height:10px;border-top:1px solid var(--ink);border-right:1px solid var(--ink);background:var(--paper);transform:rotate(45deg);z-index:2}
@@ -220,7 +221,7 @@
     .approachGrid{grid-template-columns:1fr 1fr}
     .approach:nth-child(2){border-right:0}
     .approach:nth-child(-n+2){border-bottom:1px solid var(--soft)}
-    .funnel{grid-template-columns:1fr}
+    .funnel,.funnel.protocolFunnel{grid-template-columns:1fr}
     .step{border-right:0;border-bottom:1px solid var(--soft)}
     .step:after{display:none}
   }
@@ -310,7 +311,7 @@
   .score{border:1px solid var(--ink);background:var(--accent);color:#111;padding:7px 10px;text-align:center;font-weight:800;min-width:70px}
   .score span{display:block;font-size:9px;letter-spacing:.12em;text-transform:uppercase}
   .recText{font-size:12.2px;color:var(--muted);margin:0 0 12px;line-height:1.55}
-  .miniCols{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .miniCols{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
   .mini{border:1px solid var(--soft);padding:10px;background:var(--hi)}
   .mini b{display:block;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
   .mini ul{margin:0;padding-left:16px;font-size:11px;line-height:1.5}
@@ -419,9 +420,9 @@
 
   <header class="app">
     <div class="brand"><img class="lt" src="assets/aim-logo-light.png" alt="ai mindset"><img class="dk" src="assets/aim-logo.png" alt="ai mindset">reels pipeline os <span class="bsub">· ai mindset</span></div>
-    <div class="crumb"><b>public atlas</b> как монтировать reels · libraries · coauthors · configurator</div>
+    <div class="crumb"><b>public atlas</b> reels editing system · protocols · communication · community · configurator</div>
     <div class="meta">
-      <b>v3.5</b> · 2026-06-26 · public<br>
+      <b>v3.6</b> · 2026-06-26 · public<br>
       <a href="https://github.com/aPoWall/reels-pipeline-os">github · repo</a> · <a href="https://apowall.github.io/reels-pipeline-os/">pages</a><br>
       <button class="tbtn" onclick="document.documentElement.classList.toggle('dark')">◐ тема</button>
     </div>
@@ -429,7 +430,7 @@
 
   <div class="thesis">
     <div class="tag">тезис</div>
-    <p><b>reels pipeline os</b> показывает публичную механику короткого монтажа: запись проходит source audit, transcript, source blocks, EDL, overlay lanes, render route и QA. страница собирает понятный workflow, список библиотек, вклад соавторов и configurator, который выдаёт branch pack, JSON config и prompt для агента.</p>
+    <p><b>reels pipeline os</b> описывает систему монтажа коротких видео: brief превращается в protocol stack, затем в source audit, transcript, source blocks, soft communication layer, EDL, overlay lanes, render route и QA. страница держит community borrow map, список библиотек и configurator, который выдаёт branch pack, JSON config и prompt для агента.</p>
   </div>
 
   <div class="ctas">
@@ -443,7 +444,7 @@
     <button role="tab" aria-selected="false" onclick="tab('pipeline',this)">pipeline</button>
     <button role="tab" aria-selected="false" onclick="tab('tech',this)">библиотеки</button>
     <button role="tab" aria-selected="false" onclick="tab('config',this)">конфигуратор</button>
-    <button role="tab" aria-selected="false" onclick="tab('approaches',this)">соавторы</button>
+    <button role="tab" aria-selected="false" onclick="tab('approaches',this)">community</button>
     <button role="tab" aria-selected="false" onclick="tab('branches',this)">ветки</button>
     <button role="tab" aria-selected="false" onclick="tab('sources',this)">sources</button>
   </nav>
@@ -530,8 +531,28 @@
     <div class="useGrid">
       <div class="useStep"><div class="u">01</div><b>смотри карту</b><p>понять путь записи от сырого файла до review/final без внутренних деталей.</p></div>
       <div class="useStep"><div class="u">02</div><b>читай pipeline</b><p>увидеть монтажный contract: mode, audio, EDL, overlays, QA.</p></div>
-      <div class="useStep"><div class="u">03</div><b>смотри соавторов</b><p>понять, какие публичные инструменты и подходы повлияли на stack.</p></div>
+      <div class="useStep"><div class="u">03</div><b>смотри community</b><p>понять, какие публичные инструменты и подходы повлияли на stack.</p></div>
       <div class="useStep hot"><div class="u">04</div><b>собери pack</b><p>выбрать source/goal/mode и скопировать prompt для агента.</p></div>
+    </div>
+
+    <h2 class="sec">монтажные протоколы</h2>
+    <div class="creditGrid">
+      <div class="creditCell hot"><div class="role">P0</div><b>brief protocol</b><p>цель, канал, audience, source type, режим монтажа, privacy boundary and expected artifacts.</p></div>
+      <div class="creditCell"><div class="role">P1</div><b>source protocol</b><p>ffprobe, orientation, fps, audio channels, source map, iPhone HDR/HLG to SDR when needed.</p></div>
+      <div class="creditCell"><div class="role">P2</div><b>timing protocol</b><p>transcript, word timings, pause map, silence/dead-air hints and no cut inside words.</p></div>
+      <div class="creditCell"><div class="role">P3</div><b>story protocol</b><p>source blocks: hook, setup, tension, proof, turn, closer, tail and public-safe summaries.</p></div>
+      <div class="creditCell"><div class="role">P4</div><b>EDL protocol</b><p>`cuts[]` as SSOT with source ranges, output ranges, risk labels and branch status.</p></div>
+      <div class="creditCell"><div class="role">P5</div><b>overlay protocol</b><p>independent lanes: caption, card, rail, proof, stamp, cover. Viewer-facing copy and safe zones.</p></div>
+      <div class="creditCell"><div class="role">P6</div><b>render protocol</b><p>draft, review MP4, text-free base, final 1080x1920, render adapter and deterministic commands.</p></div>
+      <div class="creditCell"><div class="role">P7</div><b>QA protocol</b><p>ffprobe, audio listen, first 3 seconds, safe-zone pass, privacy pass, learning note and publish package.</p></div>
+    </div>
+
+    <h2 class="sec">soft communication layer</h2>
+    <div class="creditGrid">
+      <div class="creditCell hot"><div class="role">hook</div><b>why watch</b><p>первый смысловой крючок: конфликт, вопрос, обещание пользы or visible proof in the first seconds.</p></div>
+      <div class="creditCell"><div class="role">voice</div><b>how it speaks</b><p>тон, темп, паузы, density captions, persona lane and the amount of visible process.</p></div>
+      <div class="creditCell"><div class="role">proof</div><b>why believe</b><p>экран, объект, timeline, before/after, quote-safe source or action shown inside the frame.</p></div>
+      <div class="creditCell"><div class="role">turn</div><b>why finish</b><p>поворот, вывод, CTA, next branch and learning note for the following edit.</p></div>
     </div>
 
     <h2 class="sec">кто это собрал и какие слои внес</h2>
@@ -551,7 +572,7 @@
       <div class="layerName">context / brief</div><div class="layerBody">контекстный skill или человек формулирует цель, аудиторию, ограничения, source type and publish channel. В публичный пакет уходит только generic summary.</div>
       <div class="layerName">reel-edit</div><div class="layerBody">владеет приватным video state: source audit, transcript, source blocks, EDL, overlay lanes, render outputs and QA. Raw media, transcripts and local paths остаются локально.</div>
       <div class="layerName">reel-block-edit</div><div class="layerBody">может быть visual/timeline surface: branch surface, overlay density ladder, manual review, safe-zone checks and text-free base.</div>
-      <div class="layerName">stack-compare</div><div class="layerBody">владеет публичным Shaper artifact: dashboard, library stack, coauthor map, sanitized EDL examples, README, STACK.md and contribution rules.</div>
+      <div class="layerName">stack-compare</div><div class="layerBody">владеет публичным Shaper artifact: dashboard, library stack, community map, sanitized EDL examples, README, STACK.md and contribution rules.</div>
       <div class="layerName">github pages</div><div class="layerBody">публикует текущую версию как open artifact. Проверка релиза: live URL returns 200 and expected tab text appears in deployed HTML.</div>
     </div>
 
@@ -620,86 +641,89 @@
   </section>
 
   <section class="panel" id="approaches">
-    <h2 class="sec">соавторы и источники – кто усилил pipeline</h2>
-    <p class="lead">это отдельная credit map: какие публичные проекты, авторы и библиотеки дали полезные решения для открытого Reels Pipeline OS.</p>
+    <h2 class="sec">community map – что берем из публичных GitHub</h2>
+    <p class="lead">это карта заимствуемых механик. каждый source даёт один полезный слой: portable ingest, agent timeline, render adapter, open editor or production loop.</p>
 
     <div class="authorGrid">
       <article class="authorCard">
-        <div class="authorTop"><h3>dasha / voronik1801</h3><span>portable kit</span></div>
-        <p>публичное repo `reel_pipline` сильнее всего как переносимый macOS/iPhone production kit: PIPELINE.md, preflight, avconvert, templates and detectors.</p>
+        <div class="authorTop"><h3>portable production kit</h3><span>ingest / qa</span></div>
+        <p>из Dasha / Voronik1801 берём дисциплину переносимого iPhone production kit: preflight, avconvert, copy-fill templates, dead-air and stutter review.</p>
         <ul>
-          <li>Apple `avconvert` для iPhone HDR/HLG to SDR bt709</li>
-          <li>`pipeline_check.sh`, copy-fill-run templates</li>
-          <li>`find_stutters.py` and `find_deadair.py` for review hints</li>
+          <li>portable folder contract</li>
+          <li>source healthcheck before creative work</li>
+          <li>render scripts as templates</li>
         </ul>
-        <div class="link"><a href="https://github.com/Voronik1801/reel_pipline">github.com/Voronik1801/reel_pipline</a> · checked HEAD 2b255a8</div>
+        <div class="link"><a href="https://github.com/Voronik1801/reel_pipline">github.com/Voronik1801/reel_pipline</a></div>
       </article>
 
       <article class="authorCard you">
-        <div class="authorTop"><h3>reels pipeline os</h3><span>public maintainer</span></div>
-        <p>этот репозиторий собирает публичную схему: EDL as SSOT, overlay lanes, branch packs, library stack, configurator and contribution boundary.</p>
+        <div class="authorTop"><h3>AI Mindset system</h3><span>local canon</span></div>
+        <p>наш слой держит контракт: mode-first, one audio spine, EDL as SSOT, overlay lanes, public/private boundary and skill chain.</p>
         <ul>
-          <li>держит страницу и `STACK.md` как открытый артефакт</li>
-          <li>публикует generic EDL, branch recipes and QA policy</li>
-          <li>сохраняет source links and public attribution</li>
+          <li>`reel-edit` owns private video state</li>
+          <li>`stack-compare` owns public artifact</li>
+          <li>GitHub Pages ships community docs</li>
         </ul>
-        <div class="link">source: this repo · public packaging layer</div>
+        <div class="link">source: this repo · public-safe skill summary</div>
       </article>
 
       <article class="authorCard">
-        <div class="authorTop"><h3>meigen-ai / x-cut</h3><span>chat editor</span></div>
-        <p>X-Cut показывает новую форму editor: человек пишет intent в chat, agent анализирует assets, выбирает skills, строит multi-track timeline and renders through Remotion.</p>
+        <div class="authorTop"><h3>agent timeline tools</h3><span>x-cut / openscript</span></div>
+        <p>из X-Cut и OpenScript берём agent-directed editing: chat intent, skills, timeline operations, MCP tools, validation and verification.</p>
         <ul>
-          <li>recipe/style sharing как skill</li>
-          <li>chat edits плюс прямой timeline manipulation</li>
-          <li>reference-based modification отдельных элементов</li>
+          <li>intent → plan → multi-track timeline</li>
+          <li>MCP operations around EDL/timeline</li>
+          <li>verification layer before final render</li>
         </ul>
-        <div class="link"><a href="https://github.com/MeiGen-AI/X-Cut">github.com/MeiGen-AI/X-Cut</a></div>
+        <div class="link"><a href="https://github.com/MeiGen-AI/X-Cut">X-Cut</a> · <a href="https://github.com/birchrust/openscript">OpenScript</a></div>
       </article>
 
       <article class="authorCard">
-        <div class="authorTop"><h3>ishan parihar / openscript</h3><span>mcp timeline</span></div>
-        <p>OpenScript полезен как инженерный референс: MCP server, multi-track EDL v2, validation, music/SFX/voiceover tracks and verification layer.</p>
+        <div class="authorTop"><h3>render adapters</h3><span>otio / remotion / hyperframes</span></div>
+        <p>этот слой задаёт переносимость: OTIO для editorial interchange, Remotion для React render, HyperFrames для HTML-native video.</p>
         <ul>
-          <li>structured brief before direct render</li>
-          <li>Rust MCP tools around timeline operations</li>
-          <li>verify.audio, verify.captions, verify.render</li>
+          <li>state interchange</li>
+          <li>typed tracks/items render</li>
+          <li>agent-friendly HTML render path</li>
         </ul>
-        <div class="link"><a href="https://github.com/birchrust/openscript">github.com/birchrust/openscript</a> · fork points to ishan-parihar/openscript</div>
+        <div class="link"><a href="https://github.com/AcademySoftwareFoundation/OpenTimelineIO">OTIO</a> · <a href="https://www.remotion.dev/docs/building-a-timeline">Remotion</a> · <a href="https://github.com/heygen-com/hyperframes">HyperFrames</a></div>
       </article>
 
       <article class="authorCard">
-        <div class="authorTop"><h3>heygen / hyperframes</h3><span>html render</span></div>
-        <p>HyperFrames важен для агентной поверхности: agents already write HTML, composition can be plain HTML/CSS/media with seekable animations and FFmpeg render.</p>
+        <div class="authorTop"><h3>open production loop</h3><span>reelstack / openreels</span></div>
+        <p>из ReelStack и OpenReels берём production loop: step reruns, provider registry, script-to-video flow, live pipeline UI and batch-friendly artifacts.</p>
         <ul>
-          <li>data attributes for timing and tracks</li>
-          <li>CLI loop: lint, preview, inspect, render</li>
-          <li>skills router for agent video work</li>
+          <li>pipeline stages as commands</li>
+          <li>asset regeneration without full rerun</li>
+          <li>community-ready docs and demos</li>
         </ul>
-        <div class="link"><a href="https://github.com/heygen-com/hyperframes">github.com/heygen-com/hyperframes</a></div>
+        <div class="link"><a href="https://github.com/jurczykpawel/reelstack">ReelStack</a> · <a href="https://github.com/tsensei/OpenReels">OpenReels</a></div>
       </article>
 
       <article class="authorCard">
-        <div class="authorTop"><h3>reelstack / openreels / opencut</h3><span>open wave</span></div>
-        <p>открытые repos показывают market direction: programmatic video pipelines, browser timelines, API-first renders, provider orchestration and headless/editor split.</p>
+        <div class="authorTop"><h3>open editor surface</h3><span>opencut / webcodecs</span></div>
+        <p>из OpenCut берём направление open timeline editor: browser surface, editor API, plugin/headless route and future MCP control.</p>
         <ul>
-          <li>ReelStack: API/CLI, effects, templates, provider registry</li>
-          <li>OpenReels: topic to vertical MP4 with live pipeline UI</li>
-          <li>OpenCut: open editor API, plugins, MCP/headless direction</li>
+          <li>visual review for timeline state</li>
+          <li>plugin model for editor actions</li>
+          <li>headless/editor split</li>
         </ul>
-        <div class="link"><a href="https://github.com/jurczykpawel/reelstack">reelstack</a> · <a href="https://github.com/tsensei/OpenReels">openreels</a> · <a href="https://github.com/OpenCut-app/OpenCut">opencut</a></div>
+        <div class="link"><a href="https://github.com/OpenCut-app/OpenCut">github.com/OpenCut-app/OpenCut</a></div>
       </article>
     </div>
 
-    <h2 class="sec">что входит в публичный pipeline</h2>
+    <h2 class="sec">что можно взять в систему</h2>
     <table class="cmp">
-      <thead><tr><th>слой</th><th>источник</th><th>что берем</th><th>как применяем</th></tr></thead>
+      <thead><tr><th>source</th><th>что взять</th><th>как применить</th><th>community роль</th></tr></thead>
       <tbody>
-        <tr><td class="l">portable ingest</td><td>Dasha / Voronik1801</td><td>preflight, avconvert, folders, copy-fill templates</td><td class="move">portable iPhone branch pack</td></tr>
-        <tr><td class="l">timeline state</td><td>OTIO, Remotion, X-Cut, OpenScript</td><td>tracks/items, cuts, markers, validation, render adapters</td><td class="move">EDL + overlay_tracks + render.outputs</td></tr>
-        <tr><td class="l">agent surface</td><td>HyperFrames, X-Cut, OpenCut</td><td>chat intent, skills, browser preview, headless render</td><td class="move">future timeline board bridge</td></tr>
-        <tr><td class="l">production loop</td><td>ReelStack, OpenReels</td><td>API/CLI stages, provider registry, cost/quality checks, live pipeline UI</td><td class="move">render queue, Trial Reels, batch variants</td></tr>
-        <tr><td class="l">public package</td><td>STACK.md + CONTRIBUTING</td><td>generic examples, privacy rules, branch README format</td><td class="move">forkable docs and contribution path</td></tr>
+        <tr><td class="l">Voronik1801/reel_pipline</td><td>portable iPhone kit, preflight, avconvert, templates, detectors</td><td class="move">make `portable-iphone-kit` protocol stricter</td><td>creator handoff recipe</td></tr>
+        <tr><td class="l">MeiGen-AI/X-Cut</td><td>chat intent, dynamic skills, asset analysis, live Remotion timeline</td><td class="move">shape future timeline agent UI</td><td>agent editor pattern</td></tr>
+        <tr><td class="l">birchrust/OpenScript</td><td>MCP tools, EDL v2, multi-track timeline, verification layer</td><td class="move">turn protocols into callable tools</td><td>agent control contract</td></tr>
+        <tr><td class="l">heygen-com/HyperFrames</td><td>HTML/CSS/media render, CLI lint/preview/render, agent skills</td><td class="move">use HTML-native render adapter for explainers</td><td>agent-friendly render engine</td></tr>
+        <tr><td class="l">jurczykpawel/ReelStack</td><td>CLI/API stages, provider registry, prompt templates, self-hosting</td><td class="move">add rerunnable production protocol</td><td>scale and automation reference</td></tr>
+        <tr><td class="l">tsensei/OpenReels</td><td>topic-to-short pipeline, script/voice/visual/music/captions assembly</td><td class="move">use as article-demo / idea-to-reel recipe</td><td>one-command community demo</td></tr>
+        <tr><td class="l">OpenCut-app/OpenCut</td><td>open timeline editor direction, plugin/headless surface</td><td class="move">future browser review board</td><td>open editor ecosystem</td></tr>
+        <tr><td class="l">OpenTimelineIO</td><td>editorial interchange format</td><td class="move">export EDL to NLE-friendly state</td><td>industry timeline bridge</td></tr>
       </tbody>
     </table>
   </section>
@@ -722,7 +746,7 @@
       <article class="techCard"><h3>browser preview</h3><b>WebCodecs / OpenCut</b><p>local decode/encode and editor/headless split for future visual reel dashboard.</p></article>
 
       <article class="techCard"><h3>automation</h3><b>MCP / CLI tools</b><p>structured preflight, transcript, EDL build, render, verify and publish handoff.</p></article>
-      <article class="techCard"><h3>quality gates</h3><b>volumedetect / silencedetect</b><p>audio health, dead-air hints, first-frame checks, seam listening and final ffprobe report.</p></article>
+      <article class="techCard"><h3>quality gates</h3><b>volumedetect / silencedetect</b><p>audio health, dead-air hints, first-frame checks, cut-boundary listening and final ffprobe report.</p></article>
       <article class="techCard"><h3>package docs</h3><b>Markdown + JSON Schema</b><p>STACK.md, CONTRIBUTING, branch README, EDL skeletons and reusable config contracts.</p></article>
     </div>
 
@@ -739,6 +763,16 @@
   <section class="panel" id="config">
     <h2 class="sec">конфигуратор branch pack</h2>
     <p class="lead">выбери исходник, цель и монтажный режим. configurator выдаст pack, список артефактов, JSON config и prompt, который можно сразу дать агенту для сборки Reels pipeline.</p>
+    <div class="funnel protocolFunnel" aria-label="selected protocol stack">
+      <div class="step"><div class="n">P0</div><b>brief</b><span>goal · audience</span></div>
+      <div class="step"><div class="n">P1</div><b>source</b><span>audit · ingest</span></div>
+      <div class="step"><div class="n">P2</div><b>timing</b><span>words · pauses</span></div>
+      <div class="step"><div class="n">P3</div><b>story</b><span>blocks · hook</span></div>
+      <div class="step core"><div class="n">P4</div><b>EDL</b><span>cuts · branches</span></div>
+      <div class="step"><div class="n">P5</div><b>overlay</b><span>lanes · safe zones</span></div>
+      <div class="step"><div class="n">P6</div><b>render</b><span>review · final</span></div>
+      <div class="step"><div class="n">P7</div><b>QA</b><span>privacy · publish</span></div>
+    </div>
     <div class="configShell">
       <div class="configLeft">
         <div class="selectorGrid">
@@ -782,6 +816,7 @@
         <p class="recText" id="recText">Быстрый production pack для iPhone Reels: правильный цвет, word timing, manual clean cut, caption lane, QA и минимальный public-safe EDL.</p>
         <div class="miniCols">
           <div class="mini"><b>layers</b><ul id="recLayers"></ul></div>
+          <div class="mini"><b>protocols</b><ul id="recProtocols"></ul></div>
           <div class="mini"><b>artifacts</b><ul id="recArtifacts"></ul></div>
         </div>
         <pre class="copyBox" id="configJson"></pre>
@@ -831,13 +866,14 @@
       <div class="sourceCard"><b>ReelStack</b><p><a href="https://github.com/jurczykpawel/reelstack">github.com/jurczykpawel/reelstack</a> · API/CLI production pipeline, effects, templates, provider registry and self-hosting model.</p></div>
       <div class="sourceCard"><b>OpenReels / OpenCut</b><p><a href="https://github.com/tsensei/OpenReels">OpenReels</a> · topic-to-short pipeline with live UI. <a href="https://github.com/OpenCut-app/OpenCut">OpenCut</a> · editor API, plugins, MCP/headless direction.</p></div>
       <div class="sourceCard"><b>Whisper / FFmpeg / WebCodecs</b><p><a href="https://github.com/openai/whisper">Whisper</a> · word timings. <a href="https://ffmpeg.org/ffmpeg.html">FFmpeg</a> · render and diagnostics. <a href="https://www.w3.org/TR/webcodecs/">WebCodecs</a> · browser media primitives.</p></div>
+      <div class="sourceCard"><b>Protocol spec</b><p><a href="PROTOCOLS.md">PROTOCOLS.md</a> · P0-P7 editing protocols, community borrow map and configurator output contract.</p></div>
       <div class="sourceCard"><b>Article reference</b><p><a href="ARTICLE.md">ARTICLE.md</a> · short public description, citation notes and one-paragraph explanation for articles.</p></div>
     </div>
   </section>
 
   <footer class="stamp">
     <div><b>fig.1</b> · reels-pipeline-os · public atlas · 2026-06-26</div>
-    <div>shortcuts: <span class="kbd">1</span> map · <span class="kbd">2</span> pipeline · <span class="kbd">3</span> libraries · <span class="kbd">4</span> config · <span class="kbd">5</span> coauthors · <span class="kbd">d</span> theme</div>
+    <div>shortcuts: <span class="kbd">1</span> map · <span class="kbd">2</span> pipeline · <span class="kbd">3</span> libraries · <span class="kbd">4</span> config · <span class="kbd">5</span> community · <span class="kbd">d</span> theme</div>
   </footer>
 </div>
 
@@ -866,6 +902,17 @@
       experimental: "experimental"
     }
   };
+  const protocolCatalog = [
+    "P0 brief: goal, audience, source type, mode, privacy boundary",
+    "P1 source: ffprobe, orientation, audio, color/HDR check, source map",
+    "P2 timing: transcript, word timings, pause map, dead-air/stutter hints",
+    "P3 story: source blocks, hook, tension, proof, turn, closer",
+    "P4 EDL: cuts[], overlay_tracks[], render.outputs, branch status",
+    "P5 overlay: caption, card, rail, proof, stamp, cover, safe zones",
+    "P6 render: draft, review MP4, text-free base, final 1080x1920",
+    "P7 QA: ffprobe, listening pass, first 3s, privacy pass, learning note"
+  ];
+  const protocolNav = ["P0 brief", "P1 source", "P2 timing", "P3 story", "P4 EDL", "P5 overlay", "P6 render", "P7 QA"];
   const packs = {
     portable: {
       title: "Portable iPhone Core",
@@ -906,7 +953,7 @@
       title: "Article Demo Pack",
       score: 84,
       text: "Для статьи, доклада или публичного разбора: schematic EDL, pipeline screenshot, library list, source credits and privacy-safe example.",
-      layers: ["schematic source", "generic EDL", "library stack", "coauthor credits", "article paragraph"],
+      layers: ["schematic source", "generic EDL", "library stack", "community credits", "article paragraph"],
       artifacts: ["ARTICLE.md", "edit_decision_list.example.json", "assets/og-cover.png", "STACK.md", "QA.md"]
     }
   };
@@ -924,9 +971,10 @@
     document.getElementById("recScore").textContent = pack.score;
     document.getElementById("recText").textContent = pack.text;
     document.getElementById("recLayers").innerHTML = pack.layers.map(x=>`<li>${x}</li>`).join("");
+    document.getElementById("recProtocols").innerHTML = protocolNav.map(x=>`<li>${x}</li>`).join("");
     document.getElementById("recArtifacts").innerHTML = pack.artifacts.map(x=>`<li>${x}</li>`).join("");
     const json = {
-      schema: "reels.stack.config.v4",
+      schema: "reels.stack.config.v5",
       selected: state,
       recommended_pack: pack.title,
       pipeline_defaults: {
@@ -935,6 +983,7 @@
         baseline_required: true,
         public_safe: true
       },
+      protocols: protocolCatalog,
       layers: pack.layers,
       artifacts: pack.artifacts
     };
@@ -955,19 +1004,23 @@ Use this stack:
 - EDL JSON as the source of truth: source_blocks[], cuts[], overlay_tracks[], render.outputs and qa.
 - Optional adapters: OpenTimelineIO export, Remotion tracks/items render, HyperFrames HTML render, WebCodecs/browser preview.
 
+Required protocols:
+${protocolCatalog.map(x => `- ${x}`).join("\n")}
+
 Required artifacts:
 ${pack.artifacts.map(x => `- ${x}`).join("\n")}
 
 Required process:
-1. Read STACK.md, README.md and the selected branch README if it exists.
-2. Run preflight: ffmpeg, ffprobe, Python packages, avconvert when relevant.
-3. Create source_map.md with public-safe labels and source properties.
-4. Build transcript JSON and pause map. Do not cut inside words.
-5. Create clean baseline first, then branch variants.
-6. Write edit_decision_list.json with cuts[], overlay_tracks[] and render.outputs.
-7. Render review MP4 and final 1080x1920 MP4.
-8. Run QA: ffprobe, audio listen, first 3 seconds, safe zones, contact sheet, privacy pass.
-9. Write a short learning note: what branch worked, what failed and what should be reused next time.
+1. Read STACK.md, PROTOCOLS.md, README.md and the selected branch README if it exists.
+2. Fill P0 brief and choose the branch pack.
+3. Run P1 source preflight: ffmpeg, ffprobe, Python packages, avconvert when relevant.
+4. Build P2 transcript JSON and pause map. Do not cut inside words.
+5. Create P3 source blocks and clean baseline first, then branch variants.
+6. Write P4 edit_decision_list.json with cuts[], overlay_tracks[] and render.outputs.
+7. Fill P5 overlay lanes with viewer-facing copy and safe-zone rules.
+8. Render P6 review MP4, text-free base and final 1080x1920 MP4.
+9. Run P7 QA: ffprobe, audio listen, first 3 seconds, safe zones, contact sheet, privacy pass.
+10. Write a short learning note: what branch worked, what failed and what should be reused next time.
 
 Public boundary:
 - Keep raw footage, transcript text, real names, handles, local paths, private screenshots and keys outside public artifacts.
@@ -990,12 +1043,24 @@ Return:
       renderConfig();
     });
   });
-  function copyConfig(){
-    navigator.clipboard.writeText(document.getElementById("configJson").textContent);
+  async function copyTextFrom(id){
+    const text = document.getElementById(id).textContent;
+    try{
+      await navigator.clipboard.writeText(text);
+    }catch(_err){
+      const area = document.createElement("textarea");
+      area.value = text;
+      area.setAttribute("readonly", "");
+      area.style.position = "fixed";
+      area.style.left = "-9999px";
+      document.body.appendChild(area);
+      area.select();
+      try{ document.execCommand("copy"); }catch(_copyErr){}
+      area.remove();
+    }
   }
-  function copyPrompt(){
-    navigator.clipboard.writeText(document.getElementById("configPrompt").textContent);
-  }
+  function copyConfig(){ void copyTextFrom("configJson"); }
+  function copyPrompt(){ void copyTextFrom("configPrompt"); }
   function tab(id, btn){
     document.querySelectorAll(".panel").forEach(p=>p.classList.remove("on"));
     document.getElementById(id).classList.add("on");

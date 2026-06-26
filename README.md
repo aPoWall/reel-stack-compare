@@ -3,7 +3,7 @@
 > **Public atlas, stack spec and configurator for agentic Reels editing.**
 > Live: https://apowall.github.io/reels-pipeline-os/
 
-This repo is a public **Reels Pipeline OS** for short-form editing. It explains the shared editing state first: source audit, transcript, source blocks, EDL, overlay lanes, render route, QA and public/private boundary. The configurator is the practical layer: it turns that map into a branch pack, JSON config and agent prompt.
+This repo is a public **Reels Pipeline OS** for short-form editing. It explains the shared editing state first: brief, source audit, transcript, source blocks, EDL, overlay lanes, render route, QA and public/private boundary. The configurator is the practical layer: it turns that map into a protocol stack, branch pack, JSON config and agent prompt.
 
 It is built from public-safe editing mechanics, the `stack-compare` package pattern, and an audit of public video-pipeline repositories including `Voronik1801/reel_pipline`.
 
@@ -13,7 +13,8 @@ It is built from public-safe editing mechanics, the `stack-compare` package patt
 
 | file | what |
 |------|------|
-| **[index.html](index.html)** | public atlas, library stack, coauthor map and live configurator |
+| **[index.html](index.html)** | public atlas, protocol map, community borrow map and live configurator |
+| **[PROTOCOLS.md](PROTOCOLS.md)** | P0-P7 editing protocols and community borrow map |
 | **[STACK.md](STACK.md)** | stack spec: packs, contracts, EDL schema, QA gates, source research, agent prompt |
 | **[ARTICLE.md](ARTICLE.md)** | short public description and citation notes for articles |
 | **[CONTRIBUTING.md](CONTRIBUTING.md)** | how to contribute a branch without leaking private data |
@@ -25,11 +26,13 @@ The current version leads with the **public montage atlas**:
 
 1. see how different editing approaches become one `editing state`;
 2. inspect the public pipeline contract: mode, audio, EDL, overlays, QA;
-3. review who contributed which layer: AI Mindset/aPoWall, Codex + Claude Code, Dasha/Voronik, EXA/public repos, X-Cut, OpenScript, OTIO, Remotion, HyperFrames, FFmpeg, Whisper/Scribe, Apple, ReelStack, OpenReels, OpenCut;
-4. inspect how the public artifact fits the AI Mindset skill system: context/brief -> reel-edit -> reel-block-edit -> stack-compare -> GitHub Pages;
-5. inspect the library stack: ffmpeg, ffprobe, avconvert, Whisper/Scribe, Pillow, numpy, ASS/SRT/WebVTT, OTIO, Remotion, HyperFrames, WebCodecs, MCP;
-6. choose `source`, `goal` and `mode` in the configurator;
-7. copy the generated JSON config and agent prompt.
+3. inspect editing protocols P0-P7: brief, source, timing, story, EDL, overlays, render, QA;
+4. inspect the soft communication layer: hook, voice, proof, turn;
+5. review the community borrow map: Voronik1801/reel_pipline, X-Cut, OpenScript, HyperFrames, ReelStack, OpenReels, OpenCut, OpenTimelineIO;
+6. inspect how the public artifact fits the AI Mindset skill system: context/brief -> reel-edit -> reel-block-edit -> stack-compare -> GitHub Pages;
+7. inspect the library stack: ffmpeg, ffprobe, avconvert, Whisper/Scribe, Pillow, numpy, ASS/SRT/WebVTT, OTIO, Remotion, HyperFrames, WebCodecs, MCP;
+8. choose `source`, `goal` and `mode` in the configurator;
+9. copy the generated protocol stack, JSON config and agent prompt.
 
 ## Branch Packs
 
@@ -41,7 +44,7 @@ The current version leads with the **public montage atlas**:
 | `collab-spine` | live exchange between creators | turn map, `collabBeats[]`, preserved handoff notes |
 | `creator-collab-challenge` | public growth challenge | sanitized metrics, challenge EDL, Trial results |
 | `public-dashboard` | open-source package | `STACK.md`, `CONTRIBUTING.md`, branch README, static dashboard |
-| `article-demo` | article, talk or public explanation | schematic EDL, library list, coauthor credits, citation paragraph |
+| `article-demo` | article, talk or public explanation | schematic EDL, library list, community credits, citation paragraph |
 
 ## Dasha/Voronik Audit
 
@@ -69,11 +72,34 @@ Those mechanics inform the `portable-iphone-kit` pack. The broader OS adds EDL-a
 | browser/editor surface | tracks/items board, WebCodecs/OpenCut direction |
 | agent control | CLI, MCP tools and public-safe branch packs |
 
+## Editing Protocols
+
+| id | protocol | short output |
+|----|----------|--------------|
+| P0 | brief | goal, audience, source, mode, privacy boundary |
+| P1 | source | source map, ffprobe facts, ingest decision |
+| P2 | timing | transcript, word timings, pauses |
+| P3 | story | source blocks and public-safe summaries |
+| P4 | EDL | cuts, overlay tracks, render outputs |
+| P5 | overlays | lanes, captions, safe zones |
+| P6 | render | review, text-free base, final MP4 |
+| P7 | QA | diagnostics, privacy pass, learning note |
+
+## Soft Communication Layer
+
+| layer | purpose |
+|-------|---------|
+| hook | why someone should watch now |
+| voice | how the reel speaks: tone, tempo, pause density, caption density |
+| proof | what makes the claim believable on screen |
+| turn | how the reel lands: reversal, conclusion, CTA and next branch |
+
 ## Builder Prompt
 
 The live page generates a prompt from `source + goal + mode`. The prompt asks an agent to:
 
 - read `STACK.md`, `README.md` and the selected branch README;
+- read `PROTOCOLS.md` with the P0-P7 contract;
 - run preflight;
 - build `source_map.md`, transcript JSON, pause map, EDL and overlay tracks;
 - render review/final MP4;

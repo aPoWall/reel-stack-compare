@@ -20,6 +20,19 @@ source audit -> ingest/color -> transcript/timing -> source blocks -> EDL state 
 
 The MP4 is an output. The durable artifact is the recipe: source blocks, cut map, overlay tracks, QA decisions and branch status.
 
+## 1.1 Editing Protocol Stack
+
+| id | protocol | output |
+|----|----------|--------|
+| P0 | brief protocol | goal, audience, source type, mode, privacy boundary, expected artifacts |
+| P1 | source protocol | `source_map.md`, ffprobe facts, orientation, fps, audio channels, HDR/SDR decision |
+| P2 | timing protocol | transcript JSON, word timings, pause map, dead-air/stutter hints |
+| P3 | story protocol | source blocks: hook, setup, tension, proof, turn, closer, tail |
+| P4 | EDL protocol | `edit_decision_list.json` with `cuts[]`, `overlay_tracks[]`, `render.outputs`, branch status |
+| P5 | overlay protocol | caption/card/rail/proof/stamp/cover lanes, safe-zone rules, viewer-facing copy |
+| P6 | render protocol | draft, review MP4, text-free base, final 1080x1920 MP4 |
+| P7 | QA protocol | ffprobe, listening pass, first-3s check, safe-zone pass, privacy pass, learning note |
+
 ## 2. Decision Order
 
 ### 2.1 Source
@@ -57,18 +70,29 @@ Pick the editorial mode before the visual style:
 | `social_short` | punch and CTA carry the reel | tight cut and minimal copy |
 | `experimental` | deliberate exploration | one wild branch with clean baseline preserved |
 
+### 2.4 Soft Communication Layer
+
+| layer | question | editing signal |
+|-------|----------|----------------|
+| hook | why watch | conflict, question, useful promise or visible proof in the first seconds |
+| voice | how it speaks | tone, tempo, pauses, caption density, persona lane and visible process level |
+| proof | why believe | screen, object, timeline, before/after, quote-safe source or action inside the frame |
+| turn | why finish | reversal, conclusion, CTA, next branch and learning note |
+
 ## 3. Pack Catalog
 
-## 3.0 Author / Source Map
+## 3.0 Community Borrow Map
 
-| author/source | strongest contribution | adopted layer |
-|---------------|------------------------|---------------|
-| Dasha / `Voronik1801/reel_pipline` | portable macOS/iPhone kit, `PIPELINE.md`, `pipeline_check.sh`, `avconvert`, templates, stutter/dead-air review | `portable-iphone-kit` |
-| MeiGen-AI / X-Cut | chat-driven video agent, selected skills, real-time Remotion timeline, reusable style recipes | agent/editor surface |
-| Ishan Parihar / OpenScript | MCP tools, multi-track EDL v2, Rust timeline validation, verification layer | state and QA |
-| HeyGen / HyperFrames | HTML/CSS/media to deterministic MP4, agent skills, CLI validation/render loop | render adapter |
-| ReelStack / OpenReels / OpenCut | API-first pipelines, live pipeline UI, effects/templates, editor API, headless/MCP direction | future builder and dashboard |
-| Reels Pipeline OS | EDL as SSOT, overlay lanes, branch packs, library stack, configurator and contribution boundary | public packaging |
+| source | strongest contribution | adopted layer |
+|--------|------------------------|---------------|
+| [Voronik1801/reel_pipline](https://github.com/Voronik1801/reel_pipline) | portable macOS/iPhone kit, `PIPELINE.md`, `pipeline_check.sh`, `avconvert`, templates, stutter/dead-air review | P1 source, P2 timing, P7 QA |
+| [MeiGen-AI/X-Cut](https://github.com/MeiGen-AI/X-Cut) | chat-driven video agent, dynamic skills, asset analysis, real-time Remotion timeline | P0 brief, P3 story, future editor surface |
+| [birchrust/OpenScript](https://github.com/birchrust/openscript) | MCP tools, EDL v2, multi-track timeline, verification layer | P4 EDL, P7 QA, agent control |
+| [heygen-com/HyperFrames](https://github.com/heygen-com/hyperframes) | HTML/CSS/media render loop, CLI lint/preview/render, agent skills | P5 overlays, P6 render |
+| [jurczykpawel/ReelStack](https://github.com/jurczykpawel/reelstack) | CLI/API production stages, provider registry, prompt templates, self-hosting | P0 brief, P6 render, automation |
+| [tsensei/OpenReels](https://github.com/tsensei/OpenReels) | topic-to-short pipeline: research, script, voiceover, visuals, music, captions, assembly | article-demo pack |
+| [OpenCut-app/OpenCut](https://github.com/OpenCut-app/OpenCut) | open timeline editor direction, plugin/headless surface | future browser review board |
+| [OpenTimelineIO](https://github.com/AcademySoftwareFoundation/OpenTimelineIO) | editorial timeline interchange format | EDL export and NLE bridge |
 
 ### 3.1 `portable-iphone-kit`
 
@@ -216,7 +240,7 @@ context / brief -> reel-edit -> reel-block-edit -> stack-compare -> GitHub Pages
 | context / brief | defines goal, audience, constraints, source type and publish channel |
 | `reel-edit` | owns private video state: source audit, transcript, source blocks, EDL, overlay lanes, render outputs and QA |
 | `reel-block-edit` | optional visual/timeline surface: branch surface, overlay density, manual review and safe-zone checks |
-| `stack-compare` | owns public dashboard, library stack, coauthor map, sanitized examples, README and STACK.md |
+| `stack-compare` | owns public dashboard, library stack, community map, sanitized examples, README and STACK.md |
 | GitHub Pages | publishes the public artifact and verifies live tab text after release |
 
 Raw media, transcripts and local paths stay in the private video project. The public artifact carries mechanics only.
@@ -309,7 +333,7 @@ On-screen copy must not include internal terms like `EDL`, `branch`, `render`, `
 - Default: one continuous voice master.
 - Cross-take speech splice: explicit experimental branch only.
 - Preserve a clean baseline before experiments.
-- Listen to every speech seam.
+- Listen to every speech cut boundary.
 - Avoid per-segment filters on iPhone MOV.
 - Reject silent or suspicious AAC output.
 
@@ -332,7 +356,7 @@ python3 -c "import PIL, numpy"
 - SDR `bt709` tags;
 - AAC stereo 48k;
 - target loudness around −16 LUFS;
-- contact sheet for hook, overlay, seam and ending;
+- contact sheet for hook, overlay, transition point and ending;
 - listening pass;
 - privacy pass.
 
@@ -385,16 +409,27 @@ Use this stack:
 - EDL JSON as the source of truth: source_blocks[], cuts[], overlay_tracks[], render.outputs and qa.
 - Optional adapters: OpenTimelineIO export, Remotion tracks/items render, HyperFrames HTML render, WebCodecs/browser preview.
 
+Required protocols:
+- P0 brief: goal, audience, source type, mode, privacy boundary.
+- P1 source: ffprobe, orientation, audio, color/HDR check, source map.
+- P2 timing: transcript, word timings, pause map, dead-air/stutter hints.
+- P3 story: source blocks, hook, tension, proof, turn, closer.
+- P4 EDL: cuts[], overlay_tracks[], render.outputs, branch status.
+- P5 overlay: caption, card, rail, proof, stamp, cover, safe zones.
+- P6 render: draft, review MP4, text-free base, final 1080x1920.
+- P7 QA: ffprobe, listening pass, first 3s, privacy pass, learning note.
+
 Required process:
-1. Read STACK.md, README.md and the selected branch README if it exists.
-2. Run preflight: ffmpeg, ffprobe, Python packages, avconvert when relevant.
-3. Create source_map.md with public-safe labels and source properties.
-4. Build transcript JSON and pause map. Do not cut inside words.
-5. Create clean baseline first, then branch variants.
-6. Write edit_decision_list.json with cuts[], overlay_tracks[] and render.outputs.
-7. Render review MP4 and final 1080x1920 MP4.
-8. Run QA: ffprobe, audio listen, first 3 seconds, safe zones, contact sheet, privacy pass.
-9. Write a short learning note: what branch worked, what failed and what should be reused next time.
+1. Read STACK.md, PROTOCOLS.md, README.md and the selected branch README if it exists.
+2. Fill P0 brief and choose the branch pack.
+3. Run P1 source preflight: ffmpeg, ffprobe, Python packages, avconvert when relevant.
+4. Build P2 transcript JSON and pause map. Do not cut inside words.
+5. Create P3 source blocks and clean baseline first, then branch variants.
+6. Write P4 edit_decision_list.json with cuts[], overlay_tracks[] and render.outputs.
+7. Fill P5 overlay lanes with viewer-facing copy and safe-zone rules.
+8. Render P6 review MP4, text-free base and final 1080x1920 MP4.
+9. Run P7 QA: ffprobe, audio listen, first 3 seconds, safe zones, contact sheet, privacy pass.
+10. Write a short learning note: what branch worked, what failed and what should be reused next time.
 
 Public boundary:
 - Keep raw footage, transcript text, real names, handles, local paths, private screenshots and keys outside public artifacts.
