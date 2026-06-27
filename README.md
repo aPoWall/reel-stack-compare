@@ -1,9 +1,9 @@
 # Reels Pipeline OS
 
-> **Public atlas, stack spec and configurator for agentic Reels editing.**
+> **Public atlas, stack spec and route configurator for agentic Reels editing.**
 > Live: https://apowall.github.io/reels-pipeline-os/
 
-This repo is a public **Reels Pipeline OS** for short-form editing. It explains the shared editing state first: brief, source audit, transcript, source blocks, EDL, overlay lanes, render route, QA and public/private boundary. The configurator is the practical layer: it turns that map into a protocol stack, branch pack, JSON config and agent prompt.
+This repo is a public **Reels Pipeline OS** for short-form editing. It explains the shared editing state first: brief, source audit, transcript, source blocks, EDL, overlay lanes, render route, QA and public/private boundary. The configurator is the practical layer: it turns that map into a route session, branch pack, JSON config and agent prompt.
 
 It is built from public-safe editing mechanics, the `stack-compare` package pattern, and an audit of public video-pipeline repositories including `Voronik1801/reel_pipline`.
 
@@ -13,7 +13,7 @@ It is built from public-safe editing mechanics, the `stack-compare` package patt
 
 | file | what |
 |------|------|
-| **[index.html](index.html)** | public atlas, protocol map, community borrow map and live configurator |
+| **[index.html](index.html)** | public atlas, protocol map, research sessions, skill route map and live configurator |
 | **[PROTOCOLS.md](PROTOCOLS.md)** | P0-P7 editing protocols and community borrow map |
 | **[STACK.md](STACK.md)** | stack spec: packs, contracts, EDL schema, QA gates, source research, agent prompt |
 | **[ARTICLE.md](ARTICLE.md)** | short public description and citation notes for articles |
@@ -28,11 +28,34 @@ The current version leads with the **public montage atlas**:
 2. inspect the public pipeline contract: mode, audio, EDL, overlays, QA;
 3. inspect editing protocols P0-P7: brief, source, timing, story, EDL, overlays, render, QA;
 4. inspect the soft communication layer: hook, voice, proof, turn;
-5. review the community borrow map: Voronik1801/reel_pipline, X-Cut, OpenScript, HyperFrames, ReelStack, OpenReels, OpenCut, OpenTimelineIO;
+5. review the research map: Voronik1801/reel_pipline, X-Cut, OpenScript, AI Video Editor, HyperFrames, ReelStack, OpenReels, OpenCut Engine, Elah, timeline, OpenTimelineIO and platform QA guides;
 6. inspect how the public artifact fits the AI Mindset skill system: context/brief -> reel-edit -> reel-block-edit -> stack-compare -> GitHub Pages;
 7. inspect the library stack: ffmpeg, ffprobe, avconvert, Whisper/Scribe, Pillow, numpy, ASS/SRT/WebVTT, OTIO, Remotion, HyperFrames, WebCodecs, MCP;
-8. choose `source`, `goal` and `mode` in the configurator;
+8. choose `source`, `goal`, `mode` and `route` in the configurator;
 9. copy the generated protocol stack, JSON config and agent prompt.
+
+## Route Sessions
+
+The current configurator creates `reels.stack.config.v6`. A route session tells the agent what kind of pass to run on the same material.
+
+| route | skill/system | output |
+|-------|--------------|--------|
+| `reel_edit` | `reel-edit` | private render spine: source audit, transcript, EDL, overlay lanes, review/final MP4, text-free base and QA |
+| `block_timeline` | `reel-block-edit` | source blocks, timeline board state, overlay events, contact sheet and manual trim notes |
+| `palmier` | `reel-palmier-board` | editable Palmier board, frame shells, native text clips and winner cutlane |
+| `shaper` | `shaper-reels` | restrained public proof/process overlay with thin rails, labels and safe-zone QA |
+| `article_research` | `stack-compare` | public research sessions, source credits, route matrix and article-ready summary |
+
+### Same-Source Test
+
+To compare routes, use one source map, transcript baseline and audio policy. Save outputs under `test_runs/<route>/`, then compare:
+
+- first 3 seconds;
+- safe-zone readability;
+- editability;
+- render QA;
+- publish readiness;
+- learning note quality.
 
 ## Branch Packs
 
@@ -96,7 +119,7 @@ Those mechanics inform the `portable-iphone-kit` pack. The broader OS adds EDL-a
 
 ## Builder Prompt
 
-The live page generates a prompt from `source + goal + mode`. The prompt asks an agent to:
+The live page generates a prompt from `source + goal + mode + route`. The prompt asks an agent to:
 
 - read `STACK.md`, `README.md` and the selected branch README;
 - read `PROTOCOLS.md` with the P0-P7 contract;
@@ -105,6 +128,8 @@ The live page generates a prompt from `source + goal + mode`. The prompt asks an
 - render review/final MP4;
 - run ffprobe, audio, first-3s, safe-zone and privacy QA;
 - write a short learning note with reusable branch decisions.
+
+Each route has a different process and handoff: render spine, timeline board, Palmier board, Shaper overlay or article research.
 
 ## Public Boundary
 

@@ -64,8 +64,39 @@ Public protocol files exclude:
 The configurator should return:
 
 - selected `source`, `goal`, `mode`;
+- selected `route`;
 - recommended branch pack;
 - full protocol stack P0-P7;
 - artifacts to create;
 - public-safe agent prompt;
 - learning note instruction.
+
+## Test Session Routes
+
+| route | owner | expected output |
+|-------|-------|-----------------|
+| `reel_edit` | `reel-edit` | render-grade spine, review/final MP4, text-free base, QA and learning note |
+| `block_timeline` | `reel-block-edit` | source blocks, cut map, overlay events, board state and manual review notes |
+| `palmier` | `reel-palmier-board` | editable Palmier board, frame shells, native text clips and winner cutlane |
+| `shaper` | `shaper-reels` | monochrome proof/process overlay, safe-zone contact sheet and style reuse note |
+| `article_research` | `stack-compare` | public research sessions, source credits, route matrix and article-ready summary |
+
+## Same Source Comparison Protocol
+
+Use one source package for all routes:
+
+- `source_map.md`;
+- transcript JSON and pause map;
+- baseline audio policy;
+- privacy boundary;
+- public-safe source labels.
+
+Run each route into `test_runs/<route>/`. Compare:
+
+- first 3 seconds;
+- safe-zone readability;
+- editability;
+- render or board QA;
+- public boundary;
+- publish readiness;
+- learning note quality.

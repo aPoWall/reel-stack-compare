@@ -4,7 +4,7 @@
 
 - **Live dashboard:** https://apowall.github.io/reels-pipeline-os/
 - **Repo:** https://github.com/aPoWall/reels-pipeline-os
-- **Last rebuilt:** 2026-06-26
+- **Last rebuilt:** 2026-06-27
 
 This document is the downloadable operating spec behind the dashboard. It is intentionally public-safe: examples are generic, branch names are generic, and raw media/transcripts stay outside the repo.
 
@@ -70,7 +70,19 @@ Pick the editorial mode before the visual style:
 | `social_short` | punch and CTA carry the reel | tight cut and minimal copy |
 | `experimental` | deliberate exploration | one wild branch with clean baseline preserved |
 
-### 2.4 Soft Communication Layer
+### 2.4 Route Session
+
+The configurator selects a route after `source`, `goal` and `mode`. Route controls which skill/system owns the next pass.
+
+| route | owner | output |
+|-------|-------|--------|
+| `reel_edit` | `reel-edit` | private render spine: source audit, transcript, EDL, overlay lanes, review/final MP4, text-free base and QA |
+| `block_timeline` | `reel-block-edit` | inspectable timeline board: source blocks, cuts, overlay events, contact sheet and manual trim notes |
+| `palmier` | `reel-palmier-board` | editable board: base video/audio, frame shells, native text clips and winner cutlane |
+| `shaper` | `shaper-reels` | public proof/process overlay: monochrome rails, labels, safe-zone contact sheet and style reuse note |
+| `article_research` | `stack-compare` | public article branch: research sessions, source credits, route matrix and prompt contract |
+
+### 2.5 Soft Communication Layer
 
 | layer | question | editing signal |
 |-------|----------|----------------|
@@ -232,15 +244,17 @@ Use for open-source packaging.
 Public-safe skill chain:
 
 ```text
-context / brief -> reel-edit -> reel-block-edit -> stack-compare -> GitHub Pages
+inside-insanity -> reel-edit -> reel-block-edit -> reel-palmier-board -> shaper-reels -> stack-compare -> GitHub Pages
 ```
 
 | layer | role |
 |-------|------|
-| context / brief | defines goal, audience, constraints, source type and publish channel |
+| `inside-insanity` | defines personal visual board, motif, tone, caption grammar and public-safe summary |
 | `reel-edit` | owns private video state: source audit, transcript, source blocks, EDL, overlay lanes, render outputs and QA |
-| `reel-block-edit` | optional visual/timeline surface: branch surface, overlay density, manual review and safe-zone checks |
-| `stack-compare` | owns public dashboard, library stack, community map, sanitized examples, README and STACK.md |
+| `reel-block-edit` | visual/timeline surface: branch surface, overlay density, manual review and safe-zone checks |
+| `reel-palmier-board` | editable review and winner cutlane board with base tracks, frame shells and native text clips |
+| `shaper-reels` | monochrome proof/process overlay grammar for public-safe visible flow |
+| `stack-compare` | owns public dashboard, library stack, research sessions, sanitized examples, README and STACK.md |
 | GitHub Pages | publishes the public artifact and verifies live tab text after release |
 
 Raw media, transcripts and local paths stay in the private video project. The public artifact carries mechanics only.
@@ -384,9 +398,12 @@ EXA MCP research and primary docs point to a converging pattern:
 | [HyperFrames](https://github.com/heygen-com/hyperframes) | HTML/CSS/media to deterministic MP4, agent skills, CLI validation and render loop |
 | [X-Cut](https://github.com/MeiGen-AI/X-Cut) | chat-driven video agent, multi-track timeline, reusable style skills and Remotion render |
 | [OpenScript](https://github.com/birchrust/openscript) | MCP tools, EDL v2, multi-track timeline, verification layer and agent-directed render |
+| [AI Video Editor](https://github.com/tjameswilliams/ai-video-editor) | natural-language edits, multi-track timeline and Remotion motion graphics |
+| [OpenCut Engine](https://github.com/buildingopen/opencut) | code-driven video production with Whisper, TypeScript timelines and Remotion render |
+| [Elah](https://github.com/elahlabs/elah), [timeline](https://github.com/webpacked/timeline), [OpenReel Video](https://github.com/Augani/openreel-video) | browser-native editor direction: timeline core, UI adapter and local preview |
 | [ReelStack](https://github.com/jurczykpawel/reelstack) | API/CLI production pipeline, templates, effects, provider registry and self-hosting |
 | [OpenReels](https://github.com/tsensei/OpenReels) | topic-to-short pipeline, live pipeline visualization, provider mix and critique/rerun loop |
-| [OpenCut](https://github.com/OpenCut-app/OpenCut) | open editor API, plugin-first architecture, headless and MCP direction |
+| [Captions.ai Reels guide](https://captions.ai/blog/how-to-make-instagram-reels), [WaveGen size guide](https://wavegen.ai/instagram-reel-size) | first 3 seconds, watch time, shares, 1080x1920 and safe-zone QA |
 | [Whisper](https://github.com/openai/whisper), [FFmpeg](https://ffmpeg.org/ffmpeg.html), [WebCodecs](https://www.w3.org/TR/webcodecs/) | speech timing, render/diagnostics and future browser media primitives |
 
 Practical conclusion: keep the state model small and portable, then route rendering by use case.
@@ -399,6 +416,7 @@ Build a public-safe Reels pipeline branch.
 Selected source: <iphone_single | multi_take | collab | screen_system | reference>
 Selected goal: <publish_fast | recipe | reviewable | public_branch | article_demo>
 Selected mode: <dry_preserve | caption_only | proof_overlay | visible_flow | experimental>
+Selected route: <reel_edit | block_timeline | palmier | shaper | article_research>
 
 Use this stack:
 - Python 3.10+ orchestration, JSON files as contracts, sequential render queue.
@@ -419,17 +437,18 @@ Required protocols:
 - P6 render: draft, review MP4, text-free base, final 1080x1920.
 - P7 QA: ffprobe, listening pass, first 3s, privacy pass, learning note.
 
-Required process:
-1. Read STACK.md, PROTOCOLS.md, README.md and the selected branch README if it exists.
-2. Fill P0 brief and choose the branch pack.
-3. Run P1 source preflight: ffmpeg, ffprobe, Python packages, avconvert when relevant.
-4. Build P2 transcript JSON and pause map. Do not cut inside words.
-5. Create P3 source blocks and clean baseline first, then branch variants.
-6. Write P4 edit_decision_list.json with cuts[], overlay_tracks[] and render.outputs.
-7. Fill P5 overlay lanes with viewer-facing copy and safe-zone rules.
-8. Render P6 review MP4, text-free base and final 1080x1920 MP4.
-9. Run P7 QA: ffprobe, audio listen, first 3 seconds, safe zones, contact sheet, privacy pass.
-10. Write a short learning note: what branch worked, what failed and what should be reused next time.
+Route process:
+- `reel_edit`: build source map, transcript, EDL, overlay lanes, review/final MP4, text-free base and QA.
+- `block_timeline`: export source blocks, cut map, overlayEvents, board state, safe-zone contact sheet and manual review notes.
+- `palmier`: create base video/audio references, frame shells, native text clips, editable board state and winner cutlane.
+- `shaper`: apply monochrome proof/process overlay grammar to a clean baseline and run safe-zone QA.
+- `article_research`: summarize sources as signal, diagnosis and move; update public article, route matrix and prompt contract.
+
+Same-source comparison:
+1. Use the same source_map, transcript baseline and audio policy when comparing routes.
+2. Save outputs under test_runs/<route>/.
+3. Compare first_3s, safe_zone, editability, render_qa and publish_readiness.
+4. Write one route verdict: keep, rerun with notes, or archive.
 
 Public boundary:
 - Keep raw footage, transcript text, real names, handles, local paths, private screenshots and keys outside public artifacts.

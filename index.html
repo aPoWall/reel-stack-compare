@@ -3,19 +3,19 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Reels Pipeline OS - public editing atlas + configurator</title>
-<meta name="description" content="Public Reels Pipeline OS: editing protocols, soft communication layer, community borrow map, libraries and configurator for short-form videos.">
+<title>Reels Pipeline OS - public editing atlas + route configurator</title>
+<meta name="description" content="Public Reels Pipeline OS: editing protocols, skill routes, library map, research sessions and configurator for short-form videos.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="AI Mindset Reels Pipeline OS">
 <meta property="og:title" content="Reels Pipeline OS">
-<meta property="og:description" content="Public atlas for Reels editing: protocol stack, soft communication layer, community borrow map, libraries, timeline state, branch packs and configurator.">
+<meta property="og:description" content="Public atlas for Reels editing: protocol stack, skill routes, research sessions, libraries, timeline state, branch packs and configurator.">
 <meta property="og:image" content="https://apowall.github.io/reels-pipeline-os/assets/og-cover.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:url" content="https://apowall.github.io/reels-pipeline-os/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="AI Mindset Reels Pipeline OS">
-<meta name="twitter:description" content="Public visual atlas + stack builder for agentic Reels editing.">
+<meta name="twitter:description" content="Public visual atlas + route builder for agentic Reels editing.">
 <meta name="twitter:image" content="https://apowall.github.io/reels-pipeline-os/assets/og-cover.png">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -30,7 +30,7 @@
     --hair:#eeeeea;
     --hi:#f6f3ea;
     --paper:#ffffff;
-    --accent:#f4c83f;
+    --accent:#e9dfbf;
     --red:#d94b3d;
     --green:#87b77c;
     --blue:#8ab6ce;
@@ -45,7 +45,7 @@
     --hair:#23221f;
     --hi:#191817;
     --paper:#151412;
-    --accent:#f7d75a;
+    --accent:#302d22;
     --red:#e35d50;
     --green:#94c48b;
     --blue:#90c4dc;
@@ -117,29 +117,28 @@
   .thesis p{margin:0;font-size:13.5px;line-height:1.65;max-width:1060px}
   .thesis b{font-weight:700}
 
-  .ctas{display:grid;grid-template-columns:2fr 1.35fr 1.2fr;gap:14px;margin:18px 0 22px}
+  .ctas{display:flex;gap:8px;margin:12px 0 18px;flex-wrap:wrap}
   .cta{
     border:1px solid var(--ink);
-    padding:16px 18px;
+    padding:8px 11px;
     text-decoration:none;
     display:flex;
-    min-height:86px;
-    flex-direction:column;
-    justify-content:center;
+    min-height:40px;
+    align-items:center;
     background:var(--paper);
   }
   .cta:hover{background:var(--ink);color:var(--bg)}
   .cta.hero{background:var(--ink);color:var(--bg)}
   .cta.hero:hover{background:var(--bg);color:var(--ink)}
-  .ctaTop{font-weight:700;font-size:18px;line-height:1.2}
-  .ctaSub{display:block;color:var(--muted);font-size:10.5px;margin-top:8px;line-height:1.45}
+  .ctaTop{font-weight:700;font-size:11.5px;line-height:1.2;letter-spacing:.05em}
+  .ctaSub{display:none}
   .cta.hero .ctaSub{color:rgba(255,255,255,.62)}
   .cta.hero:hover .ctaSub{color:var(--muted)}
   .glyph{
-    width:28px;height:28px;border:1px solid currentColor;border-radius:50%;
-    display:inline-grid;place-items:center;margin-right:10px;font-weight:700;
+    width:18px;height:18px;border:1px solid currentColor;border-radius:50%;
+    display:inline-grid;place-items:center;margin-right:7px;font-weight:700;font-size:9px;
   }
-  @media(max-width:900px){.ctas{grid-template-columns:1fr}.cta{min-height:auto}}
+  @media(max-width:900px){.cta{min-height:auto}}
 
   nav.tabs{display:flex;gap:0;margin:18px 0 22px;border:1px solid var(--ink);width:fit-content;max-width:100%;overflow-x:auto}
   nav.tabs button{
@@ -297,7 +296,7 @@
   .configShell{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(340px,.9fr);gap:0;overflow:hidden}
   .configLeft{border-right:1px solid var(--ink);padding:16px}
   .configRight{padding:16px;background:var(--paper)}
-  .selectorGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .selectorGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
   .selector h3{margin:0 0 10px;font-size:10.5px;text-transform:uppercase;letter-spacing:.16em;color:var(--muted)}
   .seg{display:grid;gap:7px}
   .seg button{border:1px solid var(--ink);background:transparent;min-height:48px;padding:8px 10px;cursor:pointer;text-align:left;display:flex;align-items:center;justify-content:space-between;gap:10px}
@@ -308,7 +307,7 @@
   .seg button.active .hint{color:rgba(255,255,255,.68)}
   .recHead{display:flex;justify-content:space-between;gap:12px;align-items:start;border-bottom:1px solid var(--soft);padding-bottom:11px;margin-bottom:12px}
   .recHead h3{margin:0;font-size:22px;line-height:1.08}
-  .score{border:1px solid var(--ink);background:var(--accent);color:#111;padding:7px 10px;text-align:center;font-weight:800;min-width:70px}
+  .score{border:1px solid var(--ink);background:var(--hi);color:var(--ink);padding:7px 10px;text-align:center;font-weight:800;min-width:70px}
   .score span{display:block;font-size:9px;letter-spacing:.12em;text-transform:uppercase}
   .recText{font-size:12.2px;color:var(--muted);margin:0 0 12px;line-height:1.55}
   .miniCols{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
@@ -347,8 +346,8 @@
   .useStep .u{font-size:9px;color:var(--muted);letter-spacing:.15em;text-transform:uppercase}
   .useStep b{display:block;margin-top:10px;font-size:12.5px;line-height:1.25}
   .useStep p{margin:6px 0 0;color:var(--muted);font-size:10.8px;line-height:1.45}
-  .useStep.hot{background:var(--accent);color:#111}
-  .useStep.hot .u,.useStep.hot p{color:#4c3d00}
+  .useStep.hot{background:var(--ink);color:var(--bg)}
+  .useStep.hot .u,.useStep.hot p{color:rgba(255,255,255,.66)}
   @media(max-width:850px){.useGrid{grid-template-columns:1fr 1fr}.useStep:nth-child(2){border-right:0}.useStep:nth-child(-n+2){border-bottom:1px solid var(--soft)}}
   @media(max-width:560px){.useGrid{grid-template-columns:1fr}.useStep{border-right:0;border-bottom:1px solid var(--soft)}.useStep:last-child{border-bottom:0}}
   .creditGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:12px}
@@ -420,9 +419,9 @@
 
   <header class="app">
     <div class="brand"><img class="lt" src="assets/aim-logo-light.png" alt="ai mindset"><img class="dk" src="assets/aim-logo.png" alt="ai mindset">reels pipeline os <span class="bsub">· ai mindset</span></div>
-    <div class="crumb"><b>public atlas</b> reels editing system · protocols · communication · community · configurator</div>
+    <div class="crumb"><b>public atlas</b> reels editing system · route sessions · skill map · configurator</div>
     <div class="meta">
-      <b>v3.6</b> · 2026-06-26 · public<br>
+      <b>v3.7</b> · 2026-06-27 · public<br>
       <a href="https://github.com/aPoWall/reels-pipeline-os">github · repo</a> · <a href="https://apowall.github.io/reels-pipeline-os/">pages</a><br>
       <button class="tbtn" onclick="document.documentElement.classList.toggle('dark')">◐ тема</button>
     </div>
@@ -430,12 +429,12 @@
 
   <div class="thesis">
     <div class="tag">тезис</div>
-    <p><b>reels pipeline os</b> описывает систему монтажа коротких видео: brief превращается в protocol stack, затем в source audit, transcript, source blocks, soft communication layer, EDL, overlay lanes, render route и QA. страница держит community borrow map, список библиотек и configurator, который выдаёт branch pack, JSON config и prompt для агента.</p>
+    <p><b>reels pipeline os</b> описывает публичный контур монтажа коротких видео: source audit, transcript, source blocks, EDL, overlay lanes, render route, QA и route session. конфигуратор собирает JSON + prompt для конкретного прохода: render spine, timeline board, Palmier board, Shaper overlay or article research.</p>
   </div>
 
   <div class="ctas">
-    <a class="cta hero" href="#pipeline" onclick="openTab('pipeline')"><span class="ctaTop"><span class="glyph">◎</span>как монтировать рилс</span><span class="ctaSub">source audit · transcript · EDL · overlay lanes · render · QA</span></a>
-    <a class="cta" href="#tech" onclick="openTab('tech')"><span class="ctaTop"><span class="glyph">⌁</span>libraries stack</span><span class="ctaSub">ffmpeg · whisper · avconvert · OTIO · Remotion · HyperFrames · WebCodecs</span></a>
+    <a class="cta hero" href="#pipeline" onclick="openTab('pipeline')"><span class="ctaTop"><span class="glyph">◎</span>method map</span><span class="ctaSub">source audit · transcript · EDL · overlay lanes · render · QA</span></a>
+    <a class="cta" href="#config" onclick="openTab('config')"><span class="ctaTop"><span class="glyph">⌁</span>config session</span><span class="ctaSub">source · goal · mode · route</span></a>
     <a class="cta" href="STACK.md" download="ai-mindset-reels-pipeline-STACK.md"><span class="ctaTop"><span class="glyph">↓</span>скачать STACK.md</span><span class="ctaSub">слои, контракты, EDL-схема, public/private boundary</span></a>
   </div>
 
@@ -444,7 +443,7 @@
     <button role="tab" aria-selected="false" onclick="tab('pipeline',this)">pipeline</button>
     <button role="tab" aria-selected="false" onclick="tab('tech',this)">библиотеки</button>
     <button role="tab" aria-selected="false" onclick="tab('config',this)">конфигуратор</button>
-    <button role="tab" aria-selected="false" onclick="tab('approaches',this)">community</button>
+    <button role="tab" aria-selected="false" onclick="tab('approaches',this)">research</button>
     <button role="tab" aria-selected="false" onclick="tab('branches',this)">ветки</button>
     <button role="tab" aria-selected="false" onclick="tab('sources',this)">sources</button>
   </nav>
@@ -531,7 +530,7 @@
     <div class="useGrid">
       <div class="useStep"><div class="u">01</div><b>смотри карту</b><p>понять путь записи от сырого файла до review/final без внутренних деталей.</p></div>
       <div class="useStep"><div class="u">02</div><b>читай pipeline</b><p>увидеть монтажный contract: mode, audio, EDL, overlays, QA.</p></div>
-      <div class="useStep"><div class="u">03</div><b>смотри community</b><p>понять, какие публичные инструменты и подходы повлияли на stack.</p></div>
+      <div class="useStep"><div class="u">03</div><b>смотри research</b><p>понять, какие публичные инструменты и подходы повлияли на stack.</p></div>
       <div class="useStep hot"><div class="u">04</div><b>собери pack</b><p>выбрать source/goal/mode и скопировать prompt для агента.</p></div>
     </div>
 
@@ -567,13 +566,23 @@
       <div class="creditCell"><div class="role">open wave</div><b>ReelStack + OpenReels + OpenCut</b><p>дали API/CLI pipeline, live UI, provider registry, editor API and headless direction.</p></div>
     </div>
 
-    <h2 class="sec">как это работает в AI Mindset skill system</h2>
+    <h2 class="sec">skill route map – как это работает в AI Mindset system</h2>
     <div class="stackLayers">
-      <div class="layerName">context / brief</div><div class="layerBody">контекстный skill или человек формулирует цель, аудиторию, ограничения, source type and publish channel. В публичный пакет уходит только generic summary.</div>
-      <div class="layerName">reel-edit</div><div class="layerBody">владеет приватным video state: source audit, transcript, source blocks, EDL, overlay lanes, render outputs and QA. Raw media, transcripts and local paths остаются локально.</div>
-      <div class="layerName">reel-block-edit</div><div class="layerBody">может быть visual/timeline surface: branch surface, overlay density ladder, manual review, safe-zone checks and text-free base.</div>
-      <div class="layerName">stack-compare</div><div class="layerBody">владеет публичным Shaper artifact: dashboard, library stack, community map, sanitized EDL examples, README, STACK.md and contribution rules.</div>
-      <div class="layerName">github pages</div><div class="layerBody">публикует текущую версию как open artifact. Проверка релиза: live URL returns 200 and expected tab text appears in deployed HTML.</div>
+      <div class="layerName">inside-insanity</div><div class="layerBody">личный visual board: premise, tone, motif, caption grammar, aesthetic tokens and public-safe summary. Public page uses generic mechanics from this layer.</div>
+      <div class="layerName">reel-edit</div><div class="layerBody">private render spine: source audit, transcript, word-safe cuts, EDL, overlay lanes, review/final MP4, text-free base and QA. Raw media, transcripts and local paths stay local.</div>
+      <div class="layerName">reel-block-edit</div><div class="layerBody">visual timeline surface: source blocks, branch surface, overlay density ladder, manual trims, safe-zone checks and timeline handoff.</div>
+      <div class="layerName">reel-palmier-board</div><div class="layerBody">editable review board: base video/audio, frame shells, native text clips, winner cutlane and handoff for human correction.</div>
+      <div class="layerName">shaper-reels</div><div class="layerBody">monochrome overlay grammar for visible proof/process: thin frames, rails, labels, no decorative color, no production words on screen.</div>
+      <div class="layerName">stack-compare</div><div class="layerBody">public package: dashboard, library stack, research sessions, sanitized EDL examples, README, STACK.md and contribution rules.</div>
+      <div class="layerName">github pages</div><div class="layerBody">publishes the public artifact. Release QA checks live URL, tab anchors, copied prompt text and expected version markers.</div>
+    </div>
+
+    <h2 class="sec">same-source route test</h2>
+    <div class="useGrid">
+      <div class="useStep"><div class="u">A</div><b>reel-edit spine</b><p>render-grade baseline with final MP4, text-free base, QA and learning note.</p></div>
+      <div class="useStep"><div class="u">B</div><b>timeline board</b><p>same source becomes inspectable source blocks, cut map, overlay events and review board.</p></div>
+      <div class="useStep"><div class="u">C</div><b>Palmier board</b><p>same cut becomes editable native text clips, frame shells and winner cutlane.</p></div>
+      <div class="useStep hot"><div class="u">D</div><b>Shaper overlay</b><p>same baseline gets public proof/process surface with restrained B/W visual language.</p></div>
     </div>
 
     <h2 class="sec">таймлайн как главный объект</h2>
@@ -641,8 +650,18 @@
   </section>
 
   <section class="panel" id="approaches">
+    <h2 class="sec">research sessions – что меняет систему</h2>
+    <p class="lead">EXA MCP scan свёл публичные источники в три решения: route selector, timeline state boundary and QA gates. Ниже практические сессии для конфигуратора.</p>
+
+    <div class="creditGrid">
+      <div class="creditCell hot"><div class="role">session 01</div><b>agent timeline tools</b><p>OpenScript, X-Cut, AI Video Editor and Remotion MCP показывают intent → plan → timeline → render. Move: route-specific prompts and tool contracts.</p></div>
+      <div class="creditCell"><div class="role">session 02</div><b>browser/editor core</b><p>Elah, OpenReel, OpenCut and timeline engines separate headless timeline core, UI adapter and render adapter. Move: future board route.</p></div>
+      <div class="creditCell"><div class="role">session 03</div><b>platform QA</b><p>Reels guidance points to first 3 seconds, 9:16 safe zones, captions, completion, shares and originality. Move: P7 scorecard.</p></div>
+      <div class="creditCell"><div class="role">session 04</div><b>skill system test</b><p>same source can run through reel-edit, block timeline, Palmier, Shaper and article research. Move: compare outputs, not opinions.</p></div>
+    </div>
+
     <h2 class="sec">community map – что берем из публичных GitHub</h2>
-    <p class="lead">это карта заимствуемых механик. каждый source даёт один полезный слой: portable ingest, agent timeline, render adapter, open editor or production loop.</p>
+    <p class="lead">карта заимствуемых механик: portable ingest, agent timeline, render adapter, open editor and production loop.</p>
 
     <div class="authorGrid">
       <article class="authorCard">
@@ -690,25 +709,25 @@
       </article>
 
       <article class="authorCard">
-        <div class="authorTop"><h3>open production loop</h3><span>reelstack / openreels</span></div>
-        <p>из ReelStack и OpenReels берём production loop: step reruns, provider registry, script-to-video flow, live pipeline UI and batch-friendly artifacts.</p>
+        <div class="authorTop"><h3>open production loop</h3><span>reelstack / openreels / opencut</span></div>
+        <p>из ReelStack, OpenReels and code-driven OpenCut берём production loop: step reruns, provider registry, script-to-video flow, live pipeline UI and batch-friendly artifacts.</p>
         <ul>
           <li>pipeline stages as commands</li>
           <li>asset regeneration without full rerun</li>
           <li>community-ready docs and demos</li>
         </ul>
-        <div class="link"><a href="https://github.com/jurczykpawel/reelstack">ReelStack</a> · <a href="https://github.com/tsensei/OpenReels">OpenReels</a></div>
+        <div class="link"><a href="https://github.com/jurczykpawel/reelstack">ReelStack</a> · <a href="https://github.com/tsensei/OpenReels">OpenReels</a> · <a href="https://github.com/buildingopen/opencut">OpenCut engine</a></div>
       </article>
 
       <article class="authorCard">
-        <div class="authorTop"><h3>open editor surface</h3><span>opencut / webcodecs</span></div>
-        <p>из OpenCut берём направление open timeline editor: browser surface, editor API, plugin/headless route and future MCP control.</p>
+        <div class="authorTop"><h3>open editor surface</h3><span>elah / timeline / webcodecs</span></div>
+        <p>из browser-native редакторов берём разделение: headless timeline core, React adapter, local media decode and visual review surface.</p>
         <ul>
           <li>visual review for timeline state</li>
-          <li>plugin model for editor actions</li>
-          <li>headless/editor split</li>
+          <li>state core separate from UI</li>
+          <li>local preview and safe-zone board</li>
         </ul>
-        <div class="link"><a href="https://github.com/OpenCut-app/OpenCut">github.com/OpenCut-app/OpenCut</a></div>
+        <div class="link"><a href="https://github.com/elahlabs/elah">Elah</a> · <a href="https://github.com/webpacked/timeline">timeline</a> · <a href="https://github.com/Augani/openreel-video">OpenReel Video</a></div>
       </article>
     </div>
 
@@ -719,11 +738,13 @@
         <tr><td class="l">Voronik1801/reel_pipline</td><td>portable iPhone kit, preflight, avconvert, templates, detectors</td><td class="move">make `portable-iphone-kit` protocol stricter</td><td>creator handoff recipe</td></tr>
         <tr><td class="l">MeiGen-AI/X-Cut</td><td>chat intent, dynamic skills, asset analysis, live Remotion timeline</td><td class="move">shape future timeline agent UI</td><td>agent editor pattern</td></tr>
         <tr><td class="l">birchrust/OpenScript</td><td>MCP tools, EDL v2, multi-track timeline, verification layer</td><td class="move">turn protocols into callable tools</td><td>agent control contract</td></tr>
+        <tr><td class="l">tjameswilliams/ai-video-editor</td><td>natural-language edits into multi-track timeline and Remotion motion graphics</td><td class="move">make prompt output inspectable as timeline ops</td><td>prompt-to-edit pattern</td></tr>
         <tr><td class="l">heygen-com/HyperFrames</td><td>HTML/CSS/media render, CLI lint/preview/render, agent skills</td><td class="move">use HTML-native render adapter for explainers</td><td>agent-friendly render engine</td></tr>
         <tr><td class="l">jurczykpawel/ReelStack</td><td>CLI/API stages, provider registry, prompt templates, self-hosting</td><td class="move">add rerunnable production protocol</td><td>scale and automation reference</td></tr>
         <tr><td class="l">tsensei/OpenReels</td><td>topic-to-short pipeline, script/voice/visual/music/captions assembly</td><td class="move">use as article-demo / idea-to-reel recipe</td><td>one-command community demo</td></tr>
-        <tr><td class="l">OpenCut-app/OpenCut</td><td>open timeline editor direction, plugin/headless surface</td><td class="move">future browser review board</td><td>open editor ecosystem</td></tr>
+        <tr><td class="l">Elah / OpenReel / timeline</td><td>browser-native core, UI adapter, tracks/items and local preview</td><td class="move">future browser review board</td><td>open editor ecosystem</td></tr>
         <tr><td class="l">OpenTimelineIO</td><td>editorial interchange format</td><td class="move">export EDL to NLE-friendly state</td><td>industry timeline bridge</td></tr>
+        <tr><td class="l">Reels platform guides</td><td>first 3 seconds, safe zones, captions, completion, shares and originality</td><td class="move">make P7 measurable</td><td>publish QA reference</td></tr>
       </tbody>
     </table>
   </section>
@@ -761,14 +782,14 @@
   </section>
 
   <section class="panel" id="config">
-    <h2 class="sec">конфигуратор branch pack</h2>
-    <p class="lead">выбери исходник, цель и монтажный режим. configurator выдаст pack, список артефактов, JSON config и prompt, который можно сразу дать агенту для сборки Reels pipeline.</p>
+    <h2 class="sec">конфигуратор route session</h2>
+    <p class="lead">выбери исходник, цель, монтажный режим и route. configurator выдаст pack, список артефактов, JSON config и prompt для конкретного прохода: render spine, timeline board, Palmier, Shaper or article research.</p>
     <div class="funnel protocolFunnel" aria-label="selected protocol stack">
       <div class="step"><div class="n">P0</div><b>brief</b><span>goal · audience</span></div>
       <div class="step"><div class="n">P1</div><b>source</b><span>audit · ingest</span></div>
       <div class="step"><div class="n">P2</div><b>timing</b><span>words · pauses</span></div>
       <div class="step"><div class="n">P3</div><b>story</b><span>blocks · hook</span></div>
-      <div class="step core"><div class="n">P4</div><b>EDL</b><span>cuts · branches</span></div>
+      <div class="step"><div class="n">P4</div><b>EDL</b><span>cuts · branches</span></div>
       <div class="step"><div class="n">P5</div><b>overlay</b><span>lanes · safe zones</span></div>
       <div class="step"><div class="n">P6</div><b>render</b><span>review · final</span></div>
       <div class="step"><div class="n">P7</div><b>QA</b><span>privacy · publish</span></div>
@@ -806,6 +827,16 @@
               <button data-value="experimental"><span class="label">experimental</span><span class="hint">wild branch</span></button>
             </div>
           </div>
+          <div class="selector">
+            <h3>4 · route</h3>
+            <div class="seg" data-group="route">
+              <button class="active" data-value="reel_edit"><span class="label">reel-edit spine</span><span class="hint">render + QA</span></button>
+              <button data-value="block_timeline"><span class="label">timeline board</span><span class="hint">blocks / lanes</span></button>
+              <button data-value="palmier"><span class="label">Palmier board</span><span class="hint">editable cutlane</span></button>
+              <button data-value="shaper"><span class="label">Shaper overlay</span><span class="hint">public proof</span></button>
+              <button data-value="article_research"><span class="label">article research</span><span class="hint">sources / demo</span></button>
+            </div>
+          </div>
         </div>
       </div>
       <div class="configRight">
@@ -825,7 +856,7 @@
           <button class="copyBtn" onclick="copyConfig()">copy config</button>
           <button class="copyBtn" onclick="copyPrompt()">copy prompt</button>
         </div>
-        <p class="tinyNote">prompt намеренно public-safe: он просит агента держать raw media, transcripts, handles, local paths and keys outside public artifacts.</p>
+        <p class="tinyNote">route prompts differ by source, goal, mode and route. raw media, transcripts, handles, local paths and keys stay outside public artifacts.</p>
       </div>
     </div>
   </section>
@@ -863,8 +894,11 @@
       <div class="sourceCard"><b>HyperFrames</b><p><a href="https://github.com/heygen-com/hyperframes">github.com/heygen-com/hyperframes</a> · plain HTML/CSS/media to deterministic MP4, agent skills and CLI render loop.</p></div>
       <div class="sourceCard"><b>X-Cut</b><p><a href="https://github.com/MeiGen-AI/X-Cut">github.com/MeiGen-AI/X-Cut</a> · chat-driven editor, skill selection, reusable style recipes and real-time Remotion timeline.</p></div>
       <div class="sourceCard"><b>OpenScript</b><p><a href="https://github.com/birchrust/openscript">github.com/birchrust/openscript</a> · MCP tools, multi-track EDL v2, validation, verification and agent-directed render.</p></div>
+      <div class="sourceCard"><b>AI Video Editor</b><p><a href="https://github.com/tjameswilliams/ai-video-editor">github.com/tjameswilliams/ai-video-editor</a> · natural-language edits, multi-track timeline, motion graphics and Remotion route.</p></div>
+      <div class="sourceCard"><b>OpenCut Engine</b><p><a href="https://github.com/buildingopen/opencut">github.com/buildingopen/opencut</a> · code-driven video production engine with Whisper, TypeScript timelines, React components and Remotion render.</p></div>
       <div class="sourceCard"><b>ReelStack</b><p><a href="https://github.com/jurczykpawel/reelstack">github.com/jurczykpawel/reelstack</a> · API/CLI production pipeline, effects, templates, provider registry and self-hosting model.</p></div>
-      <div class="sourceCard"><b>OpenReels / OpenCut</b><p><a href="https://github.com/tsensei/OpenReels">OpenReels</a> · topic-to-short pipeline with live UI. <a href="https://github.com/OpenCut-app/OpenCut">OpenCut</a> · editor API, plugins, MCP/headless direction.</p></div>
+      <div class="sourceCard"><b>OpenReels / Elah / timeline</b><p><a href="https://github.com/tsensei/OpenReels">OpenReels</a> · topic-to-short pipeline. <a href="https://github.com/elahlabs/elah">Elah</a> and <a href="https://github.com/webpacked/timeline">timeline</a> · browser-native timeline/editor direction.</p></div>
+      <div class="sourceCard"><b>Reels platform QA</b><p><a href="https://captions.ai/blog/how-to-make-instagram-reels">Captions.ai Reels guide</a> · watch time, 3-second threshold and shares. <a href="https://wavegen.ai/instagram-reel-size">WaveGen size guide</a> · 1080x1920 and safe-zone checks.</p></div>
       <div class="sourceCard"><b>Whisper / FFmpeg / WebCodecs</b><p><a href="https://github.com/openai/whisper">Whisper</a> · word timings. <a href="https://ffmpeg.org/ffmpeg.html">FFmpeg</a> · render and diagnostics. <a href="https://www.w3.org/TR/webcodecs/">WebCodecs</a> · browser media primitives.</p></div>
       <div class="sourceCard"><b>Protocol spec</b><p><a href="PROTOCOLS.md">PROTOCOLS.md</a> · P0-P7 editing protocols, community borrow map and configurator output contract.</p></div>
       <div class="sourceCard"><b>Article reference</b><p><a href="ARTICLE.md">ARTICLE.md</a> · short public description, citation notes and one-paragraph explanation for articles.</p></div>
@@ -872,13 +906,13 @@
   </section>
 
   <footer class="stamp">
-    <div><b>fig.1</b> · reels-pipeline-os · public atlas · 2026-06-26</div>
-    <div>shortcuts: <span class="kbd">1</span> map · <span class="kbd">2</span> pipeline · <span class="kbd">3</span> libraries · <span class="kbd">4</span> config · <span class="kbd">5</span> community · <span class="kbd">d</span> theme</div>
+    <div><b>fig.1</b> · reels-pipeline-os · public atlas · 2026-06-27</div>
+    <div>shortcuts: <span class="kbd">1</span> map · <span class="kbd">2</span> pipeline · <span class="kbd">3</span> libraries · <span class="kbd">4</span> config · <span class="kbd">5</span> research · <span class="kbd">d</span> theme</div>
   </footer>
 </div>
 
 <script>
-  const state = { source: "iphone_single", goal: "publish_fast", mode: "caption_only" };
+  const state = { source: "iphone_single", goal: "publish_fast", mode: "caption_only", route: "reel_edit" };
   const labels = {
     source: {
       iphone_single: "iPhone one-take",
@@ -900,6 +934,36 @@
       proof_overlay: "proof overlay",
       visible_flow: "visible flow",
       experimental: "experimental"
+    },
+    route: {
+      reel_edit: "reel-edit spine",
+      block_timeline: "timeline board",
+      palmier: "Palmier board",
+      shaper: "Shaper overlay",
+      article_research: "article research"
+    }
+  };
+  const optionProfiles = {
+    source: {
+      iphone_single: ["single camera/audio master", "check iPhone HDR/HLG and orientation", "preserve face and speech continuity"],
+      multi_take: ["compare doubles and repeats", "mark best take and rescue fragments", "store rejected beats as source_blocks with reasons"],
+      collab: ["map turns and interruptions", "preserve handoff logic", "use creator_a/creator_b labels in public files"],
+      system: ["redact terminal/site proof", "crop readable proof area", "treat screen as evidence lane"],
+      reference: ["extract mechanics from reference", "use own footage and copy", "document source as attribution anchor"]
+    },
+    goal: {
+      publish_fast: ["ship one safe MP4 now", "minimize branch count", "finish with QA and learning note"],
+      recipe: ["make the edit repeatable", "store EDL and branch matrix", "write reusable decisions"],
+      reviewable: ["make human review easy", "produce board/contact sheet", "keep edit state inspectable"],
+      public_branch: ["sanitize examples", "prepare README and source credits", "publish mechanics only"],
+      article_demo: ["make a public explanation branch", "include library map and research anchors", "produce screenshot-ready demo"]
+    },
+    mode: {
+      dry_preserve: ["keep original rhythm", "trim silence and broken starts", "use sparse or absent overlays"],
+      caption_only: ["build caption lane as main social surface", "check face/object safe zones", "keep text short and readable"],
+      proof_overlay: ["show one proof object per beat", "redact private UI", "make proof readable on phone"],
+      visible_flow: ["show process rail or timeline", "make state visible to viewer", "limit label density"],
+      experimental: ["create one wild branch", "keep clean baseline рядом", "log what to reuse and what to drop"]
     }
   };
   const protocolCatalog = [
@@ -909,8 +973,8 @@
     "P3 story: source blocks, hook, tension, proof, turn, closer",
     "P4 EDL: cuts[], overlay_tracks[], render.outputs, branch status",
     "P5 overlay: caption, card, rail, proof, stamp, cover, safe zones",
-    "P6 render: draft, review MP4, text-free base, final 1080x1920",
-    "P7 QA: ffprobe, listening pass, first 3s, privacy pass, learning note"
+    "P6 render: draft, review MP4, text-free base, final 1080x1920 or selected board",
+    "P7 QA: ffprobe, listening pass, first 3s, safe zones, privacy pass, learning note"
   ];
   const protocolNav = ["P0 brief", "P1 source", "P2 timing", "P3 story", "P4 EDL", "P5 overlay", "P6 render", "P7 QA"];
   const packs = {
@@ -955,9 +1019,99 @@
       text: "Для статьи, доклада или публичного разбора: schematic EDL, pipeline screenshot, library list, source credits and privacy-safe example.",
       layers: ["schematic source", "generic EDL", "library stack", "community credits", "article paragraph"],
       artifacts: ["ARTICLE.md", "edit_decision_list.example.json", "assets/og-cover.png", "STACK.md", "QA.md"]
+    },
+    palmier: {
+      title: "Editable Palmier Cutlane",
+      score: 89,
+      text: "Для ручной правки после агентного анализа: base video/audio, frame shells, native text clips, winner cutlane and review handoff.",
+      layers: ["base video/audio", "frame PNG shells", "native text clips", "winner cutlane", "human review notes"],
+      artifacts: ["palmier_board.json", "winner_cutlane.json", "frames/*.png", "text_clips/*.json", "review_notes.md"]
+    },
+    shaper: {
+      title: "Shaper Proof Overlay",
+      score: 87,
+      text: "Для публичного proof/process рилса: чёрно-белая overlay grammar, thin rails, restrained labels, safe-zone QA and no private UI.",
+      layers: ["B/W overlay grammar", "thin rail sequence", "proof cards", "safe-zone preview", "public screenshot pack"],
+      artifacts: ["shaper_overlay_plan.md", "overlayEvents.json", "safe_zone_contact_sheet.png", "renders/shaper_review.mp4"]
+    },
+    research: {
+      title: "Article Research Session",
+      score: 85,
+      text: "Для публичной статьи: research sessions, source credits, skill route map, same-source test plan and sanitized demo prompt.",
+      layers: ["EXA source notes", "skill route map", "same-source matrix", "public prompt contract", "article paragraph"],
+      artifacts: ["research_sessions.md", "ARTICLE.md", "STACK.md", "PROTOCOLS.md", "assets/og-cover.png"]
+    }
+  };
+  const routeProfiles = {
+    reel_edit: {
+      pack: "portable",
+      title: "Run the private reel-edit render spine",
+      contract: ["create render-grade baseline", "produce review/final MP4 and text-free base", "write QA and learning note"],
+      process: [
+        "Build source_map.md with ffprobe facts, ingest decision and privacy boundary.",
+        "Create transcript JSON, pause map and source_blocks with hook/setup/proof/turn roles.",
+        "Write edit_decision_list.json with word-safe cuts, overlay_tracks and render.outputs.",
+        "Render review MP4, text-free base and final 1080x1920 MP4.",
+        "Run ffprobe, listening pass, first-3s check, safe-zone pass and privacy pass."
+      ],
+      handoff: "Return render paths, EDL skeleton, QA status and one next-edit learning note."
+    },
+    block_timeline: {
+      pack: "edl",
+      title: "Build an inspectable timeline board",
+      contract: ["focus on source blocks and branch state", "make cuts and overlays editable", "render preview only when useful"],
+      process: [
+        "Convert the same source into source_blocks, cuts and overlayEvents.",
+        "Create a timeline board payload with visible branch labels and density levels.",
+        "Add safe-zone markers, contact sheet frames and manual trim notes.",
+        "Export realself.timeline.json, edit_decision_list.json and overlayEvents.json.",
+        "Summarize which timeline decisions should move into the render spine."
+      ],
+      handoff: "Return timeline state, board-ready JSON and review notes for the human editor."
+    },
+    palmier: {
+      pack: "palmier",
+      title: "Create an editable Palmier review board",
+      contract: ["separate base video/audio from text layers", "build editable native captions", "choose winner cutlane"],
+      process: [
+        "Use the selected EDL as the base and export clean video/audio references.",
+        "Generate frame shells for key beats and native text clip metadata.",
+        "Assemble Palmier board state with editable captions, proof cards and cutlane candidates.",
+        "Mark one winner cutlane and keep rejected variants with reasons.",
+        "Write reviewer instructions and export handoff artifacts."
+      ],
+      handoff: "Return Palmier board JSON, winner cutlane and exact human review questions."
+    },
+    shaper: {
+      pack: "shaper",
+      title: "Apply Shaper overlay grammar to an existing baseline",
+      contract: ["use restrained monochrome visual language", "show proof/process with thin rails", "keep viewer-facing copy only"],
+      process: [
+        "Start from an already-clean baseline or EDL and choose visible proof beats.",
+        "Map thin rails, proof cards, small labels and caption density.",
+        "Keep internal terms, file paths and production labels out of on-screen copy.",
+        "Create overlayEvents.json plus safe-zone contact sheet.",
+        "Render Shaper review MP4 and log where the style helps or distracts."
+      ],
+      handoff: "Return Shaper overlay plan, review MP4 path and style reuse note."
+    },
+    article_research: {
+      pack: "research",
+      title: "Prepare a public article/demo research branch",
+      contract: ["summarize source mechanics", "connect research to routes", "produce publish-safe explanation"],
+      process: [
+        "Read README, STACK, PROTOCOLS and current dashboard copy.",
+        "Summarize EXA/source findings as signal, diagnosis and move.",
+        "Map each source into one adopted layer and one route impact.",
+        "Write same-source test plan for comparing route outputs.",
+        "Update public article paragraph, source credits and prompt contract."
+      ],
+      handoff: "Return article-ready summary, citation list, route matrix and public prompt."
     }
   };
   function choosePack(){
+    const route = routeProfiles[state.route];
+    if(route && route.pack) return packs[route.pack];
     if(state.goal === "public_branch") return packs.public;
     if(state.goal === "article_demo") return packs.article;
     if(state.source === "collab") return packs.collab;
@@ -967,6 +1121,7 @@
   }
   function renderConfig(){
     const pack = choosePack();
+    const route = routeProfiles[state.route];
     document.getElementById("recTitle").textContent = pack.title;
     document.getElementById("recScore").textContent = pack.score;
     document.getElementById("recText").textContent = pack.text;
@@ -974,9 +1129,20 @@
     document.getElementById("recProtocols").innerHTML = protocolNav.map(x=>`<li>${x}</li>`).join("");
     document.getElementById("recArtifacts").innerHTML = pack.artifacts.map(x=>`<li>${x}</li>`).join("");
     const json = {
-      schema: "reels.stack.config.v5",
+      schema: "reels.stack.config.v6",
       selected: state,
       recommended_pack: pack.title,
+      route_session: {
+        title: route.title,
+        contract: route.contract,
+        handoff: route.handoff
+      },
+      option_contracts: {
+        source: optionProfiles.source[state.source],
+        goal: optionProfiles.goal[state.goal],
+        mode: optionProfiles.mode[state.mode],
+        route: route.contract
+      },
       pipeline_defaults: {
         mode_first: true,
         audio_policy: "one_audio_spine",
@@ -985,15 +1151,34 @@
       },
       protocols: protocolCatalog,
       layers: pack.layers,
-      artifacts: pack.artifacts
+      artifacts: pack.artifacts,
+      same_source_test: ["use one source_map/transcript baseline across routes", "save route outputs separately", "compare first_3s, safe_zone, editability, QA and publish readiness"]
     };
     document.getElementById("configJson").textContent = JSON.stringify(json, null, 2);
-    const prompt = `Build a public-safe Reels pipeline branch.
+    const sourceContract = optionProfiles.source[state.source].map(x => `- ${x}`).join("\n");
+    const goalContract = optionProfiles.goal[state.goal].map(x => `- ${x}`).join("\n");
+    const modeContract = optionProfiles.mode[state.mode].map(x => `- ${x}`).join("\n");
+    const routeContract = route.contract.map(x => `- ${x}`).join("\n");
+    const routeProcess = route.process.map((x,i) => `${i + 1}. ${x}`).join("\n");
+    const prompt = `${route.title}.
 
 Selected source: ${labels.source[state.source]}
 Selected goal: ${labels.goal[state.goal]}
 Selected mode: ${labels.mode[state.mode]}
+Selected route: ${labels.route[state.route]}
 Recommended pack: ${pack.title}
+
+Source contract:
+${sourceContract}
+
+Goal contract:
+${goalContract}
+
+Mode contract:
+${modeContract}
+
+Route contract:
+${routeContract}
 
 Use this stack:
 - Python 3.10+ orchestration, JSON files as contracts, sequential render queue.
@@ -1010,28 +1195,28 @@ ${protocolCatalog.map(x => `- ${x}`).join("\n")}
 Required artifacts:
 ${pack.artifacts.map(x => `- ${x}`).join("\n")}
 
-Required process:
-1. Read STACK.md, PROTOCOLS.md, README.md and the selected branch README if it exists.
-2. Fill P0 brief and choose the branch pack.
-3. Run P1 source preflight: ffmpeg, ffprobe, Python packages, avconvert when relevant.
-4. Build P2 transcript JSON and pause map. Do not cut inside words.
-5. Create P3 source blocks and clean baseline first, then branch variants.
-6. Write P4 edit_decision_list.json with cuts[], overlay_tracks[] and render.outputs.
-7. Fill P5 overlay lanes with viewer-facing copy and safe-zone rules.
-8. Render P6 review MP4, text-free base and final 1080x1920 MP4.
-9. Run P7 QA: ffprobe, audio listen, first 3 seconds, safe zones, contact sheet, privacy pass.
-10. Write a short learning note: what branch worked, what failed and what should be reused next time.
+Route process:
+${routeProcess}
+
+Same-source comparison:
+1. Use the same source_map, transcript baseline and audio policy when comparing routes.
+2. Save outputs under test_runs/${state.route}/.
+3. Compare first_3s, safe_zone, editability, render_qa and publish_readiness.
+4. Write one route verdict: keep, rerun with notes, or archive.
 
 Public boundary:
 - Keep raw footage, transcript text, real names, handles, local paths, private screenshots and keys outside public artifacts.
 - Public files may include generic timing, labels, EDL shape, overlay lane types, QA decisions and source links.
 
 Return:
-- branch pack summary,
+- route session summary,
 - commands or scripts to run,
-- JSON EDL skeleton,
+- JSON state skeleton,
 - QA checklist,
-- next learning note.`;
+- next learning note.
+
+Handoff focus:
+${route.handoff}`;
     document.getElementById("configPrompt").textContent = prompt;
   }
   document.querySelectorAll(".seg button").forEach(btn=>{
